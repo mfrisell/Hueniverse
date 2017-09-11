@@ -2257,6 +2257,11 @@ Prefab:
       propertyPath: m_Name
       value: See Spawn Point
       objectReference: {fileID: 0}
+    - target: {fileID: 23895279350610948, guid: 6aa56564d788148fc955a51956cfe6d5,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
   m_IsPrefabParent: 0
