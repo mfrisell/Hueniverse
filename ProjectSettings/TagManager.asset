@@ -16,6 +16,8 @@ TagManager:
   - CircleLeft
   - GlowOrbLeft
   - CircleRight
+  - ShotSpawnLeft
+  - ShotSpawnRight
   layers:
   - Default
   - TransparentFX

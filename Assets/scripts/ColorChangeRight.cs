@@ -6,8 +6,8 @@ public class ColorChangeRight : MonoBehaviour {
 
 	public float TimeScale = 2f;
 	private Color currentColor = Color.red;
+	public Color startColorRight;
 
-	private Color startColor;
 	private Color endColor;
 
 	private Color lerpedColor;
@@ -17,11 +17,11 @@ public class ColorChangeRight : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		startColorRight = currentColor;
 
 		//		gameObject.GetComponentInParent<Script>();
 
 		ps = gameObject.GetComponent<ParticleSystem> ();
-		startColor = currentColor;
 	}
 
 	// Update is called once per frame
@@ -30,18 +30,21 @@ public class ColorChangeRight : MonoBehaviour {
 
 		if (Input.GetKeyDown((KeyCode.R))) {
 			endColor = Color.red;
+			startColorRight = endColor;
 			chosenColorRight = "red";
 			StartCoroutine(LerpColorRight());
 		}
 
 		if (Input.GetKeyDown((KeyCode.G))) {
 			endColor = Color.green;
+			startColorRight = endColor;
 			chosenColorRight = "green";
 			StartCoroutine(LerpColorRight());
 		}
 
 		if (Input.GetKeyDown((KeyCode.B))) {
 			endColor = Color.blue;
+			startColorRight = endColor;
 			chosenColorRight = "blue";
 			StartCoroutine(LerpColorRight());
 		}

@@ -155,6 +155,18 @@ Prefab:
       propertyPath: m_TagString
       value: GlowOrbLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 1922977361524272, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444688241017596, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551967168954640, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114810303717352862, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
     - {fileID: 114909427007968944, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
@@ -248,7 +260,7 @@ Transform:
   m_LocalScale: {x: 3.333333, y: 3.333333, z: 3.333333}
   m_Children: []
   m_Father: {fileID: 2101999224}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &238788515
 GameObject:
@@ -565,7 +577,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeScale: 2
+  startColorLeft: {r: 0, g: 0, b: 0, a: 0}
   chosenColorLeft: red
+--- !u!1 &646185857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 646185858}
+  m_Layer: 0
+  m_Name: ShotSpawnCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &646185858
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 646185857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1352991377}
+  m_Father: {fileID: 2101999224}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &746708171
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeScale: 2
+  startColorRight: {r: 0, g: 0, b: 0, a: 0}
   chosenColorRight: red
 --- !u!1 &927835545
 GameObject:
@@ -1014,6 +1057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeScale: 2
+  startColorRight: {r: 0, g: 0, b: 0, a: 0}
   chosenColorRight: red
 --- !u!1 &961896748
 GameObject:
@@ -1025,7 +1069,7 @@ GameObject:
   - component: {fileID: 961896749}
   m_Layer: 0
   m_Name: Shot Spawn
-  m_TagString: Untagged
+  m_TagString: ShotSpawnLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1139,6 +1183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeScale: 2
+  startColorLeft: {r: 0, g: 0, b: 0, a: 0}
   chosenColorLeft: red
 --- !u!1 &1066482438
 GameObject:
@@ -1150,7 +1195,7 @@ GameObject:
   - component: {fileID: 1066482439}
   m_Layer: 0
   m_Name: Shot Spawn
-  m_TagString: Untagged
+  m_TagString: ShotSpawnRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1185,6 +1230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeScale: 2
+  startColorLeft: {r: 0, g: 0, b: 0, a: 0}
   chosenColorLeft: red
 --- !u!4 &1100500520 stripped
 Transform:
@@ -1231,6 +1277,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1352991376
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 646185858}
+    m_Modifications:
+    - target: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6aa56564d788148fc955a51956cfe6d5, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1352991377 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4734365632498166, guid: 6aa56564d788148fc955a51956cfe6d5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1352991376}
 --- !u!1 &1442271802 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1209691201678408, guid: d9fe1c05ffb7e4830ba2c654c969124f,
@@ -1248,6 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeScale: 2
+  startColorRight: {r: 0, g: 0, b: 0, a: 0}
   chosenColorRight: red
 --- !u!1 &1720389637
 GameObject:
@@ -1284,7 +1378,7 @@ Transform:
   - {fileID: 1066482439}
   - {fileID: 1100500520}
   m_Father: {fileID: 2101999224}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 21.79, y: 18, z: 30}
 --- !u!23 &1720389639
 MeshRenderer:
@@ -1374,6 +1468,7 @@ MonoBehaviour:
   chosenColor: {r: 0, g: 0, b: 0, a: 0}
   shotSpawnLeft: {fileID: 961896749}
   shotSpawnRight: {fileID: 1066482439}
+  shotSpawnCenter: {fileID: 646185858}
 --- !u!54 &1720389646
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1548,6 +1643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeScale: 2
+  startColorLeft: {r: 0, g: 0, b: 0, a: 0}
   chosenColorLeft: red
 --- !u!1 &1826714312
 GameObject:
@@ -1583,7 +1679,7 @@ Transform:
   - {fileID: 961896749}
   - {fileID: 842925965}
   m_Father: {fileID: 2101999224}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &1826714315
 MeshRenderer:
@@ -1660,6 +1756,7 @@ MonoBehaviour:
   chosenColor: {r: 0, g: 0, b: 0, a: 0}
   shotSpawnLeft: {fileID: 961896749}
   shotSpawnRight: {fileID: 1066482439}
+  shotSpawnCenter: {fileID: 646185858}
 --- !u!54 &1826714319
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1806,6 +1903,18 @@ Prefab:
       propertyPath: m_TagString
       value: CircleRight
       objectReference: {fileID: 0}
+    - target: {fileID: 1922977361524272, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551967168954640, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444688241017596, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114810303717352862, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
     - {fileID: 114909427007968944, guid: d9fe1c05ffb7e4830ba2c654c969124f, type: 2}
@@ -1903,6 +2012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeScale: 2
+  startColorRight: {r: 0, g: 0, b: 0, a: 0}
   chosenColorRight: red
 --- !u!1 &2101999217
 GameObject:
@@ -2009,6 +2119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778e8db1f54c74cad9e60b93ab560705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 0.2
+  minDistance: 0.1
+  shotSpawnCenter: {fileID: 646185858}
 --- !u!33 &2101999223
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2026,6 +2139,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
+  - {fileID: 646185858}
   - {fileID: 158782379}
   - {fileID: 1826714313}
   - {fileID: 1720389638}

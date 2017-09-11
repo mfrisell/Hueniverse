@@ -23,6 +23,8 @@ public class ControlWeapon : MonoBehaviour {
 
 	public Transform shotSpawnLeft;
 	public Transform shotSpawnRight;
+	public Transform shotSpawnCenter;
+
 	private GameObject newProjectile;
 
 
@@ -77,29 +79,42 @@ public class ControlWeapon : MonoBehaviour {
 		audio.Play ();
 		yield return new WaitForSeconds (0.5f);
 
-		GameObject childGameObjectLeft = GameObject.FindGameObjectWithTag("CircleLeft");
-		GameObject childGameObjectRight = GameObject.FindGameObjectWithTag("CircleRight");
+		GameObject childGameObjectLeft = GameObject.FindGameObjectWithTag ("CircleLeft");
+		GameObject childGameObjectRight = GameObject.FindGameObjectWithTag ("CircleRight");
 
-		ColorChangeLeft ccLeft = childGameObjectLeft.GetComponent<ColorChangeLeft>();
-		ColorChangeRight ccRight = childGameObjectRight.GetComponent<ColorChangeRight>();
+		ColorChangeLeft ccLeft = childGameObjectLeft.GetComponent<ColorChangeLeft> ();
+		ColorChangeRight ccRight = childGameObjectRight.GetComponent<ColorChangeRight> ();
 
-		if (weapon == "left") {
+		if (ccLeft.chosenColorLeft != "magenta" && ccLeft.chosenColorLeft != "yellow" && ccLeft.chosenColorLeft != "cyan") {
 
-			if (ccLeft.chosenColorLeft == "red")
-				newProjectile = Instantiate (redBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
-			if (ccLeft.chosenColorLeft == "green")
-				newProjectile = Instantiate (greenBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
-			if (ccLeft.chosenColorLeft == "blue")
-				newProjectile = Instantiate (blueBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
+			Debug.Log (ccLeft.chosenColorLeft);
+
+			if (weapon == "left") {
+
+				if (ccLeft.chosenColorLeft == "red")
+					newProjectile = Instantiate (redBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
+				if (ccLeft.chosenColorLeft == "green")
+					newProjectile = Instantiate (greenBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
+				if (ccLeft.chosenColorLeft == "blue")
+					newProjectile = Instantiate (blueBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
 			
-		} else if(weapon == "right") {
+			} else if (weapon == "right") {
 			
-			if (ccRight.chosenColorRight == "red")
-				newProjectile = Instantiate (redBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
-			if (ccRight.chosenColorRight == "green")
-				newProjectile = Instantiate (greenBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
-			if (ccRight.chosenColorRight == "blue")
-				newProjectile = Instantiate (blueBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
+				if (ccRight.chosenColorRight == "red")
+					newProjectile = Instantiate (redBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
+				if (ccRight.chosenColorRight == "green")
+					newProjectile = Instantiate (greenBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
+				if (ccRight.chosenColorRight == "blue")
+					newProjectile = Instantiate (blueBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
+			}
+		} else {
+
+			if (ccLeft.chosenColorLeft == "magenta")
+				newProjectile = Instantiate (magentaBolt, shotSpawnCenter.position, shotSpawnCenter.rotation) as GameObject;
+			if (ccLeft.chosenColorLeft == "yellow")
+				newProjectile = Instantiate (yellowBolt, shotSpawnCenter.position, shotSpawnCenter.rotation) as GameObject;
+			if (ccLeft.chosenColorLeft == "cyan")
+				newProjectile = Instantiate (cyanBolt, shotSpawnCenter.position, shotSpawnCenter.rotation) as GameObject;
 		}
 	}
 }
