@@ -41,8 +41,8 @@ GameObject:
   - component: {fileID: 114444923120117150}
   - component: {fileID: 82471717641237584}
   m_Layer: 0
-  m_Name: LightBolt
-  m_TagString: Untagged
+  m_Name: RedBolt
+  m_TagString: red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

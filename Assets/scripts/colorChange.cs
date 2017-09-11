@@ -2,49 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class colorChange : MonoBehaviour {
+public class ColorChange : MonoBehaviour {
 
-	private float TimeScale = 0.2f;
-	public Color startColor;
-	public Color endColor;
+	public float TimeScale = 2f;
+	private Color currentColor = Color.red;
 
-	public Color lerpedColor = Color.blue;
-	public ParticleSystem ps;
+	private Color startColor;
+	private Color endColor;
+
+	private Color lerpedColor;
+	private ParticleSystem ps;
+
+	public string chosenColor = "red";
 
 	// Use this for initialization
 	void Start () {
 
-		ps = gameObject.GetComponent<ParticleSystem> ();
+//		gameObject.GetComponentInParent<Script>();
 
-		
+		ps = gameObject.GetComponent<ParticleSystem> ();
+		startColor = currentColor;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown((KeyCode.Space))) {
+		if (Input.GetKeyDown((KeyCode.R))) {
+			endColor = Color.red;
+			chosenColor = "red";
 			StartCoroutine(LerpColor());
-
 		}
-		
+
+		if (Input.GetKeyDown((KeyCode.G))) {
+			endColor = Color.green;
+			chosenColor = "green";
+			StartCoroutine(LerpColor());
+		}
+
+		if (Input.GetKeyDown((KeyCode.B))) {
+			endColor = Color.blue;
+			chosenColor = "blue";
+			StartCoroutine(LerpColor());
+		}
 	}
 
 	IEnumerator LerpColor(){
 		float progress = 0;
 
-
 		while(progress <= 1){
-			lerpedColor = Color.Lerp(Color.red, Color.blue, Mathf.SmoothStep(0.0f, 1.0f, progress));
+			lerpedColor = Color.Lerp(currentColor, endColor, progress);
 
 			var main = ps.main;
 			main.startColor = lerpedColor;
 
-//			transform.localScale = Vector3.Slerp(startColor, endColor,  Mathf.SmoothStep(0.0f, 1.0f, progress));
 			progress += Time.deltaTime * TimeScale;
 			yield return null;
 		}
 
-		// Sätt slutgiltigt värde
+		currentColor = endColor;
 
 	} 
 }

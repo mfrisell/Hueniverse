@@ -6,13 +6,23 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed;
 
-	public GameObject shot;
+	public Color chosenColor;
+
+	public GameObject redBolt;
+	public GameObject blueBolt;
+	public GameObject greenBolt;
+
 	public Transform shotSpawn;
 	private GameObject newProjectile;
 
 	public float fireDelta = 0.5F;
 	private float nextFire = 0.5F;
 	private float myTime = 0.0F;
+
+
+	void Start() {
+		chosenColor = Color.red;
+	}
 
 	void Update() {
 
@@ -33,22 +43,28 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	void FixedUpdate() {
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
-	
-		Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-		Rigidbody rb = GetComponent<Rigidbody> ();
-		rb.velocity = movement * speed;
-
-	}
+//	void FixedUpdate() {
+//		float moveHorizontal = Input.GetAxis ("Horizontal");
+//		float moveVertical = Input.GetAxis ("Vertical");
+//	
+//		Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+//		Rigidbody rb = GetComponent<Rigidbody> ();
+//		rb.velocity = movement * speed;
+//	}
 
 	IEnumerator Shoot() {
 
 		AudioSource audio = GetComponent<AudioSource> ();
 		audio.Play ();
 		yield return new WaitForSeconds (0.5f);
-		newProjectile = Instantiate(shot, shotSpawn.position, shotSpawn.rotation) as GameObject;
+
+		GameObject childGameObject = GameObject.FindGameObjectWithTag("CircleTag");
+	
+		ColorChange cc = childGameObject.GetComponent<ColorChange>();
+
+		if(cc.chosenColor == "red") newProjectile = Instantiate(redBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
+		if(cc.chosenColor == "green") newProjectile = Instantiate(greenBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
+		if(cc.chosenColor == "blue") newProjectile = Instantiate(blueBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
 	}
 
 }
