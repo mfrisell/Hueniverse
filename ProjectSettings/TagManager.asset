@@ -11,6 +11,11 @@ TagManager:
   - redHazard
   - weaponRight
   - weaponLeft
+  - CircleTagLeft
+  - lightOrbTag
+  - CircleLeft
+  - GlowOrbLeft
+  - CircleRight
   layers:
   - Default
   - TransparentFX

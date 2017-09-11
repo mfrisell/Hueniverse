@@ -16,11 +16,13 @@ public class ControlWeapon : MonoBehaviour {
 
 	public float fireDelta = 0.5F;
 	private float nextFire = 0.5F;
-	private float myTime = 0.0F;
+	private float myTimeLeft = 0.0F;
+	private float myTimeRight = 0.0F;
 
 	public Color chosenColor;
 
-	public Transform shotSpawn;
+	public Transform shotSpawnLeft;
+	public Transform shotSpawnRight;
 	private GameObject newProjectile;
 
 
@@ -32,19 +34,28 @@ public class ControlWeapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		myTime = myTime + Time.deltaTime;
+		myTimeLeft = myTimeLeft + Time.deltaTime;
 
-		if (Input.GetButton("Fire1") && myTime > nextFire)
+		if (Input.GetKeyDown(KeyCode.Alpha1) && myTimeLeft > nextFire)
 		{
-			nextFire = myTime + fireDelta;
+			nextFire = myTimeLeft + fireDelta;
 
-			StartCoroutine(Shoot());
+			StartCoroutine(Shoot("left"));
 
+			nextFire = nextFire - myTimeLeft;
+			myTimeLeft = 0.0F;
+		}
 
-			// create code here that animates the newProjectile
+		myTimeRight = myTimeRight + Time.deltaTime;
 
-			nextFire = nextFire - myTime;
-			myTime = 0.0F;
+		if (Input.GetKeyDown(KeyCode.Alpha2) && myTimeRight > nextFire)
+		{
+			nextFire = myTimeRight + fireDelta;
+
+			StartCoroutine(Shoot("right"));
+
+			nextFire = nextFire - myTimeRight;
+			myTimeRight = 0.0F;
 		}
 		
 	}
@@ -60,18 +71,35 @@ public class ControlWeapon : MonoBehaviour {
 		rb.velocity = movement * speed;
 	}
 
-	IEnumerator Shoot() {
+	IEnumerator Shoot(string weapon) {
 
 		AudioSource audio = GetComponent<AudioSource> ();
 		audio.Play ();
 		yield return new WaitForSeconds (0.5f);
 
-		GameObject childGameObject = GameObject.FindGameObjectWithTag("CircleTag");
+		GameObject childGameObjectLeft = GameObject.FindGameObjectWithTag("CircleLeft");
+		GameObject childGameObjectRight = GameObject.FindGameObjectWithTag("CircleRight");
 
-		ColorChange cc = childGameObject.GetComponent<ColorChange>();
+		ColorChangeLeft ccLeft = childGameObjectLeft.GetComponent<ColorChangeLeft>();
+		ColorChangeRight ccRight = childGameObjectRight.GetComponent<ColorChangeRight>();
 
-		if(cc.chosenColor == "red") newProjectile = Instantiate(redBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
-		if(cc.chosenColor == "green") newProjectile = Instantiate(greenBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
-		if(cc.chosenColor == "blue") newProjectile = Instantiate(blueBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
+		if (weapon == "left") {
+
+			if (ccLeft.chosenColorLeft == "red")
+				newProjectile = Instantiate (redBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
+			if (ccLeft.chosenColorLeft == "green")
+				newProjectile = Instantiate (greenBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
+			if (ccLeft.chosenColorLeft == "blue")
+				newProjectile = Instantiate (blueBolt, shotSpawnLeft.position, shotSpawnLeft.rotation) as GameObject;
+			
+		} else if(weapon == "right") {
+			
+			if (ccRight.chosenColorRight == "red")
+				newProjectile = Instantiate (redBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
+			if (ccRight.chosenColorRight == "green")
+				newProjectile = Instantiate (greenBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
+			if (ccRight.chosenColorRight == "blue")
+				newProjectile = Instantiate (blueBolt, shotSpawnRight.position, shotSpawnRight.rotation) as GameObject;
+		}
 	}
 }

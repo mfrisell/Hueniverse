@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChange : MonoBehaviour {
+public class ColorChangeLeft : MonoBehaviour {
 
 	public float TimeScale = 2f;
 	private Color currentColor = Color.red;
@@ -13,40 +13,40 @@ public class ColorChange : MonoBehaviour {
 	private Color lerpedColor;
 	private ParticleSystem ps;
 
-	public string chosenColor = "red";
+	public string chosenColorLeft = "red";
 
 	// Use this for initialization
 	void Start () {
 
-//		gameObject.GetComponentInParent<Script>();
+		//		gameObject.GetComponentInParent<Script>();
 
 		ps = gameObject.GetComponent<ParticleSystem> ();
 		startColor = currentColor;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown((KeyCode.R))) {
+		if (Input.GetKeyDown((KeyCode.T))) {
 			endColor = Color.red;
-			chosenColor = "red";
-			StartCoroutine(LerpColor());
+			chosenColorLeft = "red";
+			StartCoroutine(LerpColorLeft());
 		}
 
-		if (Input.GetKeyDown((KeyCode.G))) {
+		if (Input.GetKeyDown((KeyCode.H))) {
 			endColor = Color.green;
-			chosenColor = "green";
-			StartCoroutine(LerpColor());
+			chosenColorLeft = "green";
+			StartCoroutine(LerpColorLeft());
 		}
 
-		if (Input.GetKeyDown((KeyCode.B))) {
+		if (Input.GetKeyDown((KeyCode.N))) {
 			endColor = Color.blue;
-			chosenColor = "blue";
-			StartCoroutine(LerpColor());
+			chosenColorLeft = "blue";
+			StartCoroutine(LerpColorLeft());
 		}
 	}
 
-	IEnumerator LerpColor(){
+	private IEnumerator LerpColorLeft(){
 		float progress = 0;
 
 		while(progress <= 1){
