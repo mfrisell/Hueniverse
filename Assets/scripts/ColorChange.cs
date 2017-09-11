@@ -18,9 +18,9 @@ public class ColorChange : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-//		gameObject.GetComponentInParent<Script>();
+		//		gameObject.GetComponentInParent<Script>();
 
-		ps = gameObject.GetComponent<ParticleSystem> ();
+		ps = gameObject.GetComponent<ParticleSystem> ();	
 		startColor = currentColor;
 	}
 	
