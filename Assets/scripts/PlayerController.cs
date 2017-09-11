@@ -4,42 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed;
 
-	public Color chosenColor;
-
-	public GameObject redBolt;
-	public GameObject blueBolt;
-	public GameObject greenBolt;
-
-	public Transform shotSpawn;
-	private GameObject newProjectile;
-
-	public float fireDelta = 0.5F;
-	private float nextFire = 0.5F;
-	private float myTime = 0.0F;
 
 
 	void Start() {
-		chosenColor = Color.red;
+		
 	}
 
 	void Update() {
 
-		myTime = myTime + Time.deltaTime;
 
-		if (Input.GetButton("Fire1") && myTime > nextFire)
-		{
-			nextFire = myTime + fireDelta;
-
-			StartCoroutine(Shoot());
-
-
-			// create code here that animates the newProjectile
-
-			nextFire = nextFire - myTime;
-			myTime = 0.0F;
-		}
 
 	}
 
@@ -51,20 +25,5 @@ public class PlayerController : MonoBehaviour {
 //		Rigidbody rb = GetComponent<Rigidbody> ();
 //		rb.velocity = movement * speed;
 //	}
-
-	IEnumerator Shoot() {
-
-		AudioSource audio = GetComponent<AudioSource> ();
-		audio.Play ();
-		yield return new WaitForSeconds (0.5f);
-
-		GameObject childGameObject = GameObject.FindGameObjectWithTag("CircleTag");
-	
-		ColorChange cc = childGameObject.GetComponent<ColorChange>();
-
-		if(cc.chosenColor == "red") newProjectile = Instantiate(redBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
-		if(cc.chosenColor == "green") newProjectile = Instantiate(greenBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
-		if(cc.chosenColor == "blue") newProjectile = Instantiate(blueBolt, shotSpawn.position, shotSpawn.rotation) as GameObject;
-	}
 
 }
