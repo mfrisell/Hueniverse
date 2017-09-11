@@ -18,6 +18,9 @@ public class ColorCombination : MonoBehaviour {
 
 	public Transform shotSpawnCenter;
 
+	private string chosenColorLeftInit;
+	private string chosenColorRightInit;
+
 //	private bool firstTimeConvert = true;
 
 	// Use this for initialization
@@ -47,6 +50,9 @@ public class ColorCombination : MonoBehaviour {
 		ParticleSystem psLeft = childGameObjectLeft.GetComponent<ParticleSystem> ();
 		ParticleSystem psRight = childGameObjectRight.GetComponent<ParticleSystem> ();
 
+		chosenColorLeftInit = ccLeft.chosenColorLeft;
+		chosenColorRightInit = ccRight.chosenColorRight;
+
 		if (distanceBetweenWeapons < maxDistance) {
 
 			// Hämta ursprungsfärger
@@ -69,7 +75,6 @@ public class ColorCombination : MonoBehaviour {
 			mainLeft.startColor = lerpedColorLeft;
 			mainRight.startColor = lerpedColorRight;
 
-
 			// Create spawn point for projectile
 			Vector3 middle = Vector3.Lerp (posLeftWeapon, posRightWeapon, 0.5f);
 			Quaternion middleRot = Quaternion.Slerp(rotLeftWeapon, rotRightWeapon, 0.5f);
@@ -84,29 +89,55 @@ public class ColorCombination : MonoBehaviour {
 					ccLeft.chosenColorLeft = "magenta";
 					ccRight.chosenColorRight = "magenta";
 
-					// do shizz
-					Debug.Log ("Magenta");
+					Debug.Log ("magenta");
 				}
 			} else if ((ccLeft.chosenColorLeft == "red" || ccLeft.chosenColorLeft == "green") && (ccRight.chosenColorRight == "red" || ccRight.chosenColorRight == "green")) {
 				if (ccLeft.chosenColorLeft != ccRight.chosenColorRight) {
 					
 					ccLeft.chosenColorLeft = "yellow";
 					ccRight.chosenColorRight = "yellow";
-					// do shizz
-					Debug.Log ("Yellow");
+
+					Debug.Log ("yellow");
 				}
 			} else if ((ccLeft.chosenColorLeft == "blue" || ccLeft.chosenColorLeft == "green") && (ccRight.chosenColorRight == "blue" || ccRight.chosenColorRight == "green")) {
 				if (ccLeft.chosenColorLeft != ccRight.chosenColorRight) {
 
 					ccLeft.chosenColorLeft = "cyan";
 					ccRight.chosenColorRight = "cyan";
-					// do shizz
-					Debug.Log ("Cyan");
+
+					Debug.Log ("cyan");
 				}
 			}
  
 		} else {
+			
+			var mainLeft = psLeft.main;
+			var mainRight = psRight.main;
 
+			float colorRedLeft = mainLeft.startColor.colorMax [0];
+			float colorGreenLeft = mainLeft.startColor.colorMax [1];
+			float colorBlueLeft = mainLeft.startColor.colorMax [2];
+
+			float colorRedRight = mainRight.startColor.colorMax [0];
+			float colorGreenRight = mainRight.startColor.colorMax [1];
+			float colorBlueRight = mainRight.startColor.colorMax [2];
+
+			if (colorRedLeft > colorGreenLeft + colorBlueLeft) {
+				ccLeft.chosenColorLeft = "red";
+			} else if (colorGreenLeft > colorRedLeft + colorBlueLeft) {
+				ccLeft.chosenColorLeft = "green";
+			} else if (colorBlueLeft > colorGreenLeft + colorRedLeft) {
+				ccLeft.chosenColorLeft = "blue";
+			}
+
+			if (colorRedRight > colorGreenRight + colorBlueRight) {
+				ccRight.chosenColorRight = "red";
+			} else if (colorGreenRight > colorRedRight + colorBlueRight) {
+				ccRight.chosenColorRight = "green";
+			} else if (colorBlueRight > colorGreenRight + colorRedRight) {
+				ccRight.chosenColorRight = "blue";
+			}
+				
 			shotSpawnCenter.transform.position = new Vector3 (0, 0, 0);
 		}
 
