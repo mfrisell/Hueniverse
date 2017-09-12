@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+	public Color setColorLeft;
+	public Color activeColorLeft;
 
-
+	public Color setColorRight;
+	public Color activeColorRight;
 
 
 	void Start() {
