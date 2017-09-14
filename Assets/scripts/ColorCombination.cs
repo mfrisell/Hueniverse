@@ -21,33 +21,44 @@ public class ColorCombination : MonoBehaviour {
 	private string chosenColorLeftInit;
 	private string chosenColorRightInit;
 
-//	private bool firstTimeConvert = true;
+    public GameObject LeftWeapon;
+    public GameObject RightWeapon;
 
-	// Use this for initialization
-	void Start () {
+    public GameObject childGameObjectLeft;
+    public GameObject childGameObjectRight;
 
-		LeftObject = GameObject.FindGameObjectWithTag("ShotSpawnLeft");
-		RightObject = GameObject.FindGameObjectWithTag("ShotSpawnRight");
+    //	private bool firstTimeConvert = true;
 
-	}
+    // Use this for initialization
+    void Start () {
+
+        //LeftObject = GameObject.FindGameObjectWithTag("ShotSpawnLeft");
+        //RightObject = GameObject.FindGameObjectWithTag("ShotSpawnRight");
+
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-		Vector3 posLeftWeapon = LeftObject.transform.position;
-		Vector3 posRightWeapon = RightObject.transform.position;
+		//Vector3 posLeftWeapon = LeftObject.transform.position;
+		//Vector3 posRightWeapon = RightObject.transform.position;
 
-		Quaternion rotLeftWeapon = LeftObject.transform.rotation;
-		Quaternion rotRightWeapon = RightObject.transform.rotation;
+        Vector3 posLeftWeapon = LeftWeapon.transform.position;
+        Vector3 posRightWeapon = RightWeapon.transform.position;
+
+        Quaternion rotLeftWeapon = LeftWeapon.transform.rotation;
+		Quaternion rotRightWeapon = RightWeapon.transform.rotation;
+
 		float distanceBetweenWeapons = (posLeftWeapon - posRightWeapon).magnitude;
 
-		GameObject childGameObjectLeft = GameObject.FindGameObjectWithTag ("CircleLeft");
-		GameObject childGameObjectRight = GameObject.FindGameObjectWithTag ("CircleRight");
+        //GameObject childGameObjectLeft = GameObject.FindGameObjectWithTag("CircleLeft");
+        //GameObject childGameObjectRight = GameObject.FindGameObjectWithTag("CircleRight");
 
-		ColorChangeLeft ccLeft = childGameObjectLeft.GetComponent<ColorChangeLeft> ();
-		ColorChangeRight ccRight = childGameObjectRight.GetComponent<ColorChangeRight> ();
+        ColorChangeLeft ccLeft = childGameObjectLeft.GetComponent<ColorChangeLeft>();
+        ColorChangeRight ccRight = childGameObjectRight.GetComponent<ColorChangeRight>();
 
-		ParticleSystem psLeft = childGameObjectLeft.GetComponent<ParticleSystem> ();
+        ParticleSystem psLeft = childGameObjectLeft.GetComponent<ParticleSystem> ();
 		ParticleSystem psRight = childGameObjectRight.GetComponent<ParticleSystem> ();
 
 		chosenColorLeftInit = ccLeft.chosenColorLeft;
