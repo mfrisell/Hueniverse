@@ -4,3 +4,4 @@ Temp
 *.sln
 *.userprefs
 obj
+.vs/Hueniverse/v15/sqlite3/storage.ide
