@@ -49,6 +49,8 @@ public class AsteroidManager : MonoBehaviour {
     void launchAsteroid ()
     {
         //Random.Range( 0.0f, 1.0f )
+        int asteroidColorIndex = Random.Range(0, 3);
+        Debug.Log(asteroidColorIndex);
         int asteroidWidthAngle = Random.Range(0, asteroidSpawnAngleWidth) - (asteroidSpawnAngleWidth / 2);
         int asteroidHeightAngle = Random.Range(0, asteroidSpawnAngleHeight) - (asteroidSpawnAngleHeight / 2);
         Vector3 asteroidSpawnPosition = new Vector3(
@@ -67,6 +69,37 @@ public class AsteroidManager : MonoBehaviour {
         rb.velocity = rb.transform.forward * asteroidSpeed;
         //asteroidObject.transform.rotation = Quaternion.LookRotation(targetPosition);
         //asteroidObject.GetComponent<Rigidbody>().velocity = 20*transform.forward;
+
+        Color asteroidColor;
+
+        switch (asteroidColorIndex)
+        {
+            case 0:
+                asteroidObject.gameObject.tag = "blue";
+                asteroidColor = new Color(0, 0, 1, 1);
+                break;
+            case 1:
+                asteroidObject.gameObject.tag = "red";
+                asteroidColor = new Color(1, 0, 0, 1);
+                break;
+            case 2:
+                asteroidObject.gameObject.tag = "green";
+                asteroidColor = new Color(0, 1, 0, 1);
+                break;
+            default:
+                Debug.Log("Error");
+                asteroidColor = new Color(1, 1, 1, 1); //It needs some color incase it bugs out, should not happen though
+                break;
+        }
+
+
+
+        MeshRenderer gameObjectRenderer = asteroidObject.GetComponent<MeshRenderer>();
+
+        Material newMaterial = new Material(Shader.Find("Standard"));
+
+        newMaterial.color = asteroidColor;
+        gameObjectRenderer.material = newMaterial;
     }
 
     private IEnumerator GenerateAsteroids(float frequency)
