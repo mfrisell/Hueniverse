@@ -25,8 +25,10 @@ GameObject:
   - component: {fileID: 54582156946908438}
   - component: {fileID: 135439986297825256}
   - component: {fileID: 114251808722648212}
+  - component: {fileID: 114703684378497824}
+  - component: {fileID: 114226030007602422}
   m_Layer: 0
-  m_Name: asteroid
+  m_Name: asteroidPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +42,7 @@ Transform:
   m_GameObject: {fileID: 1889218947661872}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -116,6 +118,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114226030007602422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889218947661872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c8393be1c864d5d9836248258a04b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114251808722648212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +140,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77acbddbb9abe644597f43ba5da0cd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114703684378497824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889218947661872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a618b360b67845a5b099a524019ca36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tumble: 5
 --- !u!135 &135439986297825256
 SphereCollider:
   m_ObjectHideFlags: 1
