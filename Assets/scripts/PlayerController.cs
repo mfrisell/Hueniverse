@@ -27,15 +27,55 @@ public class PlayerController : MonoBehaviour {
 
     private string swipeDirection = "";
 
+    // Rotate claws
+
+    public float rotationSpeed = 10.0f;
+    private float degree = 120.0f;
+    private Quaternion targetRotation;
+    public GameObject clawsLeft;
+    public GameObject handleLeft;
+
 
     void Start() {
 
         deviceindex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
         previousSwipePosition = 0;
+
+        targetRotation = clawsLeft.transform.rotation;
     }
 
     void Update()
     {
+
+        //if (deviceindex != -1 && SteamVR_Controller.Input(deviceindex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
+        //{
+
+        //    var axisPress = SteamVR_Controller.Input(deviceindex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
+        //    var xAxis = axisPress[0];
+
+        //    var handleVector = handleLeft.transform.rotation;
+
+        //    if (xAxis>0)
+        //    {
+        //        Debug.Log("Höger tryck");
+        //        // Rotera åt höger
+
+                
+        //        //targetRotation *= Quaternion.AngleAxis(degree, handleVector);
+        //        targetRotation *= handleVector;
+
+        //    } else
+        //    {
+        //        Debug.Log("Vänster tryck");
+        //        // Rotera åt vänster
+        //        //targetRotation *= Quaternion.AngleAxis(-degree, handleVector);
+
+        //    }
+ 
+
+        //}
+
+        //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         if (deviceindex != -1 && SteamVR_Controller.Input(deviceindex).GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
         {
@@ -69,8 +109,8 @@ public class PlayerController : MonoBehaviour {
                     addedTime = 0;
 
                     updateColorProgress = false;
-                    Debug.Log(colorProgress);
-                    Debug.Log(swipeDirection);
+                    //Debug.Log(colorProgress);
+                    //Debug.Log(swipeDirection);
                 }
 
             }
