@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4217572065893146}
   m_Layer: 0
   m_Name: GlowingOrb
-  m_TagString: Untagged
+  m_TagString: GlowOrbLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,13 +36,14 @@ GameObject:
   - component: {fileID: 4517057696446708}
   - component: {fileID: 198973680163603282}
   - component: {fileID: 199441184035670694}
+  - component: {fileID: 114591998039293976}
   m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1681725301342898
 GameObject:
   m_ObjectHideFlags: 0
@@ -53,13 +54,14 @@ GameObject:
   - component: {fileID: 4616084914336166}
   - component: {fileID: 198090944741542100}
   - component: {fileID: 199376591833536360}
+  - component: {fileID: 114442926199830648}
   m_Layer: 0
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1755459848279974
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,9 +72,10 @@ GameObject:
   - component: {fileID: 4728330917043430}
   - component: {fileID: 198985856670621924}
   - component: {fileID: 199998749700714214}
+  - component: {fileID: 114566200696810888}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: CircleLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,13 +90,14 @@ GameObject:
   - component: {fileID: 4131137937856530}
   - component: {fileID: 198849072770877106}
   - component: {fileID: 199074794634060514}
+  - component: {fileID: 114030164961720468}
   m_Layer: 0
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4131137937856530
 Transform:
   m_ObjectHideFlags: 1
@@ -163,6 +167,62 @@ Transform:
   m_Father: {fileID: 4217572065893146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114030164961720468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1782889995007060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3320888c0176841febd8ea77b5e0c0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeScale: 2
+  startColorLeft: {r: 0, g: 0, b: 0, a: 0}
+  chosenColorLeft: red
+--- !u!114 &114442926199830648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1681725301342898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3320888c0176841febd8ea77b5e0c0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeScale: 2
+  startColorLeft: {r: 0, g: 0, b: 0, a: 0}
+  chosenColorLeft: red
+--- !u!114 &114566200696810888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1755459848279974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3320888c0176841febd8ea77b5e0c0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeScale: 2
+  startColorLeft: {r: 0, g: 0, b: 0, a: 0}
+  chosenColorLeft: red
+--- !u!114 &114591998039293976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1437378797641910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3320888c0176841febd8ea77b5e0c0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeScale: 2
+  startColorLeft: {r: 0, g: 0, b: 0, a: 0}
+  chosenColorLeft: red
 --- !u!198 &198090944741542100
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -374,26 +434,20 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
+      scalar: 0.26
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_RotationOrder: 0
       minCurve:
         serializedVersion: 2
         m_Curve:
@@ -403,15 +457,9 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
       minMaxState: 3
@@ -687,7 +735,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.15
       mode: 0
       spread: 0
       speed:
@@ -9957,7 +10005,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1755459848279974}
   serializedVersion: 5
   lengthInSec: 2
-  simulationSpeed: 1
+  simulationSpeed: 1.2
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -10008,7 +10056,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -587657411
+  randomSeed: -170299495
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10404,7 +10452,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 3
+    maxNumParticles: 4
     size3D: 0
     rotation3D: 0
     gravityModifier:

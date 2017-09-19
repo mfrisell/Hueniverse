@@ -5,6 +5,8 @@ using Valve.VR;
 
 public class PlayerController : MonoBehaviour {
 
+
+    //Public variables
 	public Color setColorLeft;
 	public Color activeColorLeft;
 
@@ -15,9 +17,12 @@ public class PlayerController : MonoBehaviour {
 
     public float health;
     public float ammunition;
+    public float TimeScale = 2f;
 
-    public int deviceindex;
+    public GameObject leftParticleSystemGO;
+    public GameObject rightParticleSystemGO;
 
+    //Private variables
     private float currentSwipePosition;
     private float previousSwipePosition;
 
@@ -26,6 +31,18 @@ public class PlayerController : MonoBehaviour {
     private float colorProgressDelta = 0f;
 
     private string swipeDirection = "";
+
+    private int leftDeviceIndex;
+    private int rightDeviceIndex;
+
+    private int leftColorIndex;
+    private int rightColorIndex;
+
+    private Color leftCurrentColor;
+    private Color rightCurrentColor;
+
+    private ParticleSystem leftPS;
+    private ParticleSystem rightPS;
 
     // Rotate claws
 
@@ -37,100 +54,103 @@ public class PlayerController : MonoBehaviour {
 
 
     void Start() {
-
-        deviceindex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
+        
         previousSwipePosition = 0;
 
         targetRotation = clawsLeft.transform.rotation;
+
+        leftDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
+        rightDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
+
+
+        leftPS = leftParticleSystemGO.GetComponent<ParticleSystem>();
+        rightPS = rightParticleSystemGO.GetComponent<ParticleSystem>();
+
+        leftColorIndex = 0;
+        rightColorIndex = 0;
     }
 
     void Update()
     {
-
-        //if (deviceindex != -1 && SteamVR_Controller.Input(deviceindex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
-        //{
-
-        //    var axisPress = SteamVR_Controller.Input(deviceindex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
-        //    var xAxis = axisPress[0];
-
-        //    var handleVector = handleLeft.transform.rotation;
-
-        //    if (xAxis>0)
-        //    {
-        //        Debug.Log("Höger tryck");
-        //        // Rotera åt höger
-
-                
-        //        //targetRotation *= Quaternion.AngleAxis(degree, handleVector);
-        //        targetRotation *= handleVector;
-
-        //    } else
-        //    {
-        //        Debug.Log("Vänster tryck");
-        //        // Rotera åt vänster
-        //        //targetRotation *= Quaternion.AngleAxis(-degree, handleVector);
-
-        //    }
- 
-
-        //}
-
-        //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        if (deviceindex != -1 && SteamVR_Controller.Input(deviceindex).GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
+        //Update left controller color and rotation
+        //TODO Rotation
+        if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
 
-            var axis = SteamVR_Controller.Input(deviceindex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
+            Vector2 axisPress = SteamVR_Controller.Input(leftDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
+            float xAxis = axisPress[0];
 
-            currentSwipePosition = axis[0];
-            addedTime += Time.deltaTime;
+            //Quaternion handleVector = handleLeft.transform.rotation;
 
-            if (previousSwipePosition != currentSwipePosition)
+            if (xAxis > 0)
             {
-                if (previousSwipePosition > currentSwipePosition)
-                {
+                Debug.Log("Höger tryck");
+                // Rotera åt höger
+
+
+                //targetRotation *= Quaternion.AngleAxis(degree, handleVector);
+                //targetRotation *= handleVector;
+
+                leftColorIndex--;
+
+            }
+            else
+            {
+                Debug.Log("Vänster tryck");
+                // Rotera åt vänster
+                //targetRotation *= Quaternion.AngleAxis(-degree, handleVector);
                 
-                    colorProgressDelta += (-currentSwipePosition + 1) / 2;
-                    swipeDirection = "left";
-
-                }
-                else
-                {
-
-                    colorProgressDelta += (currentSwipePosition + 1) / 2;
-                    swipeDirection = "right";
-
-                }
-
-                if (updateColorProgress)
-                {
-                    colorProgress = (colorProgressDelta/addedTime)/60;
-                    colorProgressDelta = 0f;
-                    addedTime = 0;
-
-                    updateColorProgress = false;
-                    //Debug.Log(colorProgress);
-                    //Debug.Log(swipeDirection);
-                }
-
+                leftColorIndex++;
             }
 
-            if (addedTime > 0.1)
-            {
-                updateColorProgress = true;
-            }
+            Color endColor = indexToColor(leftColorIndex);
+            StartCoroutine(LerpColor(leftPS, leftCurrentColor, endColor));
+            leftCurrentColor = endColor;
 
-            
-            //Debug.Log(currentSwipePosition);
-
-
-            previousSwipePosition = currentSwipePosition;
-        } else
-        {
-            addedTime = 0f;
-            colorProgressDelta = 0f;
-            updateColorProgress = false;
+            //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+
+        //Update right controller color and rotation
+        //TODO Rotation
+        if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+
+            Vector2 axisPress = SteamVR_Controller.Input(rightDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
+            float xAxis = axisPress[0];
+
+            //Quaternion handleVector = handleLeft.transform.rotation;
+
+            if (xAxis > 0)
+            {
+                Debug.Log("Höger tryck");
+                // Rotera åt höger
+
+
+                //targetRotation *= Quaternion.AngleAxis(degree, handleVector);
+                //targetRotation *= handleVector;
+
+                rightColorIndex--;
+
+            }
+            else
+            {
+                Debug.Log("Vänster tryck");
+                // Rotera åt vänster
+                //targetRotation *= Quaternion.AngleAxis(-degree, handleVector);
+
+                rightColorIndex++;
+            }
+
+            Color endColor = indexToColor(rightColorIndex);
+            StartCoroutine(LerpColor(rightPS, rightCurrentColor, endColor));
+            rightCurrentColor = endColor;
+
+            //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+
+
+
 
     }
 
@@ -146,6 +166,41 @@ public class PlayerController : MonoBehaviour {
         else if (value >= to2)
             return to;
         return (to - from) * ((value - from2) / (to2 - from2)) + from;
+    }
+
+    private IEnumerator LerpColor(ParticleSystem ps, Color currentColor, Color endColor)
+    {
+        float progress = 0;
+
+        while (progress <= 1)
+        {
+            Color lerpedColor = Color.Lerp(currentColor, endColor, progress);
+
+            var main = ps.main;
+            main.startColor = lerpedColor;
+
+            progress += Time.deltaTime * TimeScale;
+            yield return null;
+        }
+
+        currentColor = endColor;
+
+    }
+
+    //Returns black on error
+    private Color indexToColor(int colorIndex)
+    {
+        switch (colorIndex)
+        {
+            case 0:
+                return Color.red;
+            case 1:
+                return Color.blue;
+            case 2:
+                return Color.green;
+            default:
+                return Color.black;
+        }
     }
 
 }
