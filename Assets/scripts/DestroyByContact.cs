@@ -10,6 +10,9 @@ public class DestroyByContact : MonoBehaviour {
 
 		if (gameObject.tag == other.tag) {
 			Destroy (gameObject);
+			GameObject go = GameObject.FindGameObjectWithTag ("GameController");
+			GameController gco = go.GetComponent<GameController> ();
+			gco.score += 10;
 		}
 	}
 }
