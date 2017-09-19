@@ -101,7 +101,7 @@ public class ControlWeapon : MonoBehaviour {
 
 		AudioSource audio = GetComponent<AudioSource> ();
 		audio.Play ();
-		yield return new WaitForSeconds (0.5f);
+		yield return new WaitForSeconds (0f);
 
 		GameObject childGameObjectLeft = GameObject.FindGameObjectWithTag ("CircleLeft");
 		GameObject childGameObjectRight = GameObject.FindGameObjectWithTag ("CircleRight");

@@ -18,6 +18,11 @@ TagManager:
   - CircleRight
   - ShotSpawnLeft
   - ShotSpawnRight
+  - FxTemporaire
+  - projectile
+  - magenta
+  - cyan
+  - yellow
   layers:
   - Default
   - TransparentFX

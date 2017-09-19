@@ -108,8 +108,6 @@ public class AsteroidManager : MonoBehaviour {
                 break;
         }
 
-
-
         MeshRenderer gameObjectRenderer = asteroidObject.GetComponent<MeshRenderer>();
 
         Material newMaterial = new Material(Shader.Find("Standard"));
