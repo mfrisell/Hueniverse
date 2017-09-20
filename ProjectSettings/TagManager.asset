@@ -3,7 +3,26 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CircleTag
+  - blue
+  - green
+  - red
+  - redHazard
+  - weaponRight
+  - weaponLeft
+  - CircleTagLeft
+  - lightOrbTag
+  - CircleLeft
+  - GlowOrbLeft
+  - CircleRight
+  - ShotSpawnLeft
+  - ShotSpawnRight
+  - FxTemporaire
+  - projectile
+  - magenta
+  - cyan
+  - yellow
   layers:
   - Default
   - TransparentFX
