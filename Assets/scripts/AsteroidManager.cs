@@ -27,6 +27,11 @@ public class AsteroidManager : MonoBehaviour {
 	void Start () {
         targetPosition = new Vector3(0, 0, 0);
 
+        for(int i = 0; i < 10000; i++)
+        {
+            launchAsteroid();
+        }
+
         coroutine = GenerateAsteroids(asteroidFrequency);
         StartCoroutine(coroutine);
 	}
@@ -49,26 +54,40 @@ public class AsteroidManager : MonoBehaviour {
     void launchAsteroid ()
     {
         //Random.Range( 0.0f, 1.0f )
-        
+
         //Debug.Log(asteroidColorIndex);
         int asteroidWidthAngle = Random.Range(0, asteroidSpawnAngleWidth) - (asteroidSpawnAngleWidth / 2);
         int asteroidHeightAngle = Random.Range(0, asteroidSpawnAngleHeight) - (asteroidSpawnAngleHeight / 2);
+        //Vector3 asteroidSpawnPosition = new Vector3(
+        //    targetPosition.x + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidWidthAngle) * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
+        //    targetPosition.y + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidWidthAngle) * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
+        //    targetPosition.z + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidHeightAngle)
+        //);
+
         Vector3 asteroidSpawnPosition = new Vector3(
-            asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad*asteroidWidthAngle) * Mathf.Sin(Mathf.Deg2Rad*asteroidHeightAngle), 
-            asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidWidthAngle) * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
-            asteroidSpawnRadius*Mathf.Cos(Mathf.Deg2Rad * asteroidHeightAngle)
+            targetPosition.x + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidWidthAngle) * Mathf.Cos(Mathf.Deg2Rad * asteroidHeightAngle),
+            targetPosition.y + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
+            targetPosition.z + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidHeightAngle) * Mathf.Cos(Mathf.Deg2Rad * asteroidWidthAngle)
         );
+
+        //Vector3 asteroidSpawnPosition = new Vector3(
+        //    asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidWidthAngle),
+        //    asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
+        //    asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidWidthAngle)
+        //);
 
         //find the vector pointing from our position to the target
         Vector3 direction = (targetPosition - asteroidSpawnPosition).normalized;
 
         //create the rotation we need to be in to look at the target
         Quaternion lookRotation = Quaternion.LookRotation(direction);
+
         GameObject asteroidObject = Instantiate(asteroid, asteroidSpawnPosition, lookRotation) as GameObject;
+        float asteroidSize = Random.Range(asteroidMinSize, asteroidMaxSize);
+        asteroidObject.transform.localScale = new Vector3(asteroidSize, asteroidSize, asteroidSize);
+
         Rigidbody rb = asteroidObject.GetComponent<Rigidbody>();
-        rb.velocity = rb.transform.forward * asteroidSpeed;
-        //asteroidObject.transform.rotation = Quaternion.LookRotation(targetPosition);
-        //asteroidObject.GetComponent<Rigidbody>().velocity = 20*transform.forward;
+        //rb.velocity = rb.transform.forward * asteroidSpeed;
 
 		int asteroidColorIndex = Random.Range(0, 4);
 		if (asteroidColorIndex == 3) {
