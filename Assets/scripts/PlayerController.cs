@@ -18,9 +18,11 @@ public class PlayerController : MonoBehaviour {
     public float health;
     public float ammunition;
     public float TimeScale = 2f;
+    public float maxDistance = 0.5f;
 
     public GameObject leftParticleSystemGO;
     public GameObject rightParticleSystemGO;
+    public GameObject bulletPrefab;
 
     //Private variables
     private float currentSwipePosition;
@@ -40,6 +42,10 @@ public class PlayerController : MonoBehaviour {
 
     private Color leftCurrentColor;
     private Color rightCurrentColor;
+    private Color combinedCurrentColor;
+    private bool colorIsCombined = false;
+
+    GameObject combinedBulletSpawn;
 
     private ParticleSystem leftPS;
     private ParticleSystem rightPS;
@@ -68,6 +74,8 @@ public class PlayerController : MonoBehaviour {
 
         leftColorIndex = 0;
         rightColorIndex = 0;
+
+        combinedBulletSpawn = new GameObject();
     }
 
     void Update()
@@ -148,24 +156,125 @@ public class PlayerController : MonoBehaviour {
             //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
+        Vector3 leftWeaponPos = leftParticleSystemGO.transform.position;
+        Vector3 rightWeaponPos = rightParticleSystemGO.transform.position;
 
+        float distanceBetweenWeapons = (leftParticleSystemGO.transform.position - rightParticleSystemGO.transform.position).magnitude;
 
+        colorIsCombined = false; //Reset flag
 
+        if (distanceBetweenWeapons < maxDistance)
+        {
+            colorIsCombined = true;
+            //Calculate resulting color
+            combinedCurrentColor = (leftCurrentColor + rightCurrentColor) / 2;
+
+            //Update ParticleSystem color
+            ParticleSystem.MainModule leftMainModule = leftPS.main;
+            ParticleSystem.MainModule rightMainModule = rightPS.main;
+            leftMainModule.startColor = combinedCurrentColor;
+            rightMainModule.startColor = combinedCurrentColor;
+
+            // Create spawn point for projectile
+            Vector3 combinedWeaponPos = (leftWeaponPos + rightWeaponPos) / 2;
+            Quaternion combinedWeaponRot = Quaternion.Slerp(leftParticleSystemGO.transform.rotation, rightParticleSystemGO.transform.rotation, 0.5f);
+
+            
+            combinedBulletSpawn.transform.position = combinedWeaponPos;
+            combinedBulletSpawn.transform.rotation = combinedWeaponRot;
+            
+
+        }
+
+        if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+        {
+
+            StartCoroutine(Shoot(true));
+            //Debug.Log(deviceindexLeft);
+        }
+        
+
+        if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+        {
+
+            StartCoroutine(Shoot(false));
+            
+            //Debug.Log(deviceindexRight);
+        }
 
     }
 
-    public static float map01(float value, float min, float max)
+    IEnumerator Shoot(bool isLeft)
     {
-        return (value - min) * 1f / (max - min);
-    }
 
-    public static float superLerp(float from, float to, float from2, float to2, float value)
-    {
-        if (value <= from2)
-            return from;
-        else if (value >= to2)
-            return to;
-        return (to - from) * ((value - from2) / (to2 - from2)) + from;
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.Play();
+        yield return new WaitForSeconds(0f);
+
+        Color bulletColor;
+        Vector3 bulletSpawnPosition;
+        Quaternion bulletSpawnRotation;
+
+        if (colorIsCombined)
+        {
+            bulletColor = combinedCurrentColor;
+            bulletSpawnPosition = combinedBulletSpawn.transform.position;
+            bulletSpawnRotation = combinedBulletSpawn.transform.rotation;
+        } else
+        {
+            if (isLeft)
+            {
+                bulletColor = leftCurrentColor;
+                bulletSpawnPosition = leftParticleSystemGO.transform.position;
+                bulletSpawnRotation = leftParticleSystemGO.transform.rotation;
+            } else
+            {
+                bulletColor = rightCurrentColor;
+                bulletSpawnPosition = rightParticleSystemGO.transform.position;
+                bulletSpawnRotation = rightParticleSystemGO.transform.rotation;
+            }
+        }
+
+        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, bulletSpawnRotation) as GameObject;
+
+        if (bulletColor == Color.red)
+        {
+            bulletObject.gameObject.tag = "red";
+        }
+        else if (bulletColor == Color.green)
+        {
+            bulletObject.gameObject.tag = "green";
+        }
+        else if (bulletColor == Color.blue)
+        {
+            bulletObject.gameObject.tag = "blue";
+        }
+        else if (bulletColor == Color.cyan)
+        {
+            bulletObject.gameObject.tag = "cyan";
+        }
+        else if (bulletColor == Color.magenta)
+        {
+            bulletObject.gameObject.tag = "magenta";
+        }
+        else if (bulletColor == Color.yellow)
+        {
+            bulletObject.gameObject.tag = "yellow";
+        }
+        else
+        {
+            Debug.Log("Error");
+        }
+
+        MeshRenderer gameObjectRenderer = bulletObject.GetComponent<MeshRenderer>();
+
+        Material newMaterial = new Material(Shader.Find("Standard"))
+        {
+            color = bulletColor
+        };
+
+        
+        gameObjectRenderer.material = newMaterial;
     }
 
     private IEnumerator LerpColor(ParticleSystem ps, Color currentColor, Color endColor)
