@@ -16,9 +16,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
         resetGame = false;
-		
 	}
 	
 	// Update is called once per frame
@@ -31,7 +29,7 @@ public class GameController : MonoBehaviour {
 		gameTime += Time.deltaTime;
 
 		if (Input.GetKeyDown ("k")) {
-			Debug.Log ("NU TRÖCK DU PÅ K");
+			Debug.Log ("Saving Highscore");
 			/*Destroy (GameObject.FindWithTag ("blue"));
 			Destroy (GameObject.FindWithTag ("red"));
 			Destroy (GameObject.FindWithTag ("green"));
@@ -42,10 +40,8 @@ public class GameController : MonoBehaviour {
 		}
 		if (Input.GetKeyDown ("j")) {
 			ReadHighscore ();
-		}
-			
+		}			
 	}
-
 
 	void SaveHighscore() {
 		string filePath = @"./Highscore.csv";  
@@ -78,17 +74,14 @@ public class GameController : MonoBehaviour {
 	}
 
 	void ReadHighscore(){
-		List<string[]> highScores;
+		List<string[]> highScores = new List<string[]>();
 
 		using(var reader = new StreamReader(@"./Highscore.csv"))
-		{
-			highScores = new List<string[]>();
+		{ 
 			while (!reader.EndOfStream)
 			{
 				var line = reader.ReadLine();
 				var values = line.Split(',');
-				print ("Reading CSV");
-
 				highScores.Add(values);
 			}
 		}
@@ -100,5 +93,4 @@ public class GameController : MonoBehaviour {
 			print (highScorePrint);
 		}
 	}
-
 }
