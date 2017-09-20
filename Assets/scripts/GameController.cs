@@ -78,22 +78,26 @@ public class GameController : MonoBehaviour {
 	}
 
 	void ReadHighscore(){
-		List<string> listA;
-		using(var reader = new StreamReader(@".\Highscore.csv"))
+		List<string[]> highScores;
+
+		using(var reader = new StreamReader(@"./Highscore.csv"))
 		{
-			listA = new List<string>();
-			List<string> listB = new List<string>();
+			highScores = new List<string[]>();
 			while (!reader.EndOfStream)
 			{
 				var line = reader.ReadLine();
 				var values = line.Split(',');
+				print ("Reading CSV");
 
-				listA.Add(values[0]);
-				listB.Add(values[1]);
+				highScores.Add(values);
 			}
 		}
-		for (int i = 0; i<listA.size(); i++) {
-			Debug.Log (ListA [i]);
+		foreach(var highScore in highScores) {
+			var highScorePrint = "";
+			foreach (var column in highScore) {
+				highScorePrint += " : " + column;
+			}
+			print (highScorePrint);
 		}
 	}
 
