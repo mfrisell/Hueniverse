@@ -27,11 +27,6 @@ public class AsteroidManager : MonoBehaviour {
 	void Start () {
         targetPosition = new Vector3(0, 0, 0);
 
-        for(int i = 0; i < 10000; i++)
-        {
-            launchAsteroid();
-        }
-
         coroutine = GenerateAsteroids(asteroidFrequency);
         StartCoroutine(coroutine);
 	}
@@ -72,6 +67,8 @@ public class AsteroidManager : MonoBehaviour {
         Quaternion lookRotation = Quaternion.LookRotation(direction);
 
         GameObject asteroidObject = Instantiate(asteroid, asteroidSpawnPosition, lookRotation) as GameObject;
+
+        asteroidObject.transform.SetParent(GetComponent<Transform>());
         float asteroidSize = Random.Range(asteroidMinSize, asteroidMaxSize);
         asteroidObject.transform.localScale = new Vector3(asteroidSize, asteroidSize, asteroidSize);
 

@@ -46,7 +46,8 @@ public class AmbientAsteroidController : MonoBehaviour {
 				ambientSpeed = Random.Range (50, 200);
 
 				GameObject ambas = Instantiate (AmbientAsteroid, startPos, Quaternion.identity) as GameObject;
-				ambas.transform.localScale = new Vector3 (ambientSize,ambientSize,ambientSize);
+                ambas.transform.SetParent(GetComponent<Transform>());
+                ambas.transform.localScale = new Vector3 (ambientSize,ambientSize,ambientSize);
 				Rigidbody ambasRigid = ambas.GetComponent<Rigidbody> ();
 				ambasRigid.velocity = -transform.forward * ambientSpeed;
 
