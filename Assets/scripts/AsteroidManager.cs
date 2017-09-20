@@ -54,27 +54,16 @@ public class AsteroidManager : MonoBehaviour {
     void launchAsteroid ()
     {
         //Random.Range( 0.0f, 1.0f )
-
-        //Debug.Log(asteroidColorIndex);
+        
+        //Randomize positions and center them
         int asteroidWidthAngle = Random.Range(0, asteroidSpawnAngleWidth) - (asteroidSpawnAngleWidth / 2);
         int asteroidHeightAngle = Random.Range(0, asteroidSpawnAngleHeight) - (asteroidSpawnAngleHeight / 2);
-        //Vector3 asteroidSpawnPosition = new Vector3(
-        //    targetPosition.x + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidWidthAngle) * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
-        //    targetPosition.y + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidWidthAngle) * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
-        //    targetPosition.z + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidHeightAngle)
-        //);
 
         Vector3 asteroidSpawnPosition = new Vector3(
             targetPosition.x + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidWidthAngle) * Mathf.Cos(Mathf.Deg2Rad * asteroidHeightAngle),
             targetPosition.y + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
             targetPosition.z + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidHeightAngle) * Mathf.Cos(Mathf.Deg2Rad * asteroidWidthAngle)
         );
-
-        //Vector3 asteroidSpawnPosition = new Vector3(
-        //    asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidWidthAngle),
-        //    asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidHeightAngle),
-        //    asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * asteroidWidthAngle)
-        //);
 
         //find the vector pointing from our position to the target
         Vector3 direction = (targetPosition - asteroidSpawnPosition).normalized;
@@ -87,7 +76,7 @@ public class AsteroidManager : MonoBehaviour {
         asteroidObject.transform.localScale = new Vector3(asteroidSize, asteroidSize, asteroidSize);
 
         Rigidbody rb = asteroidObject.GetComponent<Rigidbody>();
-        //rb.velocity = rb.transform.forward * asteroidSpeed;
+        rb.velocity = rb.transform.forward * asteroidSpeed;
 
 		int asteroidColorIndex = Random.Range(0, 4);
 		if (asteroidColorIndex == 3) {
