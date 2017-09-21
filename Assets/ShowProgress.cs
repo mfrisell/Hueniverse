@@ -13,11 +13,7 @@ public class ShowProgress : MonoBehaviour {
 
 		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("GameController");
 		GameController gameControllerScript = gameControllerObject.GetComponent<GameController> ();
-
-		// Change when maxGameTime is added in GameController
-		//gameProgress = gameControllerScript.maxGameTime;
-
-		gameProgress = 180;
+		gameProgress = gameControllerScript.maxGameTime;
 		
 	}
 	
