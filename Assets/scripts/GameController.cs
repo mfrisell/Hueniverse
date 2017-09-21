@@ -13,10 +13,22 @@ public class GameController : MonoBehaviour {
 	public string name = "Spansk";
 	public string gameMode = "demo";
 	public float gameTime = 0f;
+	public float maxGameTime = 180f;
+
+	private GameObject sun;
+	private float distanceZ;
+	private float deltaDistance;
+	public float sunStopFromPlayer = 30;
 
     // Use this for initialization
     void Start () {
+		
         resetGame = false;
+
+		sun = GameObject.FindGameObjectWithTag ("sun");
+		distanceZ = sun.transform.position.z;
+		deltaDistance = distanceZ / maxGameTime;
+
 	}
 	
 	// Update is called once per frame
@@ -40,7 +52,9 @@ public class GameController : MonoBehaviour {
 		}
 		if (Input.GetKeyDown ("j")) {
 			ReadHighscore ();
-		}			
+		}	
+
+		moveSunCloser ();
 	}
 
 	void SaveHighscore() {
@@ -92,5 +106,20 @@ public class GameController : MonoBehaviour {
 			}
 			print (highScorePrint);
 		}
+	}
+
+	void moveSunCloser() {
+
+		float distanceChange = deltaDistance * Time.deltaTime;
+		Vector3 pos = sun.transform.position;
+		float distanceChangeNew = distanceChange;
+	
+
+		if (pos.z < 100 + sunStopFromPlayer) {
+			distanceChangeNew = (distanceChange * (pos.z - sunStopFromPlayer)) / 100;
+		}
+
+		Vector3 tmp = new Vector3 (pos.x, pos.y, pos.z - distanceChangeNew);
+		sun.transform.position = tmp;
 	}
 }

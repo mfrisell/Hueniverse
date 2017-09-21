@@ -23,6 +23,7 @@ TagManager:
   - magenta
   - cyan
   - yellow
+  - sun
   layers:
   - Default
   - TransparentFX
