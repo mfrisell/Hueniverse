@@ -31,14 +31,15 @@ public class DestroyByContact : MonoBehaviour {
 	}
 
 	IEnumerator fadeAudio() {
-		
+		AudioSource audio = GetComponent<AudioSource> ();
+
 		for (int i = 0; i < 10; i++) {
-			AudioSource audio = GetComponent<AudioSource> ();
-			Debug.Log (audio.volume);
+			//Debug.Log (audio.volume);
 			audio.volume -= 0.02f;
 			yield return new WaitForSeconds (0.05f);
 		}
 
+		audio.volume = 0;
 		// Remove gameobject from scene
 		Destroy (gameObject);
 	}
