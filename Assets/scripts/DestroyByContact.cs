@@ -5,24 +5,28 @@ using UnityEngine;
 public class DestroyByContact : MonoBehaviour {
 
 	public GameObject explosion;
+	private bool exploded = false;
 
 	void OnTriggerEnter(Collider other) {
 
 		if (gameObject.tag == other.tag) {
 			// Create Explosion
-			Instantiate (explosion, transform.position, transform.rotation);
+			if (!exploded) {
+				exploded = true;
+				Instantiate (explosion, transform.position, transform.rotation);
 
-			// Update player score
-			GameObject go = GameObject.FindGameObjectWithTag ("GameController");
-			GameController gco = go.GetComponent<GameController> ();
-			gco.score += 10;
+				// Update player score
+				GameObject go = GameObject.FindGameObjectWithTag ("GameController");
+				GameController gco = go.GetComponent<GameController> ();
+				gco.score += 10;
 
-			// Hide mesh
-			MeshRenderer mesh = GetComponent<MeshRenderer> ();
-			mesh.enabled = false;
+				// Hide mesh
+				MeshRenderer mesh = GetComponent<MeshRenderer> ();
+				mesh.enabled = false;
 
-			// Fade out audio
-			StartCoroutine (fadeAudio ());
+				// Fade out audio
+				StartCoroutine (fadeAudio ());
+			}
 		}
 	}
 
