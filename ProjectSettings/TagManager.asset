@@ -24,6 +24,8 @@ TagManager:
   - cyan
   - yellow
   - sun
+  - leftController
+  - rightController
   layers:
   - Default
   - TransparentFX

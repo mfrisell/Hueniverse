@@ -5,24 +5,28 @@ using Valve.VR;
 
 public class RotateWeapon : MonoBehaviour {
     public Transform parentTrans;
+    public GameObject handle;
 
     private bool clockwise;
+    public bool isLeft;
 
     private int direction;
-    private int deviceindex;
+    private int leftDeviceIndex;
+    private int rightDeviceIndex;
 
     // Use this for initialization
     void Start() {
-        deviceindex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
+        leftDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
+        rightDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
     }
 
     // Update is called once per frame
     void Update() {
 
-        if (deviceindex != -1 && SteamVR_Controller.Input(deviceindex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
+        if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
 
-            var axisPress = SteamVR_Controller.Input(deviceindex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
+            var axisPress = SteamVR_Controller.Input(leftDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
             var xAxis = axisPress[0];
 
             if (xAxis > 0)
@@ -36,7 +40,29 @@ public class RotateWeapon : MonoBehaviour {
                 clockwise = false;
             }
 
-            StartCoroutine(LerpRotation());
+            if(isLeft)
+                StartCoroutine(LerpRotation());
+        }
+
+        if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+
+            var axisPress = SteamVR_Controller.Input(rightDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
+            var xAxis = axisPress[0];
+
+            if (xAxis > 0)
+            {
+                Debug.Log("Höger tryck");
+                clockwise = true;
+            }
+            else
+            {
+                Debug.Log("Vänster tryck");
+                clockwise = false;
+            }
+
+            if(!isLeft)
+                StartCoroutine(LerpRotation());
         }
     }
 
@@ -54,7 +80,8 @@ public class RotateWeapon : MonoBehaviour {
 
         for (var i = 0; i< 30; i++)
         {
-         transform.RotateAround(parentTrans.position, parentTrans.up, direction);
+            handle.transform.RotateAround(parentTrans.position, parentTrans.forward, -direction);
+            GetComponent<Transform>().RotateAround(parentTrans.position, parentTrans.forward, direction);
             
             yield return new WaitForSeconds(.01f);
         }

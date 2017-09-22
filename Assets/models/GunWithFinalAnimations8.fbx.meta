@@ -1,0 +1,466 @@
+fileFormatVersion: 2
+guid: 970cc0f997a7b964dada7162de2bf627
+timeCreated: 1506009147
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Handle
+    100004: ikHandle1
+    100006: ikHandle2
+    100008: ikHandle3
+    100010: joint2
+    100012: joint2 1
+    100014: joint2 2
+    100016: joint3
+    100018: joint3 1
+    100020: joint3 2
+    100022: joint4
+    100024: joint5
+    100026: joint6
+    100028: NotHandle
+    100030: pCylinder2
+    100032: pCylinder2 1
+    100034: pCylinder2 2
+    100036: pCylinder3
+    100038: pCylinder3 1
+    100040: pCylinder3 2
+    100042: pCylinder5
+    100044: polySurface1
+    100046: polySurface2
+    100048: polySurface3
+    100050: polySurface3 1
+    100052: polySurface4
+    100054: pPipe10
+    100056: pPipe11
+    100058: pPipe6
+    100060: pPipe6 1
+    100062: pPipe6 2
+    100064: pPipe7
+    100066: pPipe7 1
+    100068: pPipe7 2
+    100070: pPipe8
+    100072: pPipe9
+    100074: ShootButton
+    100076: transform10
+    100078: transform5
+    100080: transform5 1
+    100082: transform5 2
+    100084: transform7
+    100086: transform8
+    100088: transform9
+    400000: //RootNode
+    400002: Handle
+    400004: ikHandle1
+    400006: ikHandle2
+    400008: ikHandle3
+    400010: joint2
+    400012: joint2 1
+    400014: joint2 2
+    400016: joint3
+    400018: joint3 1
+    400020: joint3 2
+    400022: joint4
+    400024: joint5
+    400026: joint6
+    400028: NotHandle
+    400030: pCylinder2
+    400032: pCylinder2 1
+    400034: pCylinder2 2
+    400036: pCylinder3
+    400038: pCylinder3 1
+    400040: pCylinder3 2
+    400042: pCylinder5
+    400044: polySurface1
+    400046: polySurface2
+    400048: polySurface3
+    400050: polySurface3 1
+    400052: polySurface4
+    400054: pPipe10
+    400056: pPipe11
+    400058: pPipe6
+    400060: pPipe6 1
+    400062: pPipe6 2
+    400064: pPipe7
+    400066: pPipe7 1
+    400068: pPipe7 2
+    400070: pPipe8
+    400072: pPipe9
+    400074: ShootButton
+    400076: transform10
+    400078: transform5
+    400080: transform5 1
+    400082: transform5 2
+    400084: transform7
+    400086: transform8
+    400088: transform9
+    2300000: pCylinder2
+    2300002: pCylinder2 1
+    2300004: pCylinder2 2
+    2300006: pCylinder3
+    2300008: pCylinder3 1
+    2300010: pCylinder3 2
+    2300012: polySurface1
+    2300014: polySurface2
+    2300016: polySurface3 1
+    2300018: polySurface4
+    2300020: pPipe10
+    2300022: pPipe6
+    2300024: pPipe6 1
+    2300026: pPipe6 2
+    2300028: pPipe7
+    2300030: pPipe7 1
+    2300032: pPipe7 2
+    2300034: pPipe8
+    2300036: pPipe9
+    2300038: ShootButton
+    3300000: pCylinder2
+    3300002: pCylinder2 1
+    3300004: pCylinder2 2
+    3300006: pCylinder3
+    3300008: pCylinder3 1
+    3300010: pCylinder3 2
+    3300012: polySurface1
+    3300014: polySurface2
+    3300016: polySurface3 1
+    3300018: polySurface4
+    3300020: pPipe10
+    3300022: pPipe6
+    3300024: pPipe6 1
+    3300026: pPipe6 2
+    3300028: pPipe7
+    3300030: pPipe7 1
+    3300032: pPipe7 2
+    3300034: pPipe8
+    3300036: pPipe9
+    3300038: ShootButton
+    4300000: polySurface4
+    4300002: polySurface1
+    4300004: polySurface2
+    4300006: ShootButton
+    4300008: pPipe7
+    4300010: pCylinder3
+    4300012: pPipe6
+    4300014: pCylinder2
+    4300016: pPipe10
+    4300018: pPipe9
+    4300020: pPipe7
+    4300022: pCylinder3
+    4300024: pPipe6
+    4300026: pCylinder2
+    4300028: pPipe7
+    4300030: pCylinder3
+    4300032: pPipe6
+    4300034: pCylinder2
+    4300036: pPipe8
+    4300038: polySurface3
+    7400000: idle
+    7400002: Shoot
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Handle
+        weight: 1
+      - path: Handle/polySurface3
+        weight: 1
+      - path: Handle/polySurface3/transform10
+        weight: 1
+      - path: Handle/polySurface4
+        weight: 1
+      - path: Handle/polySurface4/polySurface1
+        weight: 1
+      - path: Handle/polySurface4/polySurface2
+        weight: 1
+      - path: Handle/polySurface4/ShootButton
+        weight: 1
+      - path: Handle/transform7
+        weight: 1
+      - path: NotHandle
+        weight: 1
+      - path: NotHandle/ikHandle1
+        weight: 1
+      - path: NotHandle/ikHandle2
+        weight: 1
+      - path: NotHandle/ikHandle3
+        weight: 1
+      - path: NotHandle/joint4
+        weight: 1
+      - path: NotHandle/joint4/joint2
+        weight: 1
+      - path: NotHandle/joint4/joint2/joint3
+        weight: 1
+      - path: NotHandle/joint4/joint2/pCylinder3
+        weight: 1
+      - path: NotHandle/joint4/joint2/pPipe7
+        weight: 1
+      - path: NotHandle/joint4/joint2/pPipe7/transform5
+        weight: 1
+      - path: NotHandle/joint4/pPipe6
+        weight: 1
+      - path: NotHandle/joint4/pPipe6/pCylinder2
+        weight: 1
+      - path: NotHandle/joint5
+        weight: 1
+      - path: NotHandle/joint5/joint2 1
+        weight: 1
+      - path: NotHandle/joint5/joint2 1/joint3 1
+        weight: 1
+      - path: NotHandle/joint5/joint2 1/pCylinder3 1
+        weight: 1
+      - path: NotHandle/joint5/joint2 1/pPipe7 1
+        weight: 1
+      - path: NotHandle/joint5/joint2 1/pPipe7 1/transform5 1
+        weight: 1
+      - path: NotHandle/joint5/pPipe6 1
+        weight: 1
+      - path: NotHandle/joint5/pPipe6 1/pCylinder2 1
+        weight: 1
+      - path: NotHandle/joint6
+        weight: 1
+      - path: NotHandle/joint6/joint2 2
+        weight: 1
+      - path: NotHandle/joint6/joint2 2/joint3 2
+        weight: 1
+      - path: NotHandle/joint6/joint2 2/pCylinder3 2
+        weight: 1
+      - path: NotHandle/joint6/joint2 2/pPipe7 2
+        weight: 1
+      - path: NotHandle/joint6/joint2 2/pPipe7 2/transform5 2
+        weight: 1
+      - path: NotHandle/joint6/pPipe6 2
+        weight: 1
+      - path: NotHandle/joint6/pPipe6 2/pCylinder2 2
+        weight: 1
+      - path: NotHandle/pCylinder5
+        weight: 1
+      - path: NotHandle/pCylinder5/transform9
+        weight: 1
+      - path: NotHandle/polySurface3 1
+        weight: 1
+      - path: NotHandle/pPipe8
+        weight: 1
+      - path: NotHandle/pPipe9
+        weight: 1
+      - path: NotHandle/pPipe10
+        weight: 1
+      - path: NotHandle/pPipe11
+        weight: 1
+      - path: NotHandle/pPipe11/transform8
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Shoot
+      takeName: Take 001
+      firstFrame: 11
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Handle
+        weight: 1
+      - path: Handle/polySurface3
+        weight: 1
+      - path: Handle/polySurface3/transform10
+        weight: 1
+      - path: Handle/polySurface4
+        weight: 1
+      - path: Handle/polySurface4/polySurface1
+        weight: 1
+      - path: Handle/polySurface4/polySurface2
+        weight: 1
+      - path: Handle/polySurface4/ShootButton
+        weight: 1
+      - path: Handle/transform7
+        weight: 1
+      - path: NotHandle
+        weight: 1
+      - path: NotHandle/ikHandle1
+        weight: 1
+      - path: NotHandle/ikHandle2
+        weight: 1
+      - path: NotHandle/ikHandle3
+        weight: 1
+      - path: NotHandle/joint4
+        weight: 1
+      - path: NotHandle/joint4/joint2
+        weight: 1
+      - path: NotHandle/joint4/joint2/joint3
+        weight: 1
+      - path: NotHandle/joint4/joint2/pCylinder3
+        weight: 1
+      - path: NotHandle/joint4/joint2/pPipe7
+        weight: 1
+      - path: NotHandle/joint4/joint2/pPipe7/transform5
+        weight: 1
+      - path: NotHandle/joint4/pPipe6
+        weight: 1
+      - path: NotHandle/joint4/pPipe6/pCylinder2
+        weight: 1
+      - path: NotHandle/joint5
+        weight: 1
+      - path: NotHandle/joint5/joint2 1
+        weight: 1
+      - path: NotHandle/joint5/joint2 1/joint3 1
+        weight: 1
+      - path: NotHandle/joint5/joint2 1/pCylinder3 1
+        weight: 1
+      - path: NotHandle/joint5/joint2 1/pPipe7 1
+        weight: 1
+      - path: NotHandle/joint5/joint2 1/pPipe7 1/transform5 1
+        weight: 1
+      - path: NotHandle/joint5/pPipe6 1
+        weight: 1
+      - path: NotHandle/joint5/pPipe6 1/pCylinder2 1
+        weight: 1
+      - path: NotHandle/joint6
+        weight: 1
+      - path: NotHandle/joint6/joint2 2
+        weight: 1
+      - path: NotHandle/joint6/joint2 2/joint3 2
+        weight: 1
+      - path: NotHandle/joint6/joint2 2/pCylinder3 2
+        weight: 1
+      - path: NotHandle/joint6/joint2 2/pPipe7 2
+        weight: 1
+      - path: NotHandle/joint6/joint2 2/pPipe7 2/transform5 2
+        weight: 1
+      - path: NotHandle/joint6/pPipe6 2
+        weight: 1
+      - path: NotHandle/joint6/pPipe6 2/pCylinder2 2
+        weight: 1
+      - path: NotHandle/pCylinder5
+        weight: 1
+      - path: NotHandle/pCylinder5/transform9
+        weight: 1
+      - path: NotHandle/polySurface3 1
+        weight: 1
+      - path: NotHandle/pPipe8
+        weight: 1
+      - path: NotHandle/pPipe9
+        weight: 1
+      - path: NotHandle/pPipe10
+        weight: 1
+      - path: NotHandle/pPipe11
+        weight: 1
+      - path: NotHandle/pPipe11/transform8
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
