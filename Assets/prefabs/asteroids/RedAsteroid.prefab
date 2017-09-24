@@ -75,6 +75,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4013350641981666}
+  - component: {fileID: 114466716385553742}
   m_Layer: 0
   m_Name: RedAsteroid
   m_TagString: Untagged
@@ -480,6 +481,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDeath: 15
+--- !u!114 &114466716385553742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892804000986354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c5ef09585a94fa49aadfbec30c25d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleTime: 0.05
 --- !u!114 &114483646881382148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,6 +517,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1057914330255860, guid: 70cf526976b744066921310138a59895, type: 2}
+  failExplosion: {fileID: 1118755603959354, guid: bcb30fca6a2e345d092308411b637b5b,
+    type: 2}
 --- !u!136 &136539850398808288
 CapsuleCollider:
   m_ObjectHideFlags: 1

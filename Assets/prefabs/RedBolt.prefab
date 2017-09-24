@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114444923120117150}
   - component: {fileID: 82471717641237584}
   - component: {fileID: 114162872279800378}
+  - component: {fileID: 114835377440535444}
   m_Layer: 0
   m_Name: RedBolt
   m_TagString: red
@@ -271,6 +272,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -286,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77acbddbb9abe644597f43ba5da0cd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToDeath: 7
 --- !u!114 &114444923120117150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -298,6 +314,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &114835377440535444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1486843666200062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e4ba55b587d48edabba131d2275ab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  failExplosion: {fileID: 1118755603959354, guid: bcb30fca6a2e345d092308411b637b5b,
+    type: 2}
 --- !u!136 &136727868475483936
 CapsuleCollider:
   m_ObjectHideFlags: 1

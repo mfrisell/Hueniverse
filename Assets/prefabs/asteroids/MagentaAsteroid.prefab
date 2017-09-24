@@ -35,6 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4273735890010386}
+  - component: {fileID: 114903244991584774}
   m_Layer: 0
   m_Name: MagentaAsteroid
   m_TagString: Untagged
@@ -480,6 +481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1173697183181138, guid: 8d9d4a60336d243b1903ce9d1271a9e1, type: 2}
+  failExplosion: {fileID: 1526210595141420, guid: c3d537a47530e411daea1778a26ff04c,
+    type: 2}
 --- !u!114 &114501814899900720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,6 +507,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tumble: 5
+--- !u!114 &114903244991584774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1432812886889808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c5ef09585a94fa49aadfbec30c25d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleTime: 0.05
 --- !u!136 &136457403568233610
 CapsuleCollider:
   m_ObjectHideFlags: 1

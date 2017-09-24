@@ -35,6 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4939134173227470}
+  - component: {fileID: 114664265320977488}
   m_Layer: 0
   m_Name: YellowAsteroid
   m_TagString: Untagged
@@ -480,6 +481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1067957053778526, guid: d7cad155fc1d24f5b9742d74521ac1b6, type: 2}
+  failExplosion: {fileID: 1476964932268364, guid: 2e825a1adcb764865a3bf427518ef7b8,
+    type: 2}
 --- !u!114 &114187841297567550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -492,6 +495,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDeath: 15
+--- !u!114 &114664265320977488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1247727681346186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c5ef09585a94fa49aadfbec30c25d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleTime: 0.05
 --- !u!114 &114896540938071340
 MonoBehaviour:
   m_ObjectHideFlags: 1

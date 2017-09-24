@@ -59,6 +59,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4184074030325060}
+  - component: {fileID: 114897028488593488}
   m_Layer: 0
   m_Name: CyanAsteroid
   m_TagString: Untagged
@@ -492,6 +493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1605911149434270, guid: 53d6ada2361084f3783dee9ae6156435, type: 2}
+  failExplosion: {fileID: 1811740635569886, guid: 7044023247bff4cad84dc0290b29ab3f,
+    type: 2}
 --- !u!114 &114763009517011054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,6 +507,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDeath: 15
+--- !u!114 &114897028488593488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1684835386150242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c5ef09585a94fa49aadfbec30c25d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleTime: 0.05
 --- !u!136 &136411100032053934
 CapsuleCollider:
   m_ObjectHideFlags: 1

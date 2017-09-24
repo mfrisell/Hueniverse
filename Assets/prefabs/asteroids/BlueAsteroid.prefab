@@ -91,6 +91,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4287044823994350}
+  - component: {fileID: 114132402767640536}
   m_Layer: 0
   m_Name: BlueAsteroid
   m_TagString: Untagged
@@ -480,6 +481,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDeath: 15
+--- !u!114 &114132402767640536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1931210798597440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c5ef09585a94fa49aadfbec30c25d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleTime: 0.05
 --- !u!114 &114857310453981456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -492,6 +505,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1353996578382070, guid: 6e5490d4abf4f4b1d914c91865f569d2, type: 2}
+  failExplosion: {fileID: 1389778742875958, guid: 3eac604a72de04e2187476e285dd6b44,
+    type: 2}
 --- !u!114 &114864360910935114
 MonoBehaviour:
   m_ObjectHideFlags: 1
