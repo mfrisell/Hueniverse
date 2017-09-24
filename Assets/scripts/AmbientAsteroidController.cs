@@ -35,7 +35,7 @@ public class AmbientAsteroidController : MonoBehaviour {
 			ambientSpawnNumber = Random.Range (20, 50);
 			zRange = 1000;
 			zCone = 200;
-			ambientSize = Random.Range (50, 150);
+			ambientSize = Random.Range (10, 200);
 
 
 			for (int i = 0; i < 100; i++) {
@@ -43,7 +43,7 @@ public class AmbientAsteroidController : MonoBehaviour {
 				Vector3 randomStartPos = Random.insideUnitCircle * zCone;
 				Vector3 startPos = new Vector3 (randomStartPos.x, randomStartPos.y, zRange);
 
-				ambientSpeed = Random.Range (50, 200);
+				ambientSpeed = Random.Range (100, 400);
 
 				GameObject ambas = Instantiate (AmbientAsteroid, startPos, Quaternion.identity) as GameObject;
                 ambas.transform.SetParent(GetComponent<Transform>());
