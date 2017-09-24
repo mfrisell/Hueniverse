@@ -504,6 +504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1057914330255860, guid: 70cf526976b744066921310138a59895, type: 2}
+  failExplosion: {fileID: 1118755603959354, guid: bcb30fca6a2e345d092308411b637b5b,
+    type: 2}
 --- !u!136 &136539850398808288
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -480,6 +480,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1173697183181138, guid: 8d9d4a60336d243b1903ce9d1271a9e1, type: 2}
+  failExplosion: {fileID: 1526210595141420, guid: c3d537a47530e411daea1778a26ff04c,
+    type: 2}
 --- !u!114 &114501814899900720
 MonoBehaviour:
   m_ObjectHideFlags: 1

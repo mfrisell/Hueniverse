@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestroyByContact : MonoBehaviour {
 
 	public GameObject explosion;
+	public GameObject failExplosion;
 	private bool exploded = false;
 
 	void OnTriggerEnter(Collider other) {
@@ -27,6 +28,7 @@ public class DestroyByContact : MonoBehaviour {
 				// Fade out audio
 				StartCoroutine (fadeAudio ());
 			}
+		} else {
 		}
 	}
 
