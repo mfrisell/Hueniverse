@@ -5,7 +5,7 @@ using UnityEngine;
 public class AsteroidManager : MonoBehaviour {
 
     public int asteroidSpeed;
-    public float asteroidFrequency;
+    public static float asteroidFrequency = 0.1f;
     public int asteroidSpawnAngleWidth;
     public int asteroidSpawnAngleHeight;
     public int asteroidSpawnRadius;
@@ -38,12 +38,13 @@ public class AsteroidManager : MonoBehaviour {
 	void Start () {
         targetPosition = new Vector3(0, 0, 0);
 
-        coroutine = GenerateAsteroids(asteroidFrequency);
+        coroutine = GenerateAsteroids();
         StartCoroutine(coroutine);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        
 
         if (target != null)
         {
@@ -199,11 +200,12 @@ public class AsteroidManager : MonoBehaviour {
 //        gameObjectRenderer.material = newMaterial;
     }
 
-    private IEnumerator GenerateAsteroids(float frequency)
+    private IEnumerator GenerateAsteroids()
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f/frequency);
+            yield return new WaitForSeconds(0.5f/asteroidFrequency);
+            Debug.Log(asteroidFrequency);
             launchAsteroid();
         }
         
