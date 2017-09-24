@@ -42,7 +42,7 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 0
     m_Settings:
-      intensity: 1
+      intensity: 2
       radius: 0.3
       sampleCount: 10
       downsampling: 1
@@ -124,7 +124,7 @@ MonoBehaviour:
         temperature: 0
         tint: 0
         hueShift: 0
-        saturation: 1
+        saturation: 1.2
         contrast: 1
       channelMixer:
         red: {x: 1.14, y: 0, z: 0}
