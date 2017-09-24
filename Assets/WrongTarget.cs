@@ -6,6 +6,7 @@ public class WrongTarget : MonoBehaviour {
 
 	public GameObject failExplosion;
 	public bool removeObject = true;
+	private bool exploded = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,22 +22,23 @@ public class WrongTarget : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 
-		if (gameObject.tag != other.tag) {
-			
-			Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
-		
-		} else {
-			
-		}
+		if (!exploded || !removeObject) {
+			exploded = true;
 
-		// Hide bullet mesh
-		if (removeObject) {
-			MeshRenderer mesh = GetComponent<MeshRenderer> ();
-			mesh.enabled = false;
-		}
+			if (gameObject.tag != other.tag) {
+			
+				Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
 
-		// Fade out audio and then destroy bullet
-		StartCoroutine (fadeAudio ());
+				// Hide bullet mesh
+				if (removeObject) {
+					MeshRenderer mesh = GetComponent<MeshRenderer> ();
+					mesh.enabled = false;
+				}
+
+				// Fade out audio and then destroy bullet
+				StartCoroutine (fadeAudio ());
+			} 
+		}
 	}
 
 	IEnumerator fadeAudio() {
