@@ -200,6 +200,36 @@ public class AsteroidManager : MonoBehaviour {
 //        gameObjectRenderer.material = newMaterial;
     }
 
+    public GameObject createAsteroid(string color, Vector3 position)
+    {
+        GameObject prefab;
+        switch (color)
+        {
+            case "red":
+                prefab = asteroidRed;
+                break;
+            case "green":
+                prefab = asteroidGreen;
+                break;
+            case "blue":
+                prefab = asteroidBlue;
+                break;
+            case "cyan":
+                prefab = asteroidCyan;
+                break;
+            case "magenta":
+                prefab = asteroidMagenta;
+                break;
+            case "yellow":
+                prefab = asteroidYellow;
+                break;
+            default:
+                prefab = null;
+                break;
+        }
+        return Instantiate(prefab, position, Quaternion.identity) as GameObject;
+    }
+
     private IEnumerator GenerateAsteroids()
     {
         while (true)
