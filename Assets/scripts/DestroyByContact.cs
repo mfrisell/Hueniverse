@@ -43,6 +43,6 @@ public class DestroyByContact : MonoBehaviour {
 
 		audio.volume = 0;
 		// Remove gameobject from scene
-		Destroy (gameObject);
+		Destroy (transform.parent.gameObject);
 	}
 }

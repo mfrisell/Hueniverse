@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 95583372943698876}
   - component: {fileID: 54756626843203264}
   - component: {fileID: 114483646881382148}
-  - component: {fileID: 114032903759410560}
   - component: {fileID: 82021217467171600}
   - component: {fileID: 114869467273676662}
   - component: {fileID: 136539850398808288}
@@ -76,6 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4013350641981666}
   - component: {fileID: 114466716385553742}
+  - component: {fileID: 114964579206534466}
   m_Layer: 0
   m_Name: RedAsteroid
   m_TagString: Untagged
@@ -351,20 +351,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -401,20 +387,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -451,36 +423,10 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114032903759410560
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1165841250519030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77acbddbb9abe644597f43ba5da0cd3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDeath: 15
 --- !u!114 &114466716385553742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -519,6 +465,18 @@ MonoBehaviour:
   explosion: {fileID: 1057914330255860, guid: 70cf526976b744066921310138a59895, type: 2}
   failExplosion: {fileID: 1118755603959354, guid: bcb30fca6a2e345d092308411b637b5b,
     type: 2}
+--- !u!114 &114964579206534466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892804000986354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77acbddbb9abe644597f43ba5da0cd3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDeath: 30
 --- !u!136 &136539850398808288
 CapsuleCollider:
   m_ObjectHideFlags: 1

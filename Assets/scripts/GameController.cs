@@ -39,7 +39,6 @@ public class GameController : MonoBehaviour {
         }
 
 		gameTime += Time.deltaTime;
-
         float difficulty = (gameTime / maxGameTime) / 2;
         AsteroidManager.asteroidFrequency = difficulty;
 
