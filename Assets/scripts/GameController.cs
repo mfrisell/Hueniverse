@@ -40,7 +40,11 @@ public class GameController : MonoBehaviour {
 
 		gameTime += Time.deltaTime;
 
-		if (Input.GetKeyDown ("k")) {
+        float difficulty = (gameTime / maxGameTime) / 2;
+        AsteroidManager.asteroidFrequency = difficulty;
+
+
+        if (Input.GetKeyDown ("k")) {
 			Debug.Log ("Saving Highscore");
 			/*Destroy (GameObject.FindWithTag ("blue"));
 			Destroy (GameObject.FindWithTag ("red"));
