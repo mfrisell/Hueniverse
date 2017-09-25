@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour {
             colorIsCombined = true;
             //Calculate resulting color
             combinedCurrentColor = leftCurrentColor + rightCurrentColor;
-            combinedCurrentColor.a = 1;
+            combinedCurrentColor = normalizeColor(combinedCurrentColor);
 
             //Update ParticleSystem color
             leftMainModule.startColor = combinedCurrentColor;
@@ -265,7 +265,6 @@ public class PlayerController : MonoBehaviour {
 
         GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, bulletSpawnRotation) as GameObject;
 
-        Debug.Log(bulletColor);
 
         if (bulletColor == Color.red)
         {
@@ -305,6 +304,19 @@ public class PlayerController : MonoBehaviour {
 
         
         gameObjectRenderer.material = newMaterial;
+    }
+
+    private Color normalizeColor(Color color)
+    {
+        if (color.r > 1)
+            color.r = 1;
+        if (color.g > 1)
+            color.g = 1;
+        if (color.b > 1)
+            color.b = 1;
+        if (color.a > 1)
+            color.a = 1;
+        return color;
     }
 
     private IEnumerator LerpColor(ParticleSystem ps, Color currentColor, Color endColor)
