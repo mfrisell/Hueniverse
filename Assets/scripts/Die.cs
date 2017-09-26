@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Die : MonoBehaviour {
 
-	public float timeToDeath = 7f;
+	public float timeToDeath = 30f;
 
 	// Use this for initialization
 	void Start () {

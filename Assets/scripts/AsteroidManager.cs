@@ -5,7 +5,7 @@ using UnityEngine;
 public class AsteroidManager : MonoBehaviour {
 
     public int asteroidSpeed;
-    public float asteroidFrequency;
+    public static float asteroidFrequency = 0.1f;
     public int asteroidSpawnAngleWidth;
     public int asteroidSpawnAngleHeight;
     public int asteroidSpawnRadius;
@@ -38,12 +38,13 @@ public class AsteroidManager : MonoBehaviour {
 	void Start () {
         targetPosition = new Vector3(0, 0, 0);
 
-        coroutine = GenerateAsteroids(asteroidFrequency);
+        coroutine = GenerateAsteroids();
         StartCoroutine(coroutine);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        
 
         if (target != null)
         {
@@ -199,12 +200,49 @@ public class AsteroidManager : MonoBehaviour {
 //        gameObjectRenderer.material = newMaterial;
     }
 
-    private IEnumerator GenerateAsteroids(float frequency)
+    public GameObject createAsteroid(string color, Vector3 position)
+    {
+        GameObject prefab;
+        switch (color)
+        {
+            case "red":
+                prefab = asteroidRed;
+                break;
+            case "green":
+                prefab = asteroidGreen;
+                break;
+            case "blue":
+                prefab = asteroidBlue;
+                break;
+            case "cyan":
+                prefab = asteroidCyan;
+                break;
+            case "magenta":
+                prefab = asteroidMagenta;
+                break;
+            case "yellow":
+                prefab = asteroidYellow;
+                break;
+            default:
+                prefab = null;
+                break;
+        }
+        return Instantiate(prefab, position, Quaternion.identity) as GameObject;
+    }
+
+    private IEnumerator GenerateAsteroids()
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f/frequency);
-            launchAsteroid();
+            Debug.Log(asteroidFrequency);
+            if (asteroidFrequency == 0)
+                yield return null;
+            else {
+                yield return new WaitForSeconds(0.5f / asteroidFrequency);
+                Debug.Log(asteroidFrequency);
+                launchAsteroid();
+            }
+            
         }
         
     }
