@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54204746854875942}
   - component: {fileID: 114801711634759990}
   - component: {fileID: 114050538524609340}
+  - component: {fileID: 114188981633613402}
   m_Layer: 0
   m_Name: bulletPrefab
   m_TagString: Untagged
@@ -40,7 +41,7 @@ Transform:
   m_GameObject: {fileID: 1059130069623140}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2.38}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.05, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,6 +112,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDeath: 7
+--- !u!114 &114188981633613402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1059130069623140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e4ba55b587d48edabba131d2275ab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  failExplosion: {fileID: 1118755603959354, guid: bcb30fca6a2e345d092308411b637b5b,
+    type: 2}
+  removeObject: 1
 --- !u!114 &114801711634759990
 MonoBehaviour:
   m_ObjectHideFlags: 1
