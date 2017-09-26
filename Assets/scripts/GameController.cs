@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Linq;
 using System;
 using UnityEngine;
 using Valve.VR;
@@ -14,16 +15,22 @@ public class GameController : MonoBehaviour {
 	public string gameMode = "demo";
 	public float gameTime = 0f;
 	public float maxGameTime = 180f;
+	public bool gameOver;
 
 	private GameObject sun;
 	private float distanceZ;
 	private float deltaDistance;
 	public float sunStopFromPlayer = 30;
 
+	//Animator anim;
+
     // Use this for initialization
     void Start () {
 		
         resetGame = false;
+		gameOver = false;
+
+		//anim = GetComponent<Animator> ();
 
 		sun = GameObject.FindGameObjectWithTag ("sun");
 		distanceZ = sun.transform.position.z;
@@ -58,6 +65,13 @@ public class GameController : MonoBehaviour {
 		}	
 
 		moveSunCloser ();
+
+		if (gameTime > maxGameTime) {
+			gameOver = true;
+			//gameTime = 0f;
+			Debug.Log ("GAME OVER");
+			//anim.SetTrigger ("GameOver");
+		}
 	}
 
 	void SaveHighscore() {
@@ -95,6 +109,7 @@ public class GameController : MonoBehaviour {
 
 		using(var reader = new StreamReader(@"./Highscore.csv"))
 		{ 
+			reader.ReadLine ();
 			while (!reader.EndOfStream)
 			{
 				var line = reader.ReadLine();
@@ -102,6 +117,9 @@ public class GameController : MonoBehaviour {
 				highScores.Add(values);
 			}
 		}
+
+		highScores = highScores.OrderByDescending (arr => Int32.Parse(arr [1])).ToList();
+
 		foreach(var highScore in highScores) {
 			var highScorePrint = "";
 			foreach (var column in highScore) {

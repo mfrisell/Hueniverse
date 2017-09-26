@@ -33,18 +33,26 @@ public class AsteroidManager : MonoBehaviour {
 
     private IEnumerator coroutine;
 
+	//private GameObject gameControllerObject;
+	public GameController gameControllerScript;
+	public bool gameOver;
+
     Vector3 targetPosition;
 	// Use this for initialization
 	void Start () {
         targetPosition = new Vector3(0, 0, 0);
 
         coroutine = GenerateAsteroids();
-        StartCoroutine(coroutine);
+		StartCoroutine(coroutine);
+
+		//GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("GameController");
+		//GameController gameControllerScript = gameControllerObject.GetComponent<GameController> ();
+		bool gameOver = gameControllerScript.gameOver;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
+		gameOver = gameControllerScript.gameOver;
 
         if (target != null)
         {
@@ -232,7 +240,7 @@ public class AsteroidManager : MonoBehaviour {
 
     private IEnumerator GenerateAsteroids()
     {
-        while (true)
+        while (gameOver == false)
         {
             Debug.Log(asteroidFrequency);
             if (asteroidFrequency == 0)
@@ -244,6 +252,7 @@ public class AsteroidManager : MonoBehaviour {
             }
             
         }
+		Debug.Log ("No more asteroids!");
         
     }
 }
