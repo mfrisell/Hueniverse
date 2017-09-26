@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4939134173227470}
   - component: {fileID: 114664265320977488}
+  - component: {fileID: 114161317017219502}
   m_Layer: 0
   m_Name: YellowAsteroid
   m_TagString: Untagged
@@ -56,7 +57,6 @@ GameObject:
   - component: {fileID: 95464861399957692}
   - component: {fileID: 54722969349702136}
   - component: {fileID: 114896540938071340}
-  - component: {fileID: 114187841297567550}
   - component: {fileID: 82358303525722176}
   - component: {fileID: 114073528638366954}
   - component: {fileID: 136769444627995436}
@@ -351,20 +351,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -401,20 +387,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -451,20 +423,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -483,18 +441,18 @@ MonoBehaviour:
   explosion: {fileID: 1067957053778526, guid: d7cad155fc1d24f5b9742d74521ac1b6, type: 2}
   failExplosion: {fileID: 1476964932268364, guid: 2e825a1adcb764865a3bf427518ef7b8,
     type: 2}
---- !u!114 &114187841297567550
+--- !u!114 &114161317017219502
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1307612950057454}
+  m_GameObject: {fileID: 1247727681346186}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77acbddbb9abe644597f43ba5da0cd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDeath: 15
+  timeToDeath: 30
 --- !u!114 &114664265320977488
 MonoBehaviour:
   m_ObjectHideFlags: 1
