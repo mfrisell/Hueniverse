@@ -6,6 +6,7 @@ public class AsteroidManager : MonoBehaviour {
 
     public int asteroidSpeed;
     public static float asteroidFrequency = 0.1f;
+    public static float mixedPercentage = 0.1f;
     public int asteroidSpawnAngleWidth;
     public int asteroidSpawnAngleHeight;
     public int asteroidSpawnRadius;
@@ -78,10 +79,20 @@ public class AsteroidManager : MonoBehaviour {
         //create the rotation we need to be in to look at the target
         Quaternion lookRotation = Quaternion.LookRotation(direction);
 
-		int asteroidPrefabIndex = Random.Range(0, 4);
-		if (asteroidPrefabIndex == 3) {
-			asteroidPrefabIndex += Random.Range(0, 3);
-		}
+        int randomNumber = Random.Range(0, 10);
+        int asteroidPrefabIndex = 0;
+
+        if (randomNumber < (mixedPercentage*10))
+        {
+            asteroidPrefabIndex += Random.Range(3, 6);
+        } else
+        {
+            asteroidPrefabIndex = Random.Range(0, 3);
+        }
+
+
+		
+		
 
 		switch (asteroidPrefabIndex)
 		{

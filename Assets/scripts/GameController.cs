@@ -39,8 +39,9 @@ public class GameController : MonoBehaviour {
         }
 
 		gameTime += Time.deltaTime;
-        float difficulty = (gameTime / maxGameTime) / 2;
-        AsteroidManager.asteroidFrequency = difficulty;
+        float percentComplete = (gameTime / maxGameTime);
+        AsteroidManager.asteroidFrequency = (percentComplete / 3) + 0.2f;
+        AsteroidManager.mixedPercentage = percentComplete / 3 + 0.1f; //Go linearly from 10 to 43 percent
 
 
         if (Input.GetKeyDown ("k")) {
@@ -55,10 +56,10 @@ public class GameController : MonoBehaviour {
 		}
 		if (Input.GetKeyDown ("j")) {
 			ReadHighscore ();
-		}	
+		}
 
-		moveSunCloser ();
-	}
+        moveSunCloser();
+    }
 
 	void SaveHighscore() {
 		string filePath = @"./Highscore.csv";  
