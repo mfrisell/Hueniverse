@@ -23,9 +23,19 @@ public class PlayerController : MonoBehaviour {
     
     public GameObject bulletPrefab;
     public GameObject circlePSPrefab;
+    public GameObject weaponEmitter;
 
     public Animator animLeft;
     public Animator animRight;
+
+    public GameObject leftButtonLeft;
+    public GameObject leftButtonRight;
+
+    public GameObject rightButtonLeft;
+    public GameObject rightButtonRight;
+
+    public GameObject lightEmitterLeft;
+    public GameObject lightEmitterRight;
 
     //Private variables
 
@@ -60,10 +70,24 @@ public class PlayerController : MonoBehaviour {
     private ParticleSystem leftPS;
     private ParticleSystem rightPS;
 
+    private ParticleSystem leftWeaponPS;
+    private ParticleSystem rightWeaponPS;
+
     // Rotate claws
 
     public float rotationSpeed = 10.0f;
     private float degree = 120.0f;
+
+    // Weapon Emitter materials
+    public Material redMaterial;
+    public Material greenMaterial;
+    public Material blueMaterial;
+    public Material cyanMaterial;
+    public Material magentaMaterial;
+    public Material yellowMaterial;
+
+    private GameObject leftWeaponEmitter;
+    private GameObject rightWeaponEmitter;
 
 
     void Start() {
@@ -74,8 +98,6 @@ public class PlayerController : MonoBehaviour {
         leftDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
         rightDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
 
-
-        
 
         leftColorIndex = 0;
         rightColorIndex = 0;
@@ -98,6 +120,13 @@ public class PlayerController : MonoBehaviour {
 
         leftPS = leftParticleSystemGO.GetComponent<ParticleSystem>();
         rightPS = rightParticleSystemGO.GetComponent<ParticleSystem>();
+
+        leftWeaponEmitter = Instantiate(weaponEmitter, leftController.transform.position + weaponEmitter.transform.position, leftController.transform.rotation) as GameObject;
+        leftWeaponEmitter.transform.SetParent(leftController.transform);
+
+        rightWeaponEmitter = Instantiate(weaponEmitter, rightController.transform.position + weaponEmitter.transform.position, rightController.transform.rotation) as GameObject;
+        rightWeaponEmitter.transform.SetParent(rightController.transform);
+
         delayedStartCompleted = true;
     }
 
@@ -113,7 +142,7 @@ public class PlayerController : MonoBehaviour {
         
         //Update left controller color and rotation
         //TODO Rotation
-        if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
+        if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
 
             Vector2 axisPress = SteamVR_Controller.Input(leftDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
@@ -140,12 +169,62 @@ public class PlayerController : MonoBehaviour {
             leftCurrentColor = endColor;
             Debug.Log(leftCurrentColor);
 
+            MeshRenderer leftButtonLeftRenderer = leftButtonLeft.GetComponent<MeshRenderer>();
+            MeshRenderer leftButtonRightRenderer = leftButtonRight.GetComponent<MeshRenderer>();
+
+            MeshRenderer lightEmitterLeftRenderer = lightEmitterLeft.GetComponent<MeshRenderer>();
+
+            if (leftColorIndex==0)
+            {
+
+                leftWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = redMaterial;
+
+                Material newMaterialLeft = blueMaterial;
+                leftButtonLeftRenderer.material = newMaterialLeft;
+
+                Material newMaterialRight = greenMaterial;
+                leftButtonRightRenderer.material = newMaterialRight;
+
+
+                Material newMaterialEmitter = redMaterial;
+                lightEmitterLeftRenderer.material = newMaterialEmitter;
+
+
+            } else if(leftColorIndex==1) {
+
+                leftWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = blueMaterial;
+
+                Material newMaterialLeft = greenMaterial;
+                leftButtonLeftRenderer.material = newMaterialLeft;
+
+                Material newMaterialRight = redMaterial;
+                leftButtonRightRenderer.material = newMaterialRight;
+
+                Material newMaterialEmitter = blueMaterial;
+                lightEmitterLeftRenderer.material = newMaterialEmitter;
+
+            } else 
+            {
+                leftWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = greenMaterial;
+
+                Material newMaterialLeft = redMaterial;
+                leftButtonLeftRenderer.material = newMaterialLeft;
+
+                Material newMaterialRight = blueMaterial;
+                leftButtonRightRenderer.material = newMaterialRight;
+
+                Material newMaterialEmitter = greenMaterial;
+                lightEmitterLeftRenderer.material = newMaterialEmitter;
+
+            }
+
+
             //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
         //Update right controller color and rotation
         //TODO Rotation
-        if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
+        if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
 
             Vector2 axisPress = SteamVR_Controller.Input(rightDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
@@ -171,6 +250,58 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(LerpColor(rightPS, rightCurrentColor, endColor));
             rightCurrentColor = endColor;
 
+            MeshRenderer rightButtonLeftRenderer = rightButtonLeft.GetComponent<MeshRenderer>();
+            MeshRenderer rightButtonRightRenderer = rightButtonRight.GetComponent<MeshRenderer>();
+
+            MeshRenderer lightEmitterRightRenderer = lightEmitterRight.GetComponent<MeshRenderer>();
+
+            if (rightColorIndex == 0)
+            {
+
+                rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = redMaterial;
+
+                Material newMaterialLeft = blueMaterial;
+                rightButtonLeftRenderer.material = newMaterialLeft;
+
+                Material newMaterialRight = greenMaterial;
+                rightButtonRightRenderer.material = newMaterialRight;
+
+                Material newMaterialEmitter = redMaterial;
+                lightEmitterRightRenderer.material = newMaterialEmitter;
+
+
+            }
+            else if (rightColorIndex == 1)
+            {
+
+                rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = blueMaterial;
+
+                Material newMaterialLeft = greenMaterial;
+                rightButtonLeftRenderer.material = newMaterialLeft;
+
+                Material newMaterialRight = redMaterial;
+                rightButtonRightRenderer.material = newMaterialRight;
+
+                Material newMaterialEmitter = blueMaterial;
+                lightEmitterRightRenderer.material = newMaterialEmitter;
+
+            }
+            else
+            {
+
+                rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = greenMaterial;
+
+                Material newMaterialLeft = redMaterial;
+                rightButtonLeftRenderer.material = newMaterialLeft;
+
+                Material newMaterialRight = blueMaterial;
+                rightButtonRightRenderer.material = newMaterialRight;
+
+                Material newMaterialEmitter = greenMaterial;
+                lightEmitterRightRenderer.material = newMaterialEmitter;
+
+            }
+
             //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
@@ -188,7 +319,7 @@ public class PlayerController : MonoBehaviour {
             colorIsCombined = true;
             //Calculate resulting color
             combinedCurrentColor = leftCurrentColor + rightCurrentColor;
-            combinedCurrentColor = normalizeColor(combinedCurrentColor);
+            combinedCurrentColor.a = 1;
 
             //Update ParticleSystem color
             leftMainModule.startColor = combinedCurrentColor;
@@ -265,6 +396,7 @@ public class PlayerController : MonoBehaviour {
 
         GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, bulletSpawnRotation) as GameObject;
 
+        Debug.Log(bulletColor);
 
         if (bulletColor == Color.red)
         {
@@ -304,19 +436,6 @@ public class PlayerController : MonoBehaviour {
 
         
         gameObjectRenderer.material = newMaterial;
-    }
-
-    private Color normalizeColor(Color color)
-    {
-        if (color.r > 1)
-            color.r = 1;
-        if (color.g > 1)
-            color.g = 1;
-        if (color.b > 1)
-            color.b = 1;
-        if (color.a > 1)
-            color.a = 1;
-        return color;
     }
 
     private IEnumerator LerpColor(ParticleSystem ps, Color currentColor, Color endColor)
