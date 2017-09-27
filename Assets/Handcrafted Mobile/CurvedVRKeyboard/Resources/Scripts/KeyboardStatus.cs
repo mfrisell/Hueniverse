@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace CurvedVRKeyboard {
@@ -39,7 +40,23 @@ namespace CurvedVRKeyboard {
             } else if(value.Equals(UP) || value.Equals(LOW)) { // upper/lower case pressed
                 LowerUpperKeys();
             } else if(value.Equals(SPACE)) {
-                TypeKey(BLANKSPACE);
+
+				// fetch name, call save function
+
+
+				GameObject gm = GameObject.FindGameObjectWithTag ("GameController");
+				GameController gc = gm.GetComponent<GameController> ();
+
+				GameObject playerNameObject = GameObject.FindGameObjectWithTag ("playerName");
+				Text playerNameText = playerNameObject.GetComponent<Text> ();
+
+				// Make sure the player types something
+				if (playerNameText.text != "") {
+					gc.name = playerNameText.text;
+					gc.SaveHighscore ();
+				}
+				
+                //TypeKey(BLANKSPACE);
             } else if(value.Equals(BACK)) {
                 BackspaceKey();
             } else {// Normal letter
