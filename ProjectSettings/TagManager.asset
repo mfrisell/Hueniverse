@@ -26,6 +26,12 @@ TagManager:
   - sun
   - leftController
   - rightController
+  - highscore
+  - HSplayer
+  - HSname
+  - HSscore
+  - start
+  - tutorial
   layers:
   - Default
   - TransparentFX
