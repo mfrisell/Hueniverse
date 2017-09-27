@@ -21,6 +21,9 @@ public class GameController : MonoBehaviour {
 	private float deltaDistance;
 	public float sunStopFromPlayer = 30;
 
+	private bool GOrunning = false;
+	public GameObject GameOverModel;
+
     // Use this for initialization
     void Start () {
 		
@@ -65,6 +68,11 @@ public class GameController : MonoBehaviour {
 		}
 
         moveSunCloser();
+
+		if (gameOver && !GOrunning) {
+			GOrunning = true;
+			animateGameOver ();
+		}
     }
 
 	public void SaveHighscore() {
@@ -133,5 +141,11 @@ public class GameController : MonoBehaviour {
 
 		Vector3 tmp = new Vector3 (pos.x, pos.y, pos.z - distanceChangeNew);
 		sun.transform.position = tmp;
+	}
+
+	void animateGameOver() {
+		Debug.Log ("GAME OVER");
+
+		GameObject goModel = Instantiate (GameOverModel, new Vector3 (0, 10, 20), Quaternion.Euler(20, 180, 0)) as GameObject;
 	}
 }
