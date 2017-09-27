@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 namespace CurvedVRKeyboard {
 
     public class KeyboardRaycaster: KeyboardComponent {
@@ -19,6 +20,8 @@ namespace CurvedVRKeyboard {
         private KeyboardStatus keyboardStatus;
         private KeyboardItem keyItemCurrent;
 
+		private Transform previousChosenKey;
+
         [SerializeField, HideInInspector]
         private string clickInputName;
 
@@ -33,6 +36,23 @@ namespace CurvedVRKeyboard {
             rayLength = Vector3.Distance(raycastingSource.position, target.transform.position) * (minRaylengthMultipler + 
                  (Mathf.Abs(target.transform.lossyScale.x) + Mathf.Abs(target.transform.lossyScale.y) + Mathf.Abs(target.transform.lossyScale.z)));
             RayCastKeyboard();
+
+			// Highlight chosen key
+			if (keyItemCurrent != null) {
+				
+				Transform childObject = keyItemCurrent.transform.Find ("Value");
+
+				if ((childObject != previousChosenKey) && (previousChosenKey != null)) {
+					Text childObjectTextPrevious = previousChosenKey.GetComponent < Text> ();
+					childObjectTextPrevious.color = Color.white;
+				}
+
+				Text childObjectText = childObject.GetComponent < Text> ();
+				childObjectText.color = Color.red;
+
+				previousChosenKey = childObject;
+
+			}
         }
 
         /// <summary>

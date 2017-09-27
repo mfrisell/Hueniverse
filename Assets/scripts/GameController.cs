@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using UnityEngine;
 using Valve.VR;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -66,7 +67,7 @@ public class GameController : MonoBehaviour {
         moveSunCloser();
     }
 
-	void SaveHighscore() {
+	public void SaveHighscore() {
 		string filePath = @"./Highscore.csv";  
 		string delimiter = ",";   
 		string[][] output;
@@ -92,7 +93,9 @@ public class GameController : MonoBehaviour {
 		for (int index = 0; index < length; index++)  
 			sb.AppendLine(string.Join(delimiter, output[index]));  
 
-		File.AppendAllText(filePath, sb.ToString());     
+		File.AppendAllText(filePath, sb.ToString());    
+
+		SceneManager.LoadScene(0, LoadSceneMode.Single);
 
 	}
 

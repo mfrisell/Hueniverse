@@ -288,7 +288,6 @@ namespace CurvedVRKeyboard {
                     keySelectedMaterial = value;
                     foreach(KeyboardItem key in keys) {
                         key.SetMaterial(KeyboardItem.KeyMaterialEnum.Selected, keySelectedMaterial);
-						Debug.Log (key);
                     }
                 }
 
