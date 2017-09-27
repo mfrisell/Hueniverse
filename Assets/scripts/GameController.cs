@@ -8,7 +8,7 @@ using Valve.VR;
 
 public class GameController : MonoBehaviour {
 
-    public bool resetGame;
+    public bool resetGame, gameOver;
 	public int score = 0;
 	public string name = "Spansk";
 	public string gameMode = "demo";
@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour {
     void Start () {
 		
         resetGame = false;
+		gameOver = false;
 
 		sun = GameObject.FindGameObjectWithTag ("sun");
 		distanceZ = sun.transform.position.z;
@@ -33,12 +34,16 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(resetGame)
+		if (gameTime > maxGameTime)
+			gameOver = true;
+		else
+			gameTime += Time.deltaTime;
+
+		if(resetGame)
         {
             Application.LoadLevel(Application.loadedLevel);
         }
 
-		gameTime += Time.deltaTime;
         float percentComplete = (gameTime / maxGameTime);
         AsteroidManager.asteroidFrequency = (percentComplete / 3) + 0.2f;
         AsteroidManager.mixedPercentage = percentComplete / 3 + 0.1f; //Go linearly from 10 to 43 percent
