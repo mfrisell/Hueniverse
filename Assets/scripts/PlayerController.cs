@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour {
     public float TimeScale = 2f;
     public float maxDistance = 0.5f;
 
-    
-    public GameObject bulletPrefab;
+    public GameObject weaponParticle;
+    //public GameObject bulletPrefab;
     public GameObject circlePSPrefab;
     public GameObject weaponEmitter;
 
@@ -114,9 +114,11 @@ public class PlayerController : MonoBehaviour {
         //Instantiate colorcircle particle systems
         leftParticleSystemGO = Instantiate(circlePSPrefab, leftController.transform.position, leftController.transform.rotation) as GameObject;
         leftParticleSystemGO.transform.SetParent(leftController.transform);
+        leftParticleSystemGO.transform.localScale = new Vector3(0, 0, 0);
 
         rightParticleSystemGO = Instantiate(circlePSPrefab, rightController.transform.position, rightController.transform.rotation) as GameObject;
         rightParticleSystemGO.transform.SetParent(rightController.transform);
+        rightParticleSystemGO.transform.localScale = new Vector3(0, 0, 0);
 
         leftPS = leftParticleSystemGO.GetComponent<ParticleSystem>();
         rightPS = rightParticleSystemGO.GetComponent<ParticleSystem>();
@@ -314,16 +316,19 @@ public class PlayerController : MonoBehaviour {
         ParticleSystem.MainModule leftMainModule = leftPS.main;
         ParticleSystem.MainModule rightMainModule = rightPS.main;
 
-        if (distanceBetweenWeapons < maxDistance)
+        if (distanceBetweenWeapons < maxDistance) // && leftCurrentColor != rightCurrentColor
         {
             colorIsCombined = true;
             //Calculate resulting color
             combinedCurrentColor = leftCurrentColor + rightCurrentColor;
-            combinedCurrentColor.a = 1;
+            combinedCurrentColor = normalizeColor(combinedCurrentColor);
 
             //Update ParticleSystem color
             leftMainModule.startColor = combinedCurrentColor;
             rightMainModule.startColor = combinedCurrentColor;
+
+            rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(combinedCurrentColor);
+            leftWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(combinedCurrentColor);
 
             // Create spawn point for projectile
             Vector3 combinedWeaponPos = (leftController.transform.position + rightController.transform.position) / 2;
@@ -338,6 +343,8 @@ public class PlayerController : MonoBehaviour {
         {
             leftMainModule.startColor = leftCurrentColor;
             rightMainModule.startColor = rightCurrentColor;
+            rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(rightCurrentColor);
+            leftWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(leftCurrentColor);
         }
 
         //Left trigger
@@ -373,6 +380,8 @@ public class PlayerController : MonoBehaviour {
 
         if (colorIsCombined)
         {
+            animLeft.SetTrigger("Shoot");
+            animRight.SetTrigger("Shoot");
             bulletColor = combinedCurrentColor;
             bulletSpawnPosition = combinedBulletSpawn.transform.position;
             bulletSpawnRotation = combinedBulletSpawn.transform.rotation * Quaternion.Euler(90f, 0, 0);
@@ -382,19 +391,23 @@ public class PlayerController : MonoBehaviour {
             {
                 animLeft.SetTrigger("Shoot");
                 bulletColor = leftCurrentColor;
-                bulletSpawnPosition = leftController.transform.position;
+                //Vector3 offsetVector = leftController.transform.forward/6;
+                bulletSpawnPosition = leftController.transform.position + weaponParticle.transform.position;
                 bulletSpawnRotation = leftController.transform.rotation * Quaternion.Euler(90f, 0, 0);
             } else
             {
                 animRight.SetTrigger("Shoot");
 
                 bulletColor = rightCurrentColor;
-                bulletSpawnPosition = rightController.transform.position;
+                //Vector3 offsetVector = rightController.transform.forward/6;
+                bulletSpawnPosition = rightController.transform.position + weaponParticle.transform.position;
                 bulletSpawnRotation = rightController.transform.rotation * Quaternion.Euler(90f, 0, 0);
             }
         }
 
-        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, bulletSpawnRotation) as GameObject;
+        GameObject bulletObject = Instantiate(weaponParticle, bulletSpawnPosition, bulletSpawnRotation) as GameObject;
+        bulletObject.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(bulletColor);
+
 
         Debug.Log(bulletColor);
 
@@ -436,6 +449,8 @@ public class PlayerController : MonoBehaviour {
 
         
         gameObjectRenderer.material = newMaterial;
+
+        //bulletObject.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(bulletColor);
     }
 
     private IEnumerator LerpColor(ParticleSystem ps, Color currentColor, Color endColor)
@@ -455,6 +470,49 @@ public class PlayerController : MonoBehaviour {
 
         currentColor = endColor;
 
+    }
+
+    private Color normalizeColor(Color color)
+    {
+        color.r = Mathf.Clamp(color.r, 0, 1);
+        color.g = Mathf.Clamp(color.g, 0, 1);
+        color.b = Mathf.Clamp(color.b, 0, 1);
+        color.a = Mathf.Clamp(color.a, 0, 1);
+
+        return color;
+    }
+
+    private Material colorToMaterial(Color color)
+    {
+        if (color == Color.red)
+        {
+            return redMaterial;
+        }
+        else if (color == Color.green)
+        {
+            return greenMaterial;
+        }
+        else if (color == Color.blue)
+        {
+            return blueMaterial;
+        }
+        else if (color == Color.cyan)
+        {
+            return cyanMaterial;
+        }
+        else if (color == Color.magenta)
+        {
+            return magentaMaterial;
+        }
+        else if (color == new Color(1, 1, 0)) //Yellow
+        {
+            return yellowMaterial;
+        }
+        else
+        {
+            Debug.Log("Tag error: " + color);
+            return null;
+        }
     }
 
     //Returns black on error
