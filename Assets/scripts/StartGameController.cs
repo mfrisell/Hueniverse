@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class StartGameController : MonoBehaviour {
 
+    public GameObject highscore;
 	private GameObject[] go;
 	private Transform nameUI;
 	private Transform scoreUI;
@@ -40,17 +41,20 @@ public class StartGameController : MonoBehaviour {
 		// Sort highscore list
 		highScores.Sort(SortByScore);
 
-		// Top 10 scores and player names
-		for (int i = 0; i < 10; i++) {
-			
-			String name = highScores[i][0];
-			String score = highScores[i][1];
+        // Top 10 scores and player names
+        int i = 0;
+        //Debug.Log(highscore.transform.childCount);
+        foreach (Transform child in highscore.transform)
+        {
+            String name = highScores[i][0];
+            String score = highScores[i][1];
+            //Debug.Log(name + " " + score);
 
-			// index = 0 => last child in hierarchy, index = 9 => first child in hierarchy
-			int index = 9 - i;
-			UpdateUIHS (go[index], name, score);
-		}
-	}
+            // index = 0 => last child in hierarchy, index = 9 => first child in hierarchy
+            UpdateUIHS(child.gameObject, name, score);
+            i++;
+        }
+    }
 
 	// Sort function, biggest first
 	static int SortByScore(string[] p1, string[] p2)
