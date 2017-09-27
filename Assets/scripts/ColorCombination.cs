@@ -64,7 +64,8 @@ public class ColorCombination : MonoBehaviour {
 		chosenColorLeftInit = ccLeft.chosenColorLeft;
 		chosenColorRightInit = ccRight.chosenColorRight;
 
-		if (distanceBetweenWeapons < maxDistance) {
+		if (distanceBetweenWeapons < maxDistance && ccLeft.chosenColorLeft != ccRight.chosenColorRight) {
+            Debug.Log("Cloooose");
 
 			// Hämta ursprungsfärger
 			colorLeft = ccLeft.startColorLeft;
@@ -95,34 +96,29 @@ public class ColorCombination : MonoBehaviour {
 
 			// Update colortags
 			if ((ccLeft.chosenColorLeft == "red" || ccLeft.chosenColorLeft == "blue") && (ccRight.chosenColorRight == "red" || ccRight.chosenColorRight == "blue")) {
-				if (ccLeft.chosenColorLeft != ccRight.chosenColorRight) {
-
 					ccLeft.chosenColorLeft = "magenta";
 					ccRight.chosenColorRight = "magenta";
 
 					Debug.Log ("magenta");
-				}
 			} else if ((ccLeft.chosenColorLeft == "red" || ccLeft.chosenColorLeft == "green") && (ccRight.chosenColorRight == "red" || ccRight.chosenColorRight == "green")) {
-				if (ccLeft.chosenColorLeft != ccRight.chosenColorRight) {
 					
 					ccLeft.chosenColorLeft = "yellow";
 					ccRight.chosenColorRight = "yellow";
 
 					Debug.Log ("yellow");
-				}
 			} else if ((ccLeft.chosenColorLeft == "blue" || ccLeft.chosenColorLeft == "green") && (ccRight.chosenColorRight == "blue" || ccRight.chosenColorRight == "green")) {
-				if (ccLeft.chosenColorLeft != ccRight.chosenColorRight) {
 
 					ccLeft.chosenColorLeft = "cyan";
 					ccRight.chosenColorRight = "cyan";
 
 					Debug.Log ("cyan");
-				}
 			}
  
 		} else {
-			
-			var mainLeft = psLeft.main;
+            Debug.Log("Faar away");
+
+
+            var mainLeft = psLeft.main;
 			var mainRight = psRight.main;
 
 			float colorRedLeft = mainLeft.startColor.colorMax [0];

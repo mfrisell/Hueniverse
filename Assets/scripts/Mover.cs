@@ -4,13 +4,32 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour {
 
-	public float speed;
+    private Rigidbody rb;
+
+    public float speed;
 
 	void Start() {
+        rb = GetComponent<Rigidbody>();
 
-		Rigidbody rb = GetComponent<Rigidbody> ();
-		rb.velocity = transform.up * speed;
+        StartCoroutine( SpeedUpBullet() );
 		
 	}
+
+    IEnumerator SpeedUpBullet()
+    {
+        
+
+        for (int i =0; i<10; i++)
+        {
+            float scaleValue = i / 50f;
+            rb.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
+            Debug.Log(rb.transform.localScale);
+            yield return null;
+
+        }
+  
+        rb.velocity = transform.up * speed;
+
+    }
 
 }
