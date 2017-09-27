@@ -23,6 +23,6 @@ public class showFinalScore : MonoBehaviour {
 	}
 
 	void updateText (){
-		scoreText.text = "GAME OVER!\n\nFinal score: " + gameControllerScript.score.ToString();
+		scoreText.text = "GAME OVER\n\nFinal score: " + gameControllerScript.score.ToString();
 	}
 }
