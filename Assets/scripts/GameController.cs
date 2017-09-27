@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour {
 
 	private bool GOrunning = false;
 	public GameObject GameOverModel;
+	public GameObject superExplosion;
 
     // Use this for initialization
     void Start () {
@@ -147,5 +148,6 @@ public class GameController : MonoBehaviour {
 		Debug.Log ("GAME OVER");
 
 		GameObject goModel = Instantiate (GameOverModel, new Vector3 (0, 10, 20), Quaternion.Euler(20, 180, 0)) as GameObject;
+		GameObject goExplosion = Instantiate (superExplosion, new Vector3 (0, 5.5f, 18), Quaternion.Euler(0, 0, 0)) as GameObject;
 	}
 }

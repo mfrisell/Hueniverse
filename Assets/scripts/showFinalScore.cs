@@ -18,11 +18,12 @@ public class showFinalScore : MonoBehaviour {
 	void Update () {
 		gameOver = gameControllerScript.gameOver;
 
-		if (gameOver)
+		if (gameOver) 
 			updateText ();
+		
 	}
 
 	void updateText (){
-		scoreText.text = "Final score: " + gameControllerScript.score.ToString();
+		scoreText.text = gameControllerScript.score.ToString();
 	}
 }
