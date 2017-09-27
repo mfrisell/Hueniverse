@@ -17,6 +17,8 @@ public class AsteroidManager : MonoBehaviour {
     public Vector3 gravity;
     //public float asteroidHealth;
 
+	public GameController gameControllerScript;
+	public bool gameOver;
 
     public GameObject asteroid;
     public GameObject target;
@@ -39,13 +41,15 @@ public class AsteroidManager : MonoBehaviour {
 	void Start () {
         targetPosition = new Vector3(0, 0, 0);
 
+		gameOver = gameControllerScript.gameOver;
+
         coroutine = GenerateAsteroids();
         StartCoroutine(coroutine);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
+		gameOver = gameControllerScript.gameOver;
 
         if (target != null)
         {
@@ -243,7 +247,7 @@ public class AsteroidManager : MonoBehaviour {
 
     private IEnumerator GenerateAsteroids()
     {
-        while (true)
+		while (gameOver == false)
         {
             Debug.Log(asteroidFrequency);
             if (asteroidFrequency == 0)
