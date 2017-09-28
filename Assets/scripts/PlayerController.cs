@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour {
         //TODO Rotation
         if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
-
+			SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(500);
             Vector2 axisPress = SteamVR_Controller.Input(leftDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
             float xAxis = axisPress[0];
 
@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour {
         //TODO Rotation
         if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
-
+			SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(500);
             Vector2 axisPress = SteamVR_Controller.Input(rightDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
             float xAxis = axisPress[0];
 
@@ -358,9 +358,8 @@ public class PlayerController : MonoBehaviour {
         //Right trigger
         if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
         {
-
+			
             Shoot(rightDeviceIndex);
-            
             //Debug.Log(deviceindexRight);
         }
 
@@ -389,6 +388,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (deviceIndex == leftDeviceIndex)
             {
+				SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(1000);
                 animLeft.SetTrigger("Shoot");
                 bulletColor = leftCurrentColor;
                 //Vector3 offsetVector = leftController.transform.forward/6;
@@ -396,8 +396,8 @@ public class PlayerController : MonoBehaviour {
                 bulletSpawnRotation = leftController.transform.rotation * Quaternion.Euler(90f, 0, 0);
             } else
             {
+				SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(1000);
                 animRight.SetTrigger("Shoot");
-
                 bulletColor = rightCurrentColor;
                 //Vector3 offsetVector = rightController.transform.forward/6;
                 bulletSpawnPosition = rightController.transform.position + weaponParticle.transform.position;
