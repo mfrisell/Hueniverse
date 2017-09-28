@@ -51,7 +51,7 @@ public class Tutorial : MonoBehaviour {
         }
 
         if(stageTwoDone)
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            SceneManager.LoadScene("main", LoadSceneMode.Single);
 
     }
 
