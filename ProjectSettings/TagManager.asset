@@ -33,6 +33,8 @@ TagManager:
   - start
   - tutorial
   - playerName
+  - startText
+  - tutorialText
   layers:
   - Default
   - TransparentFX
