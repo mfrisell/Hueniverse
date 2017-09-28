@@ -15,7 +15,7 @@ public class RunScene : MonoBehaviour {
 			scene = "tutorialScene";
 		}
 
-		//StartCoroutine (changeScene (scene));
+		StartCoroutine (changeScene (scene));
 	}
 
 	// Run chosen scene after 3 seconds

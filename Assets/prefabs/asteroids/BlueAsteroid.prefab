@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 4287044823994350}
   - component: {fileID: 114132402767640536}
   - component: {fileID: 114589244466641110}
+  - component: {fileID: 114090373973758424}
   m_Layer: 0
   m_Name: BlueAsteroid
   m_TagString: Untagged
@@ -427,6 +428,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114090373973758424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1931210798597440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ff6fd6fbf2cc04e85e14555f47f929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 1353996578382070, guid: 6e5490d4abf4f4b1d914c91865f569d2, type: 2}
 --- !u!114 &114132402767640536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -439,6 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleTime: 0.05
+  scaleFactor: 1
 --- !u!114 &114589244466641110
 MonoBehaviour:
   m_ObjectHideFlags: 1
