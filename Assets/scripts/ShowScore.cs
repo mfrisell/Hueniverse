@@ -50,7 +50,7 @@ public class ShowScore : MonoBehaviour {
 		incrementing = true;
 
 		while (previousScore < currentScore) {
-			previousScore++;
+            previousScore++;
 
 			string scoreTextString = previousScore.ToString();
 			scoreText.text = scoreTextString;
@@ -60,10 +60,27 @@ public class ShowScore : MonoBehaviour {
 			}
 
 
-			yield return new WaitForSeconds (0.05f);
+			yield return new WaitForSeconds (0.03f);
 		}
 
-		previousScore = currentScore;
+        while (previousScore > currentScore)
+        {
+            previousScore -= 10;
+
+            string scoreTextString = previousScore.ToString();
+            scoreText.text = scoreTextString;
+
+            if (previousScore % 2 == 0)
+            {
+                audio.Play();
+            }
+
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+
+        previousScore = currentScore;
 		incrementing = false;
 
 	}
