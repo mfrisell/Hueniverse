@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour {
     private GameObject leftWeaponEmitter;
     private GameObject rightWeaponEmitter;
 
+	private AudioSource audio;
+
 
     void Start() {
 
@@ -106,6 +108,8 @@ public class PlayerController : MonoBehaviour {
         rightCurrentColor = Color.red;
 
         combinedBulletSpawn = new GameObject();
+
+		audio = GetComponent<AudioSource> ();
     }
     
     private void delayedStart()
@@ -146,6 +150,7 @@ public class PlayerController : MonoBehaviour {
         //TODO Rotation
         if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
+			audio.Play ();
 			SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(500);
             Vector2 axisPress = SteamVR_Controller.Input(leftDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
             float xAxis = axisPress[0];
@@ -228,6 +233,7 @@ public class PlayerController : MonoBehaviour {
         //TODO Rotation
         if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
+			audio.Play ();
 			SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(500);
             Vector2 axisPress = SteamVR_Controller.Input(rightDeviceIndex).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
             float xAxis = axisPress[0];
