@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e4ba55b587d48edabba131d2275ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  failExplosion: {fileID: 1118755603959354, guid: bcb30fca6a2e345d092308411b637b5b,
+  failExplosion: {fileID: 1122847437433160, guid: ff9f36112fbf741329ccc94bdc495242,
     type: 2}
   removeObject: 1
 --- !u!114 &114998370384325360
