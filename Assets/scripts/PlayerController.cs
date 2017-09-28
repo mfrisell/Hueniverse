@@ -440,17 +440,6 @@ public class PlayerController : MonoBehaviour {
             Debug.Log("Tag error: " + bulletColor);
         }
 
-        MeshRenderer gameObjectRenderer = bulletObject.GetComponent<MeshRenderer>();
-
-        Material newMaterial = new Material(Shader.Find("Standard"))
-        {
-            color = bulletColor
-        };
-
-        
-        gameObjectRenderer.material = newMaterial;
-
-        //bulletObject.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(bulletColor);
     }
 
     private IEnumerator LerpColor(ParticleSystem ps, Color currentColor, Color endColor)

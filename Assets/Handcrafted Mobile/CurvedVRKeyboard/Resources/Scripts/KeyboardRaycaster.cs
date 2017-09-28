@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Valve.VR;
 namespace CurvedVRKeyboard {
 
     public class KeyboardRaycaster: KeyboardComponent {
@@ -24,11 +25,15 @@ namespace CurvedVRKeyboard {
 
         [SerializeField, HideInInspector]
         private string clickInputName;
+        private int rightDeviceIndex;
+
+        //public GameObject RightController;
 
         void Start () {
             keyboardStatus = gameObject.GetComponent<KeyboardStatus>();
             int layerNumber = gameObject.layer;
             layer = 1 << layerNumber;
+            rightDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
         }
 
         void Update () {
@@ -36,6 +41,8 @@ namespace CurvedVRKeyboard {
             rayLength = Vector3.Distance(raycastingSource.position, target.transform.position) * (minRaylengthMultipler + 
                  (Mathf.Abs(target.transform.lossyScale.x) + Mathf.Abs(target.transform.lossyScale.y) + Mathf.Abs(target.transform.lossyScale.z)));
             RayCastKeyboard();
+
+            Debug.Log(rayLength);
 
 			// Highlight chosen key
 			if (keyItemCurrent != null) {
@@ -66,11 +73,11 @@ namespace CurvedVRKeyboard {
                 if(focusedKeyItem != null) { // Hit may occur on item without script
                     ChangeCurrentKeyItem(focusedKeyItem);
                     keyItemCurrent.Hovering();
-#if !UNITY_HAS_GOOGLEVR
-                    if(Input.GetButtonDown(clickInputName)) {// If key clicked
-#else
-                    if(GvrController.TouchDown) {
-#endif
+
+                    //if(Input.GetButtonDown(clickInputName)) {// If key clicked
+
+                    if(SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) {
+                    
                         keyItemCurrent.Click();
                         keyboardStatus.HandleClick(keyItemCurrent);
                     }
