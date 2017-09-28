@@ -7,14 +7,17 @@ public class GetHit : MonoBehaviour {
 
 	private int leftDeviceIndex;
 	private int rightDeviceIndex;
+	private AudioSource audio;
 
 	void Start() {
 		leftDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
 		rightDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
+		audio = GetComponent<AudioSource> ();
 	}
 
     void OnTriggerEnter (Collider other)
     {
+		audio.Play ();
 		SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(2000);
 		SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(2000);
 
