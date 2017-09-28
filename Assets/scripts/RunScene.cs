@@ -56,7 +56,8 @@ public class RunScene : MonoBehaviour {
         // Run scene
         if(loadScene)
         {
-            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            //SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            SteamVR_LoadLevel.Begin(scene);
         }
 
     }
