@@ -7,12 +7,24 @@ public class DestroyByContact : MonoBehaviour {
 	public GameObject explosion;
 	public GameObject failExplosion;
 	private bool exploded = false;
+	private bool gameOver;
+	private GameObject go;
+	private GameController gc;
+
+	void Update() {
+		
+		// Check if game is over
+		go = GameObject.FindGameObjectWithTag ("GameController");
+		gc = go.GetComponent<GameController> ();
+		gameOver = gc.gameOver;
+
+	}
 
 	void OnTriggerEnter(Collider other) {
 
 		if (gameObject.tag == other.tag) {
 			// Create Explosion
-			if (!exploded) {
+			if (!exploded && !gameOver) {
 				exploded = true;
 				Instantiate (explosion, transform.position, transform.rotation);
 
