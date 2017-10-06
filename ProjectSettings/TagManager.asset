@@ -35,6 +35,7 @@ TagManager:
   - playerName
   - startText
   - tutorialText
+  - lifeCirclePart
   layers:
   - Default
   - TransparentFX

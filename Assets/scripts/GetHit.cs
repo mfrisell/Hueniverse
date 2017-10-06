@@ -23,8 +23,9 @@ public class GetHit : MonoBehaviour {
 
         GameObject go = GameObject.FindGameObjectWithTag("GameController");
         GameController gco = go.GetComponent<GameController>();
-        gco.score -= 50;
-        if (gco.score < 0)
-            gco.score = 0;
+		gco.lifes -= 1;
+//        gco.score -= 50;
+//        if (gco.score < 0)
+//            gco.score = 0;
     }
 }
