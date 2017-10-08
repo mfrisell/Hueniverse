@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour {
     private int leftColorIndex;
     private int rightColorIndex;
 
-    private Color leftCurrentColor;
-    private Color rightCurrentColor;
+	public Color leftCurrentColor;
+	public Color rightCurrentColor;
     private Color combinedCurrentColor;
     private bool colorIsCombined = false;
 
@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour {
 
         leftCurrentColor = Color.red;
         rightCurrentColor = Color.red;
+		Debug.Log (leftCurrentColor);
 
         combinedBulletSpawn = new GameObject();
 

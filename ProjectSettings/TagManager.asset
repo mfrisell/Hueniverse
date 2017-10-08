@@ -36,6 +36,8 @@ TagManager:
   - startText
   - tutorialText
   - lifeCirclePart
+  - colorSquare
+  - lifeCircleHolder
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour {
 	public float gameTime = 0f;
 	public float maxGameTime = 180f;
 	public int lifes = 3;
+	public float powerUp = 0; // A value between 0 and 1. 
+	public bool powerUpAvailable = false;
 
 	private GameObject sun;
 	private float distanceZ;

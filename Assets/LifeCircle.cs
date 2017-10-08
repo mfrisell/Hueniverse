@@ -36,10 +36,10 @@ public class LifeCircle : MonoBehaviour {
 
 		if (prevLifes != lifes) {
 			prevLifes = lifes;
-			DestroyAllObjects();
-			createLifeCircle ();
 
 			Debug.Log ("förlorade liv");
+
+			StartCoroutine (ChangeLife());
 		}
 		
 	}
@@ -101,6 +101,27 @@ public class LifeCircle : MonoBehaviour {
 		}
 	}
 
+	IEnumerator ChangeLife() {
+
+		rotateAroundAxis raa = transform.GetComponent<rotateAroundAxis> ();
+		float inititalSpeed = raa.speed;
+
+		for (int i = 0; i < 20; i++) {
+			raa.speed = inititalSpeed * i * i;
+			yield return new WaitForSeconds (0.01f);
+		}
+
+		DestroyAllObjects();
+		createLifeCircle ();
+
+		for (int i = 20; i > 0; i--) {
+			raa.speed = inititalSpeed * i * i;
+			yield return new WaitForSeconds (0.01f);
+		}
+
+
+	}
+
 	void DestroyAllObjects()
 	{
 		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("lifeCirclePart");
@@ -110,4 +131,6 @@ public class LifeCircle : MonoBehaviour {
 			Destroy(gameObjects[i]);
 		}
 	}
+
+
 }
