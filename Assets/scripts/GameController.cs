@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour {
 	public string gameMode = "demo";
 	public float gameTime = 0f;
 	public float maxGameTime = 180f;
+	public int lifes = 3;
+	public float powerUp = 0; // A value between 0 and 1. 
+	public bool powerUpAvailable = false;
 
 	private GameObject sun;
 	private float distanceZ;
@@ -73,6 +76,10 @@ public class GameController : MonoBehaviour {
 		if (gameOver && !GOrunning) {
 			GOrunning = true;
 			animateGameOver ();
+		}
+
+		if (lifes <= 0) {
+			gameOver = true;
 		}
     }
 

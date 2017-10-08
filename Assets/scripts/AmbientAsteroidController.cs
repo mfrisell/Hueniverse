@@ -18,7 +18,7 @@ public class AmbientAsteroidController : MonoBehaviour {
 
 		StartCoroutine(SpawnAmbient());
 
-		Debug.Log (Random.insideUnitCircle * 10);
+		//Debug.Log (Random.insideUnitCircle * 10);
 
 	}
 	

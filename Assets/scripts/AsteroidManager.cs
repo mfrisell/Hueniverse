@@ -249,12 +249,12 @@ public class AsteroidManager : MonoBehaviour {
     {
 		while (gameOver == false)
         {
-            Debug.Log(asteroidFrequency);
+            //Debug.Log(asteroidFrequency);
             if (asteroidFrequency == 0)
                 yield return null;
             else {
                 yield return new WaitForSeconds(0.5f / asteroidFrequency);
-                Debug.Log(asteroidFrequency);
+                //Debug.Log(asteroidFrequency);
                 launchAsteroid();
             }
             

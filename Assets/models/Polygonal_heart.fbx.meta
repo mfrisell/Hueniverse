@@ -1,0 +1,167 @@
+fileFormatVersion: 2
+guid: 2462e42ef5fed46668adbea16ee696e5
+timeCreated: 1507287181
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Camera_01
+    100002: Cloner
+    100004: Heart
+    100006: Lensflare_Source
+    100008: Light
+    100010: Moon
+    100012: Moon_Light
+    100014: Physical_Sky
+    100016: Plane_2_0
+    100018: Plane_2_1
+    100020: Plane_2_2
+    100022: Plane_2_3
+    100024: Plane_2_4
+    100026: Plane_2_5
+    100028: Plane_2_6
+    100030: Plane_2_7
+    100032: Plane_2_8
+    100034: //RootNode
+    100036: Render
+    100038: Shadow_Plane
+    100040: Sky_Dome
+    100042: Sky_Null
+    100044: Sun
+    100046: Sun_light
+    400000: Camera_01
+    400002: Cloner
+    400004: Heart
+    400006: Lensflare_Source
+    400008: Light
+    400010: Moon
+    400012: Moon_Light
+    400014: Physical_Sky
+    400016: Plane_2_0
+    400018: Plane_2_1
+    400020: Plane_2_2
+    400022: Plane_2_3
+    400024: Plane_2_4
+    400026: Plane_2_5
+    400028: Plane_2_6
+    400030: Plane_2_7
+    400032: Plane_2_8
+    400034: //RootNode
+    400036: Render
+    400038: Shadow_Plane
+    400040: Sky_Dome
+    400042: Sky_Null
+    400044: Sun
+    400046: Sun_light
+    2000000: Camera_01
+    2300000: Heart
+    2300002: Plane_2_0
+    2300004: Plane_2_1
+    2300006: Plane_2_2
+    2300008: Plane_2_3
+    2300010: Plane_2_4
+    2300012: Plane_2_5
+    2300014: Plane_2_6
+    2300016: Plane_2_7
+    2300018: Plane_2_8
+    3300000: Heart
+    3300002: Plane_2_0
+    3300004: Plane_2_1
+    3300006: Plane_2_2
+    3300008: Plane_2_3
+    3300010: Plane_2_4
+    3300012: Plane_2_5
+    3300014: Plane_2_6
+    3300016: Plane_2_7
+    3300018: Plane_2_8
+    4300000: Heart
+    4300002: Plane_2_0
+    4300004: Plane_2_1
+    4300006: Plane_2_2
+    4300008: Plane_2_3
+    4300010: Plane_2_4
+    4300012: Plane_2_5
+    4300014: Plane_2_6
+    4300016: Plane_2_7
+    4300018: Plane_2_8
+    9500000: //RootNode
+    10800000: Lensflare_Source
+    10800002: Light
+    10800004: Moon_Light
+    10800006: Sky_Dome
+    10800008: Sun_light
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

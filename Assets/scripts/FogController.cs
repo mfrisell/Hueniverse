@@ -42,7 +42,7 @@ public class FogController : MonoBehaviour {
 				ambientSpeed = Random.Range (100, 120);
 
 				GameObject ambas = Instantiate (Fog, startPos, Quaternion.identity) as GameObject;
-				Debug.Log (ambas);
+				//Debug.Log (ambas);
 				ambas.transform.SetParent(GetComponent<Transform>());
 				ambas.transform.localScale = new Vector3 (ambientSize,ambientSize,ambientSize);
 				Rigidbody ambasRigid = ambas.GetComponent<Rigidbody> ();
