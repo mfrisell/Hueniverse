@@ -71,7 +71,8 @@ public class GameController : MonoBehaviour {
 			ReadHighscore ();
 		}
 
-        moveSunCloser();
+		// Commented row below because - Removed Sun
+        //moveSunCloser();
 
 		if (gameOver && !GOrunning) {
 			GOrunning = true;

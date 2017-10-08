@@ -37,8 +37,6 @@ public class LifeCircle : MonoBehaviour {
 		if (prevLifes != lifes) {
 			prevLifes = lifes;
 
-			Debug.Log ("förlorade liv");
-
 			StartCoroutine (ChangeLife());
 		}
 		
