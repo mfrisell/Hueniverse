@@ -38,6 +38,8 @@ TagManager:
   - lifeCirclePart
   - colorSquare
   - lifeCircleHolder
+  - leftOuterColor
+  - rightOuterColor
   layers:
   - Default
   - TransparentFX
