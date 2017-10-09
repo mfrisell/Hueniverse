@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Kino;
 
 public class LifeCircle : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class LifeCircle : MonoBehaviour {
 
 	private int lifes;
 	private int prevLifes;
+
+	public GameObject agObj;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +40,7 @@ public class LifeCircle : MonoBehaviour {
 		if (prevLifes != lifes) {
 			prevLifes = lifes;
 
+			StartCoroutine (GlitchScreen());
 			StartCoroutine (ChangeLife());
 		}
 		
@@ -101,11 +105,15 @@ public class LifeCircle : MonoBehaviour {
 
 	IEnumerator ChangeLife() {
 
+		//AnalogGlitch ag = agObj.GetComponent<AnalogGlitch> ();
+
+
 		rotateAroundAxis raa = transform.GetComponent<rotateAroundAxis> ();
 		float inititalSpeed = raa.speed;
 
 		for (int i = 0; i < 20; i++) {
 			raa.speed = inititalSpeed * i * i;
+			//ag.colorDrift = i / 20;
 			yield return new WaitForSeconds (0.01f);
 		}
 
@@ -114,6 +122,7 @@ public class LifeCircle : MonoBehaviour {
 
 		for (int i = 20; i > 0; i--) {
 			raa.speed = inititalSpeed * i * i;
+			//ag.colorDrift = i / 20;
 			yield return new WaitForSeconds (0.01f);
 		}
 
@@ -128,6 +137,22 @@ public class LifeCircle : MonoBehaviour {
 		{
 			Destroy(gameObjects[i]);
 		}
+	}
+
+	IEnumerator GlitchScreen() {
+
+		AnalogGlitch ag = agObj.GetComponent<AnalogGlitch> ();
+
+		for (int i = 0; i < 5; i++) {
+			ag.colorDrift += 0.1f;
+			yield return new WaitForSeconds (0.05f);
+		}
+
+		for (int i = 5; i > 0; i--) {
+			ag.colorDrift -= 0.1f;
+			yield return new WaitForSeconds (0.05f);
+		}
+
 	}
 
 
