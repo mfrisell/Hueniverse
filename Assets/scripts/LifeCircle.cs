@@ -143,13 +143,20 @@ public class LifeCircle : MonoBehaviour {
 
 		AnalogGlitch ag = agObj.GetComponent<AnalogGlitch> ();
 
+		float increaseAmount = 0.05f;
+
 		for (int i = 0; i < 5; i++) {
-			ag.colorDrift += 0.1f;
+			
+			ag.colorDrift += increaseAmount;
+			ag.scanLineJitter += increaseAmount;
+			ag.horizontalShake += increaseAmount;
 			yield return new WaitForSeconds (0.05f);
 		}
 
 		for (int i = 5; i > 0; i--) {
-			ag.colorDrift -= 0.1f;
+			ag.colorDrift -= increaseAmount;
+			ag.scanLineJitter -= increaseAmount;
+			ag.horizontalShake -= increaseAmount;
 			yield return new WaitForSeconds (0.05f);
 		}
 
