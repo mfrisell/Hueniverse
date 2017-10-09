@@ -9,21 +9,35 @@ public class GetHit : MonoBehaviour {
 	private int rightDeviceIndex;
 	private AudioSource audio;
 
+	private float gameTimer = 0f;
+	private float protectionTimer = 3f;
+
 	void Start() {
 		leftDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
 		rightDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
 		audio = GetComponent<AudioSource> ();
 	}
 
+	void Update() {
+		gameTimer += Time.deltaTime;
+	}
+
     void OnTriggerEnter (Collider other)
     {
-		audio.Play ();
-		SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(2000);
-		SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(2000);
+		if (gameTimer > protectionTimer) {
+			gameTimer = 0f;
 
-        GameObject go = GameObject.FindGameObjectWithTag("GameController");
-        GameController gco = go.GetComponent<GameController>();
-		gco.lifes -= 1;
+			audio.Play ();
+
+			GameObject go = GameObject.FindGameObjectWithTag("GameController");
+			GameController gco = go.GetComponent<GameController>();
+			gco.lifes -= 1;
+
+			SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(2000);
+			SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(2000);
+
+		}
+
 //        gco.score -= 50;
 //        if (gco.score < 0)
 //            gco.score = 0;
