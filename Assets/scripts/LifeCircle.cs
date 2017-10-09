@@ -48,7 +48,7 @@ public class LifeCircle : MonoBehaviour {
 
 	void createLifeCircle() {
 
-		transform.rotation = Quaternion.identity;
+		//transform.rotation = Quaternion.identity;
 		
 		float amountCircleSectors = lifes * 2;
 		float fullCircle = 360;
@@ -112,7 +112,7 @@ public class LifeCircle : MonoBehaviour {
 		float inititalSpeed = raa.speed;
 
 		for (int i = 0; i < 20; i++) {
-			raa.speed = inititalSpeed * i * i;
+			//raa.speed = inititalSpeed * i * i;
 			//ag.colorDrift = i / 20;
 			yield return new WaitForSeconds (0.01f);
 		}
@@ -121,7 +121,7 @@ public class LifeCircle : MonoBehaviour {
 		createLifeCircle ();
 
 		for (int i = 20; i > 0; i--) {
-			raa.speed = inititalSpeed * i * i;
+			//raa.speed = inititalSpeed * i * i;
 			//ag.colorDrift = i / 20;
 			yield return new WaitForSeconds (0.01f);
 		}
@@ -157,6 +157,9 @@ public class LifeCircle : MonoBehaviour {
 			ag.scanLineJitter -= increaseAmount;
 			yield return new WaitForSeconds (0.05f);
 		}
+
+		ag.colorDrift = 0;
+		ag.scanLineJitter = 0;
 
 	}
 
