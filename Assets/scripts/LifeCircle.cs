@@ -149,14 +149,12 @@ public class LifeCircle : MonoBehaviour {
 			
 			ag.colorDrift += increaseAmount;
 			ag.scanLineJitter += increaseAmount;
-			ag.horizontalShake += increaseAmount;
 			yield return new WaitForSeconds (0.05f);
 		}
 
 		for (int i = 5; i > 0; i--) {
 			ag.colorDrift -= increaseAmount;
 			ag.scanLineJitter -= increaseAmount;
-			ag.horizontalShake -= increaseAmount;
 			yield return new WaitForSeconds (0.05f);
 		}
 
