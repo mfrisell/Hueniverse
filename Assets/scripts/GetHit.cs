@@ -24,22 +24,20 @@ public class GetHit : MonoBehaviour {
 
     void OnTriggerEnter (Collider other)
     {
-		if (gameTimer > protectionTimer) {
+
+		GameObject go = GameObject.FindGameObjectWithTag("GameController");
+		GameController gco = go.GetComponent<GameController>();
+
+		if ((gameTimer > protectionTimer) && !gco.gameOver) {
 			gameTimer = 0f;
 
 			audio.Play ();
 
-			GameObject go = GameObject.FindGameObjectWithTag("GameController");
-			GameController gco = go.GetComponent<GameController>();
 			gco.lifes -= 1;
 
 			SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(2000);
 			SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(2000);
 
 		}
-
-//        gco.score -= 50;
-//        if (gco.score < 0)
-//            gco.score = 0;
     }
 }
