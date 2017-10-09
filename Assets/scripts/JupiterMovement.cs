@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthRotation : MonoBehaviour {
+public class JupiterMovement : MonoBehaviour {
 
-	private Rigidbody earthRigid;
+	private Rigidbody jupiterRigid;
 
 	// Use this for initialization
 	void Start () {
-		earthRigid = this.GetComponent<Rigidbody> ();
-		Vector3 velVector = new Vector3(0,0,-70);
-		earthRigid.velocity = velVector;
+		jupiterRigid = this.GetComponent<Rigidbody> ();
+		Vector3 velVector = new Vector3(0,0,-10);
+		jupiterRigid.velocity = velVector;
 	}
 	
 	// Update is called once per frame
