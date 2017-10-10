@@ -181,50 +181,9 @@ public class PlayerController : MonoBehaviour {
             MeshRenderer leftButtonRightRenderer = leftButtonRight.GetComponent<MeshRenderer>();
 
             MeshRenderer lightEmitterLeftRenderer = lightEmitterLeft.GetComponent<MeshRenderer>();
+            ParticleSystemRenderer leftWeaponPSR = leftWeaponEmitter.GetComponent<ParticleSystemRenderer>();
 
-            if (leftColorIndex==0)
-            {
-
-                leftWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = redMaterial;
-
-                Material newMaterialLeft = blueMaterial;
-                leftButtonLeftRenderer.material = newMaterialLeft;
-
-                Material newMaterialRight = greenMaterial;
-                leftButtonRightRenderer.material = newMaterialRight;
-
-
-                Material newMaterialEmitter = redMaterial;
-                lightEmitterLeftRenderer.material = newMaterialEmitter;
-
-
-            } else if(leftColorIndex==1) {
-
-                leftWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = blueMaterial;
-
-                Material newMaterialLeft = greenMaterial;
-                leftButtonLeftRenderer.material = newMaterialLeft;
-
-                Material newMaterialRight = redMaterial;
-                leftButtonRightRenderer.material = newMaterialRight;
-
-                Material newMaterialEmitter = blueMaterial;
-                lightEmitterLeftRenderer.material = newMaterialEmitter;
-
-            } else 
-            {
-                leftWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = greenMaterial;
-
-                Material newMaterialLeft = redMaterial;
-                leftButtonLeftRenderer.material = newMaterialLeft;
-
-                Material newMaterialRight = blueMaterial;
-                leftButtonRightRenderer.material = newMaterialRight;
-
-                Material newMaterialEmitter = greenMaterial;
-                lightEmitterLeftRenderer.material = newMaterialEmitter;
-
-            }
+            SetRenderers(leftColorIndex, leftWeaponPSR, leftButtonLeftRenderer, leftButtonRightRenderer, lightEmitterLeftRenderer);
 
 
             //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -263,59 +222,13 @@ public class PlayerController : MonoBehaviour {
             MeshRenderer rightButtonRightRenderer = rightButtonRight.GetComponent<MeshRenderer>();
 
             MeshRenderer lightEmitterRightRenderer = lightEmitterRight.GetComponent<MeshRenderer>();
+            ParticleSystemRenderer rightWeaponPSR = rightWeaponEmitter.GetComponent<ParticleSystemRenderer>();
 
-            if (rightColorIndex == 0)
-            {
-
-                rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = redMaterial;
-
-                Material newMaterialLeft = blueMaterial;
-                rightButtonLeftRenderer.material = newMaterialLeft;
-
-                Material newMaterialRight = greenMaterial;
-                rightButtonRightRenderer.material = newMaterialRight;
-
-                Material newMaterialEmitter = redMaterial;
-                lightEmitterRightRenderer.material = newMaterialEmitter;
-
-
-            }
-            else if (rightColorIndex == 1)
-            {
-
-                rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = blueMaterial;
-
-                Material newMaterialLeft = greenMaterial;
-                rightButtonLeftRenderer.material = newMaterialLeft;
-
-                Material newMaterialRight = redMaterial;
-                rightButtonRightRenderer.material = newMaterialRight;
-
-                Material newMaterialEmitter = blueMaterial;
-                lightEmitterRightRenderer.material = newMaterialEmitter;
-
-            }
-            else
-            {
-
-                rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = greenMaterial;
-
-                Material newMaterialLeft = redMaterial;
-                rightButtonLeftRenderer.material = newMaterialLeft;
-
-                Material newMaterialRight = blueMaterial;
-                rightButtonRightRenderer.material = newMaterialRight;
-
-                Material newMaterialEmitter = greenMaterial;
-                lightEmitterRightRenderer.material = newMaterialEmitter;
-
-            }
-
-            //clawsLeft.transform.rotation = Quaternion.Lerp(clawsLeft.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            SetRenderers(rightColorIndex, rightWeaponPSR, rightButtonLeftRenderer, rightButtonRightRenderer, lightEmitterRightRenderer);
         }
 
 
-        float distanceBetweenWeapons = (leftController.transform.position - rightController.transform.position).magnitude;
+        float distanceBetweenWeapons = (leftWeaponEmitter.transform.position - rightWeaponEmitter.transform.position).magnitude;
 
         colorIsCombined = false; //Reset flag
 
@@ -323,7 +236,7 @@ public class PlayerController : MonoBehaviour {
         ParticleSystem.MainModule leftMainModule = leftPS.main;
         ParticleSystem.MainModule rightMainModule = rightPS.main;
 
-        if (distanceBetweenWeapons < maxDistance) // && leftCurrentColor != rightCurrentColor
+        if (distanceBetweenWeapons < maxDistance)
         {
             colorIsCombined = true;
             //Calculate resulting color
@@ -370,6 +283,14 @@ public class PlayerController : MonoBehaviour {
             //Debug.Log(deviceindexRight);
         }
 
+    }
+
+    private void SetRenderers(int colorIndex, ParticleSystemRenderer psr, MeshRenderer leftButton, MeshRenderer rightButton, MeshRenderer lightEmitter)
+    {
+        rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(indexToColor(colorIndex));
+        leftButton.material = colorToMaterial(indexToColor(colorIndex - 1));
+        rightButton.material = colorToMaterial(indexToColor(colorIndex + 1));
+        lightEmitter.material = colorToMaterial(indexToColor(colorIndex));
     }
 
     private void Shoot(int deviceIndex)
@@ -511,9 +432,15 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private int Mod(int a, int b)
+    {
+        return (a % b + b) % b;
+    }
+
     //Returns black on error
     private Color indexToColor(int colorIndex)
     {
+        colorIndex = Mod(colorIndex, 3);
         switch (colorIndex)
         {
             case 0:
