@@ -41,6 +41,7 @@ TagManager:
   - leftOuterColor
   - rightOuterColor
   - developer
+  - HUD
   layers:
   - Default
   - TransparentFX
