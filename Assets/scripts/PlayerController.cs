@@ -308,8 +308,8 @@ public class PlayerController : MonoBehaviour
     private void SetRenderers(int colorIndex, ParticleSystemRenderer psr, MeshRenderer leftButton, MeshRenderer rightButton, MeshRenderer lightEmitter)
     {
         rightWeaponEmitter.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(indexToColor(colorIndex));
-        leftButton.material = colorToMaterial(indexToColor(colorIndex - 1));
-        rightButton.material = colorToMaterial(indexToColor(colorIndex + 1));
+        leftButton.material = colorToMaterial(indexToColor(colorIndex + 1));
+        rightButton.material = colorToMaterial(indexToColor(colorIndex - 1));
         lightEmitter.material = colorToMaterial(indexToColor(colorIndex));
     }
 
