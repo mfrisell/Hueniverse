@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour {
 
     private float currentSwipePosition;
     private float previousSwipePosition;
+	private Vector3 leftPreviousPosition;
+	private Vector3 rightPreviousPosition;
+	private int amountOfFrames = 0;
 
     private float addedTime = 0f;
     private bool updateColorProgress = false;
@@ -133,6 +136,10 @@ public class PlayerController : MonoBehaviour {
 
         rightWeaponEmitter = Instantiate(weaponEmitter, rightController.transform.position + weaponEmitter.transform.position, rightController.transform.rotation) as GameObject;
         rightWeaponEmitter.transform.SetParent(rightController.transform);
+
+		rightPreviousPosition = rightController.transform.position;
+		leftPreviousPosition = leftController.transform.position;
+
 
         delayedStartCompleted = true;
     }
@@ -370,6 +377,10 @@ public class PlayerController : MonoBehaviour {
             //Debug.Log(deviceindexRight);
         }
 
+		if(activateShield ()){
+			//TODO Activate Shield
+		};
+
     }
 
     private void Shoot(int deviceIndex)
@@ -528,4 +539,23 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+	private bool activateShield() {
+		amountOfFrames++;
+		Vector3 leftControllerPosition = leftController.transform.position;
+		Vector3 rightControllerPosition = rightController.transform.position;
+
+		if(leftControllerPosition.y > 100 && rightControllerPosition.y > 100 && leftControllerPosition.x > rightControllerPosition.x+100 
+			&& leftPreviousPosition.x < leftControllerPosition.x - 100 && rightPreviousPosition.x > rightControllerPosition.x + 100){
+			if (amountOfFrames % 30 == 0) {
+				leftPreviousPosition = leftControllerPosition;
+				rightPreviousPosition = rightControllerPosition;
+			}
+			return true;
+		}
+		if (amountOfFrames % 30 == 0) {
+			leftPreviousPosition = leftControllerPosition;
+			rightPreviousPosition = rightControllerPosition;
+		}
+		return false;
+	}
 }
