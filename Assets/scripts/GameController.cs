@@ -9,7 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
-    public bool resetGame, gameOver;
+    public bool resetGame;
+    public bool gameOver;
 	public int score = 0;
 	public string name = "Spansk";
 	public string gameMode = "demo";
@@ -18,6 +19,9 @@ public class GameController : MonoBehaviour {
 	public int lifes = 3;
 	public float powerUp = 0; // A value between 0 and 1. 
 	public bool powerUpAvailable = false;
+    public float timeToPowerUp = 30;
+    public float timeToPowerDown = 5;
+    public bool shieldActivated = false;
 
 	private GameObject sun;
 	private float distanceZ;
@@ -82,6 +86,41 @@ public class GameController : MonoBehaviour {
 		if (lifes <= 0) {
 			gameOver = true;
 		}
+
+        updatePower();
+    }
+
+    public void updatePower()
+    {
+        if(!shieldActivated)
+        {
+            if (powerUp < 1)
+            {
+                powerUp += Time.deltaTime / timeToPowerUp;
+            }
+            else
+            {
+                powerUp = 1;
+            }
+        } else
+        {
+            if(powerUp>0)
+            {
+                powerUp -= Time.deltaTime / timeToPowerDown;
+            } else
+            {
+                powerUp = 0;
+                shieldActivated = false;
+                DestroyAllObjects();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            shieldActivated = true;
+        }
+
+
     }
 
 	public void SaveHighscore() {
@@ -158,4 +197,14 @@ public class GameController : MonoBehaviour {
 		GameObject goModel = Instantiate (GameOverModel, new Vector3 (0, 10, 20), Quaternion.Euler(20, 180, 0)) as GameObject;
 		GameObject goExplosion = Instantiate (superExplosion, new Vector3 (0, 5.5f, 18), Quaternion.Euler(0, 0, 0)) as GameObject;
 	}
+
+    void DestroyAllObjects()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("shield");
+
+        for (var i = 0; i < gameObjects.Length; i++)
+        {
+            Destroy(gameObjects[i]);
+        }
+    }
 }

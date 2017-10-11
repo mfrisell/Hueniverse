@@ -95,6 +95,10 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource audio;
 
+    // Shield Prefab
+    public GameObject shield;
+    private GameObject Shield;
+
 
     void Start()
     {
@@ -158,6 +162,32 @@ public class PlayerController : MonoBehaviour
 
         //Update left controller color and rotation
         //TODO Rotation
+
+        // Test for shield without gesture, only grip
+        GameObject gco = GameObject.FindGameObjectWithTag("GameController");
+        GameController gc = gco.GetComponent<GameController>();
+
+        if (!gc.shieldActivated)
+        {
+
+            if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            {
+
+                gc.shieldActivated = true;
+                Shield = Instantiate(shield, leftController.transform.position, leftController.transform.rotation);
+
+            }
+
+            if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            {
+                gc.shieldActivated = true;
+                Shield = Instantiate(shield, leftController.transform.position, leftController.transform.rotation);
+
+            }
+        }
+
+        // End of shield stuff test
+
         if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
             audio.Play();
