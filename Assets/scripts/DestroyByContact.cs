@@ -6,7 +6,7 @@ public class DestroyByContact : MonoBehaviour {
 
 	public GameObject explosion;
 	public GameObject failExplosion;
-	private bool exploded = false;
+	public bool exploded = false;
 	private bool gameOver;
 	private GameObject go;
 	private GameController gc;
