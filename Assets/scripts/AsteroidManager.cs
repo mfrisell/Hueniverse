@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class AsteroidManager : MonoBehaviour {
 
+    public static decimal percentComplete = 0;
     public int asteroidSpeed;
-    public static float asteroidFrequency = 0.1f;
-    public static float mixedPercentage = 0.1f;
     public int asteroidSpawnAngleWidth;
     public int asteroidSpawnAngleHeight;
     public int asteroidSpawnRadius;
@@ -30,7 +29,9 @@ public class AsteroidManager : MonoBehaviour {
 	public GameObject asteroidMagenta;
 	public GameObject asteroidYellow;
 
-	private Transform childAsteroid;
+    private decimal asteroidFrequency = 0;
+    private decimal mixedPercentage = 0;
+    private Transform childAsteroid;
 
 	private GameObject asteroidObject;
 
@@ -43,8 +44,8 @@ public class AsteroidManager : MonoBehaviour {
 
 		gameOver = gameControllerScript.gameOver;
 
-        coroutine = GenerateAsteroids();
-        StartCoroutine(coroutine);
+        //coroutine = GenerateAsteroids();
+        //StartCoroutine(coroutine);
 	}
 	
 	// Update is called once per frame
@@ -62,10 +63,26 @@ public class AsteroidManager : MonoBehaviour {
 
     }
 
+    private void FixedUpdate()
+    {
+        asteroidFrequency = (percentComplete / 3);
+        mixedPercentage = (percentComplete / 10); //Go linearly from 0 to 33 percent
+
+        int procentChance = (int)(asteroidFrequency * 10000);
+        
+        float y = Mathf.Pow(1.002f, procentChance) + 50;
+        int randNum = Random.Range(0, 10000);
+        Debug.Log(procentChance + " " + y);
+        if (randNum < y)
+        {
+            launchAsteroid();
+            //Debug.Log("Launch!");
+        }
+    }
+
 
     void launchAsteroid ()
     {
-        //Random.Range( 0.0f, 1.0f )
         
         //Randomize positions and center them
         int asteroidWidthAngle = Random.Range(0, asteroidSpawnAngleWidth) - (asteroidSpawnAngleWidth / 2);
@@ -245,20 +262,20 @@ public class AsteroidManager : MonoBehaviour {
         return Instantiate(prefab, position, Quaternion.identity) as GameObject;
     }
 
-    private IEnumerator GenerateAsteroids()
-    {
-		while (gameOver == false)
-        {
-            //Debug.Log(asteroidFrequency);
-            if (asteroidFrequency == 0)
-                yield return null;
-            else {
-                yield return new WaitForSeconds(0.5f / asteroidFrequency);
-                //Debug.Log(asteroidFrequency);
-                launchAsteroid();
-            }
+  //  private IEnumerator GenerateAsteroids()
+  //  {
+		//while (gameOver == false)
+  //      {
+  //          //Debug.Log(asteroidFrequency);
+  //          if (asteroidFrequency == 0)
+  //              yield return null;
+  //          else {
+  //              yield return new WaitForSeconds(0.5f / asteroidFrequency);
+  //              //Debug.Log(asteroidFrequency);
+  //              launchAsteroid();
+  //          }
             
-        }
+  //      }
         
-    }
+  //  }
 }

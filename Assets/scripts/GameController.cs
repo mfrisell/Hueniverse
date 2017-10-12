@@ -50,11 +50,10 @@ public class GameController : MonoBehaviour {
 		if(resetGame)
         {
             Application.LoadLevel(Application.loadedLevel);
+            //SteamVR_LoadLevel.Begin(Application.loadedLevel); TODO try this instead
         }
 
-        float percentComplete = (gameTime / maxGameTime);
-        AsteroidManager.asteroidFrequency = (percentComplete / 3f) + 0.1f;
-        AsteroidManager.mixedPercentage = (percentComplete / 3) + 0.1f; //Go linearly from 10 to 43 percent
+        decimal percentComplete = AsteroidManager.percentComplete = (decimal)(gameTime / maxGameTime);
 
 
         if (Input.GetKeyDown ("k")) {
