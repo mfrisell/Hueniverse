@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
+    private int framesCounter = 0;
+    private float fpsTimer = 0f;
+
     public bool resetGame;
     public bool gameOver;
 	public int score = 0;
@@ -23,11 +26,6 @@ public class GameController : MonoBehaviour {
     public float timeToPowerDown = 5;
     public bool shieldActivated = false;
 
-	private GameObject sun;
-	private float distanceZ;
-	private float deltaDistance;
-	public float sunStopFromPlayer = 30;
-
 	private bool GOrunning = false;
 	public GameObject GameOverModel;
 	public GameObject superExplosion;
@@ -37,15 +35,22 @@ public class GameController : MonoBehaviour {
 		
         resetGame = false;
 		gameOver = false;
+        
 
-		sun = GameObject.FindGameObjectWithTag ("sun");
-		distanceZ = sun.transform.position.z;
-		deltaDistance = distanceZ / maxGameTime;
-
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+        framesCounter += 1;
+        fpsTimer += Time.deltaTime;
+        if (fpsTimer > 1f)
+        {
+            Debug.Log("FPS: " + framesCounter.ToString());
+            framesCounter = 0;
+            fpsTimer = 0f;
+        }
+
 		if (gameTime > maxGameTime)
 			gameOver = true;
 		else
@@ -74,9 +79,6 @@ public class GameController : MonoBehaviour {
 		if (Input.GetKeyDown ("j")) {
 			ReadHighscore ();
 		}
-
-		// Commented row below because - Removed Sun
-        //moveSunCloser();
 
 		if (gameOver && !GOrunning) {
 			GOrunning = true;
@@ -176,21 +178,6 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	void moveSunCloser() {
-
-		float distanceChange = deltaDistance * Time.deltaTime;
-		Vector3 pos = sun.transform.position;
-		float distanceChangeNew = distanceChange;
-	
-
-		if (pos.z < 100 + sunStopFromPlayer) {
-			distanceChangeNew = (distanceChange * (pos.z - sunStopFromPlayer)) / 100;
-		}
-
-		Vector3 tmp = new Vector3 (pos.x, pos.y, pos.z - distanceChangeNew);
-		sun.transform.position = tmp;
-	}
-
 	void animateGameOver() {
 		Debug.Log ("GAME OVER");
 
@@ -207,4 +194,5 @@ public class GameController : MonoBehaviour {
             Destroy(gameObjects[i]);
         }
     }
+
 }
