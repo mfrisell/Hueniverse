@@ -5,8 +5,7 @@ using UnityEngine;
 public class AsteroidManager : MonoBehaviour {
 
     public int asteroidSpeed;
-    public static float asteroidFrequency = 0.1f;
-    public static float mixedPercentage = 0.1f;
+    public static float percentComplete = 0;
     public int asteroidSpawnAngleWidth;
     public int asteroidSpawnAngleHeight;
     public int asteroidSpawnRadius;
@@ -34,6 +33,9 @@ public class AsteroidManager : MonoBehaviour {
 
 	private GameObject asteroidObject;
 
+    private float asteroidFrequency = 0.1f;
+    private float mixedPercentage = 0.1f;
+
     private IEnumerator coroutine;
 
     Vector3 targetPosition;
@@ -55,6 +57,9 @@ public class AsteroidManager : MonoBehaviour {
         {
             targetPosition = target.transform.position;
         }
+
+        asteroidFrequency = (percentComplete / 3) + 0.1f;
+        mixedPercentage = (percentComplete / 3) + 0.1f; //Go linearly from 10 to 43 percent
 
         //Physics.gravity = gravity;
         if (Input.GetKeyDown("space"))

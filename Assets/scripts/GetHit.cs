@@ -35,8 +35,10 @@ public class GetHit : MonoBehaviour {
 
 			gco.lifes -= 1;
 
-			SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(2000);
-			SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(2000);
+            if (leftDeviceIndex != -1)
+			    SteamVR_Controller.Input (leftDeviceIndex).TriggerHapticPulse(2000);
+            if (rightDeviceIndex != -1)
+			    SteamVR_Controller.Input (rightDeviceIndex).TriggerHapticPulse(2000);
 
 		}
     }
