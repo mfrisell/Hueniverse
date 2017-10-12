@@ -27,8 +27,10 @@ public class GetHit : MonoBehaviour {
 
 		GameObject go = GameObject.FindGameObjectWithTag("GameController");
 		GameController gco = go.GetComponent<GameController>();
+        DestroyByContact dbc = other.GetComponent<DestroyByContact>();
+        
 
-		if ((gameTimer > protectionTimer) && !gco.gameOver) {
+		if ((gameTimer > protectionTimer) && !gco.gameOver && !dbc.exploded) {
 			gameTimer = 0f;
 
 			audio.Play ();

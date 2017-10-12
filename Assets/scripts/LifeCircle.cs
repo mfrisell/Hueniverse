@@ -17,6 +17,8 @@ public class LifeCircle : MonoBehaviour {
 
 	public GameObject agObj;
 
+	public GameObject hud;
+
 	// Use this for initialization
 	void Start () {
 
@@ -48,7 +50,6 @@ public class LifeCircle : MonoBehaviour {
 
 	void createLifeCircle() {
 
-		//transform.rotation = Quaternion.identity;
 		
 		float amountCircleSectors = lifes * 2;
 		float fullCircle = 360;
@@ -59,8 +60,9 @@ public class LifeCircle : MonoBehaviour {
 
 		float movedAcrossCircle = -heartLength/2;
 
-		float heartScale = 0.0001f;
+		float heartScale = 0.05f;
 
+		float eulerAng = transform.rotation.eulerAngles.z;
 
 		for (int i = 0; i < amountCircleSectors; i++) {
 
@@ -68,23 +70,27 @@ public class LifeCircle : MonoBehaviour {
 			if (i % 2 == 0) {
 
 				goHeart = Instantiate (Heart, transform.position, transform.rotation) as GameObject;
-				goHeart.transform.localScale = new Vector3(heartScale, heartScale, 1);
+
+				float zRotOffset = 360 - eulerAng;
+				goHeart.transform.Rotate (new Vector3 (0,0,zRotOffset));
+
 				goHeart.transform.SetParent(GetComponent<Transform>());
 
-				float radius = 0.0215f;
-				//float degree = 180;
+				float radius = 9f;
 				float degreeToRadian = (movedAcrossCircle +108) * 0.01745329252f;
 
 				float x = radius * Mathf.Cos (degreeToRadian);
 				float y = radius * Mathf.Sin (degreeToRadian);
 
-				Vector3 pos = transform.position;
+				Vector3 pos = goHeart.transform.localPosition;
 				pos.x += x;
 				pos.y += y;
 
-				goHeart.transform.position = pos;
+				goHeart.transform.localPosition = pos;
+				goHeart.transform.localScale = new Vector3(heartScale, heartScale, heartScale);
 
 				movedAcrossCircle += heartLength;
+
 			} else {
 
 				go = Instantiate (LifeCircleObj, transform.position, transform.rotation) as GameObject;
@@ -105,15 +111,11 @@ public class LifeCircle : MonoBehaviour {
 
 	IEnumerator ChangeLife() {
 
-		//AnalogGlitch ag = agObj.GetComponent<AnalogGlitch> ();
-
-
 		rotateAroundAxis raa = transform.GetComponent<rotateAroundAxis> ();
 		float inititalSpeed = raa.speed;
 
 		for (int i = 0; i < 20; i++) {
-			//raa.speed = inititalSpeed * i * i;
-			//ag.colorDrift = i / 20;
+			raa.speed = inititalSpeed * i * i;
 			yield return new WaitForSeconds (0.01f);
 		}
 
@@ -121,8 +123,7 @@ public class LifeCircle : MonoBehaviour {
 		createLifeCircle ();
 
 		for (int i = 20; i > 0; i--) {
-			//raa.speed = inititalSpeed * i * i;
-			//ag.colorDrift = i / 20;
+			raa.speed = inititalSpeed * i * i;
 			yield return new WaitForSeconds (0.01f);
 		}
 
