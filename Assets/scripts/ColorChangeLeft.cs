@@ -84,11 +84,9 @@ public class ColorChangeLeft : MonoBehaviour {
                 colorIndex = 0;
             }
 
-            Debug.Log(colorIndex);
-
 
             var axis = SteamVR_Controller.Input(deviceindexLeft).GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
-            Debug.Log("axis: " + axis);
+            //Debug.Log("axis: " + axis);
 
         }
     }

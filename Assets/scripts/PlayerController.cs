@@ -101,6 +101,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 center;
     public GameObject shieldHolder;
 
+    //public GameObjects
+    public GameObject spaceShip;
+
+
 
 
     void Start()
@@ -118,7 +122,6 @@ public class PlayerController : MonoBehaviour
 
         leftCurrentColor = Color.red;
         rightCurrentColor = Color.red;
-        Debug.Log(leftCurrentColor);
 
         combinedBulletSpawn = new GameObject();
 
@@ -127,7 +130,6 @@ public class PlayerController : MonoBehaviour
 
     private void delayedStart()
     {
-        Debug.Log("delayed start");
         //Instantiate colorcircle particle systems
         leftParticleSystemGO = Instantiate(circlePSPrefab, leftController.transform.position, leftController.transform.rotation) as GameObject;
         leftParticleSystemGO.transform.SetParent(leftController.transform);
@@ -225,7 +227,6 @@ public class PlayerController : MonoBehaviour
             }
 
             rightColorIndex = Mod(rightColorIndex, 3);
-            Debug.Log("RIndex: " + rightColorIndex);
 
             Color endColor = indexToColor(rightColorIndex);
             StartCoroutine(lerpColor(rightPS, rightCurrentColor, endColor));
@@ -254,12 +255,11 @@ public class PlayerController : MonoBehaviour
             else {
                 currentShieldController = leftController;
             }
-            Debug.Log(currentShieldController);
             center = currentShieldController.transform.position;// + currentShieldController.transform.forward;
             
             Vector3 shieldDirection;
             shieldDirection = currentShieldController.transform.position - GameObject.FindWithTag("MainCamera").transform.position;
-            var shieldParent = Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection));
+            var shieldParent = Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection),spaceShip.transform);
             //Debug.Log(shieldParent.transform.position.x);
 
             for (int i = 0; i < numObjects; i++) {
@@ -270,12 +270,12 @@ public class PlayerController : MonoBehaviour
                 
                 //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
                 var shieldCheckpoint = Instantiate(gestureCheckpointPrefab, new Vector3(0,0,0), new Quaternion(0,0,0,0), shieldParent.transform);
-                Vector3 pos = CreateGestureCircle(new Vector3(0,0,0), 0.3f, (360.0f / numObjects) * i);
+                Vector3 pos = CreateGestureCircle(new Vector3(0,0,0), 0.01f, (360.0f / numObjects) * i);
                 //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
 
                 shieldCheckpoint.transform.localPosition = pos;
                 Debug.Log((360 / numObjects) * i);
-                shieldCheckpoint.transform.Rotate(new Vector3(0,0,(360/numObjects)*i));
+                shieldCheckpoint.transform.Rotate(new Vector3(0,0,-(360/numObjects)*i));
             }
 
         }
@@ -328,12 +328,14 @@ public class PlayerController : MonoBehaviour
 
         if (colorIsCombined && ((leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) || (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))))
         {
+            Debug.Log("Shoot combined");
             shootCombined();
         } else
         {
             //Left trigger
             if (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
             {
+                Debug.Log("Shoot left");
                 shoot(leftDeviceIndex);
                 //Debug.Log(deviceindexLeft);
             }
@@ -341,6 +343,7 @@ public class PlayerController : MonoBehaviour
             //Right trigger
             if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
             {
+                Debug.Log("Shoot right");
                 shoot(rightDeviceIndex);
                 //Debug.Log(deviceindexRight);
             }
@@ -415,7 +418,7 @@ public class PlayerController : MonoBehaviour
         bulletObject.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(bulletColor);
 
 
-        Debug.Log(bulletColor);
+        //Debug.Log(bulletColor);
 
         bulletObject.gameObject.tag = colorToString(bulletColor);
     }

@@ -11,7 +11,7 @@ public class WrongTarget : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		Debug.Log (removeObject);
+		//Debug.Log (removeObject);
 		
 	}
 	
@@ -27,16 +27,17 @@ public class WrongTarget : MonoBehaviour {
 
 			if (gameObject.tag != other.tag) {
 			
-				Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
+				//Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
 
-				// Hide bullet mesh
-				if (removeObject) {
-					MeshRenderer mesh = GetComponent<MeshRenderer> ();
-					mesh.enabled = false;
-				}
+                // Hide bullet mesh
+                //if (removeObject)
+                //{
+                //    MeshRenderer mesh = GetComponent<MeshRenderer>();
+                //    mesh.enabled = false;
+                //}
 
-				// Fade out audio and then destroy bullet
-				StartCoroutine (fadeAudio ());
+                // Fade out audio and then destroy bullet
+                StartCoroutine (fadeAudio ());
 			} 
 		}
 	}

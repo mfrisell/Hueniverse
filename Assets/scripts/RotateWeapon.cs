@@ -31,12 +31,10 @@ public class RotateWeapon : MonoBehaviour {
 
             if (xAxis > 0)
             {
-                Debug.Log("Höger tryck");
                 clockwise = true;
             }
             else
             {
-                Debug.Log("Vänster tryck");
                 clockwise = false;
             }
 
@@ -52,12 +50,10 @@ public class RotateWeapon : MonoBehaviour {
 
             if (xAxis > 0)
             {
-                Debug.Log("Höger tryck");
                 clockwise = true;
             }
             else
             {
-                Debug.Log("Vänster tryck");
                 clockwise = false;
             }
 
