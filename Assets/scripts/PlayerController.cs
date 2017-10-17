@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
             
             Vector3 shieldDirection;
             shieldDirection = currentShieldController.transform.position - GameObject.FindWithTag("MainCamera").transform.position;
-            var shieldParent = Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection),spaceShip.transform);
+            GameObject shieldParent = (GameObject) Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection),spaceShip.transform);
             //Debug.Log(shieldParent.transform.position.x);
 
             for (int i = 0; i < numObjects; i++) {
@@ -269,7 +269,10 @@ public class PlayerController : MonoBehaviour
 
                 
                 //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
-                var shieldCheckpoint = Instantiate(gestureCheckpointPrefab, new Vector3(0,0,0), new Quaternion(0,0,0,0), shieldParent.transform);
+                GameObject shieldCheckpoint = (GameObject) Instantiate(gestureCheckpointPrefab, new Vector3(0,0,0), new Quaternion(0,0,0,0), shieldParent.transform);
+                shieldIndex sI = shieldCheckpoint.GetComponent<shieldIndex>();
+                sI.index = i;
+
                 Vector3 pos = CreateGestureCircle(new Vector3(0,0,0), 0.01f, (360.0f / numObjects) * i);
                 //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
 
