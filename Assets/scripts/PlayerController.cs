@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
     //public GameObject shieldHolder;
 
     //Shield gesture variables
-    private int numObjects = 6;
+    private int numObjects = 12;
     public GameObject gestureCheckpointPrefab;
     public Vector3 center;
     public GameObject shieldHolder;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class shieldInstantiator : MonoBehaviour {
 
@@ -12,13 +13,14 @@ public class shieldInstantiator : MonoBehaviour {
     private bool clockWise;
     private int directionMultiplier;
     private int hitBoxHitCounter = 0;
-    private int numberOfHitBoxes = 6;
+    private int numberOfHitBoxes = 12;
+    private float fill;
 
     public GameObject shieldPrefab;
 
 	void Start () {
-		
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,7 +32,10 @@ public class shieldInstantiator : MonoBehaviour {
         //Debug.Log("banan");
 
         if (other.tag == "shieldHitBox") {
+            GameObject progressShieldCircle = GameObject.FindGameObjectWithTag("progressShieldCircle");
+            Image img = progressShieldCircle.GetComponent<Image>();
             //Debug.Log("apple");
+            Debug.Log(progressShieldCircle);
             if (hitBoxHitCounter == 0)
             {
 
@@ -44,8 +49,6 @@ public class shieldInstantiator : MonoBehaviour {
             else if (hitBoxHitCounter == 1)
             {
 
-                Debug.Log(Mod(currentControllerHitBoxIndex - 1, numberOfHitBoxes));
-
                 //Om 
                 if ((other.gameObject.GetComponent<shieldIndex>().index == Mod(currentControllerHitBoxIndex + 1, numberOfHitBoxes)) || (other.gameObject.GetComponent<shieldIndex>().index == Mod(currentControllerHitBoxIndex - 1, numberOfHitBoxes)))
                 {
@@ -53,15 +56,21 @@ public class shieldInstantiator : MonoBehaviour {
                     {
                         clockWise = true;
                         directionMultiplier = 1;
+                        img.fillClockwise = true;
                         Debug.Log("Clockwise: " + currentControllerHitBoxIndex.ToString());
                     }
                     else if (other.gameObject.GetComponent<shieldIndex>().index == Mod(currentControllerHitBoxIndex - 1, numberOfHitBoxes))
                     {
                         clockWise = false;
                         directionMultiplier = -1;
+                        img.fillClockwise = false;
                         Debug.Log("Counter clockwise: " + currentControllerHitBoxIndex.ToString());
                     }
                     hitBoxHitCounter += 1;
+                    fill = ((1 / (float)numberOfHitBoxes) * (float)hitBoxHitCounter);
+
+                    Debug.Log(fill);
+                    img.fillAmount = fill;
                     currentControllerHitBoxIndex = Mod(currentControllerHitBoxIndex + directionMultiplier, numberOfHitBoxes);
                     Debug.Log("Second Hitbox: " + currentControllerHitBoxIndex.ToString());
                 }
@@ -98,6 +107,9 @@ public class shieldInstantiator : MonoBehaviour {
                     currentControllerHitBoxIndex = (currentControllerHitBoxIndex + directionMultiplier) % numberOfHitBoxes;
                     Debug.Log("current hitbox " + currentControllerHitBoxIndex.ToString());
                     hitBoxHitCounter++;
+                    fill = (1 / (float)numberOfHitBoxes) * (float)hitBoxHitCounter;
+                    img.fillAmount = fill;
+                    Debug.Log("fill amount: " + fill.ToString());
 
                 }
                 else
@@ -114,6 +126,7 @@ public class shieldInstantiator : MonoBehaviour {
                 }
 
             }
+           
 
         }
     }

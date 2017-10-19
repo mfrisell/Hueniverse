@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114754945489759242}
   m_Layer: 5
   m_Name: progressShieldCircle
-  m_TagString: Untagged
+  m_TagString: progressShieldCircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
