@@ -43,6 +43,9 @@ TagManager:
   - developer
   - HUD
   - shield
+  - shieldCheckPoint
+  - shieldHitBox
+  - shieldHolder
   layers:
   - Default
   - TransparentFX
