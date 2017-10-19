@@ -27,7 +27,7 @@ public class WrongTarget : MonoBehaviour {
 
 			if (gameObject.tag != other.tag) {
 			
-				Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
+				//Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
 
 				// Hide bullet mesh
 				if (removeObject) {

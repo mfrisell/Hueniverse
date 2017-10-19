@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 3345e1121bf3faf448ee7f60c6751968
 timeCreated: 1507817171
+=======
+guid: 099ac1b9ff926c847867e1f3f9fcf3a5
+timeCreated: 1507813148
+>>>>>>> shieldGesture
 licenseType: Free
 NativeFormatImporter:
   mainObjectFileID: 100100000

@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour {
     public float timeToPowerUp = 30;
     public float timeToPowerDown = 5;
     public bool shieldActivated = false;
+    public bool showFps = false;
 
 	private bool GOrunning = false;
 	public GameObject GameOverModel;
@@ -46,7 +47,9 @@ public class GameController : MonoBehaviour {
         fpsTimer += Time.deltaTime;
         if (fpsTimer > 1f)
         {
-            Debug.Log("FPS: " + framesCounter.ToString());
+            if(showFps) {
+                Debug.Log("FPS: " + framesCounter.ToString());
+            }
             framesCounter = 0;
             fpsTimer = 0f;
         }
@@ -187,7 +190,7 @@ public class GameController : MonoBehaviour {
 
     void DestroyAllObjects()
     {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("shield");
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("shieldHolder");
 
         for (var i = 0; i < gameObjects.Length; i++)
         {
