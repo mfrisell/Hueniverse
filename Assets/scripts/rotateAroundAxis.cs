@@ -25,7 +25,7 @@ public class rotateAroundAxis : MonoBehaviour {
 			rotateAroundAxis raa = lifeCircleHolderObject.GetComponent<rotateAroundAxis> ();
 
 			transform.Rotate (Vector3.forward * Time.deltaTime * -raa.speed);
-		}
+		} 
 
 	}
 }

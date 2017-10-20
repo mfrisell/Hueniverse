@@ -10,8 +10,7 @@ public class shieldInstantiator : MonoBehaviour {
 
     private int currentControllerHitBoxIndex;
     private int firstHitBoxIndex;
-    private bool clockWise;
-    private int directionMultiplier;
+    public int directionMultiplier;
     private int hitBoxHitCounter = 0;
     private int numberOfHitBoxes = 12;
     private float fill;
@@ -34,16 +33,14 @@ public class shieldInstantiator : MonoBehaviour {
         if (other.tag == "shieldHitBox") {
             GameObject progressShieldCircle = GameObject.FindGameObjectWithTag("progressShieldCircle");
             Image img = progressShieldCircle.GetComponent<Image>();
-            //Debug.Log("apple");
-            Debug.Log(progressShieldCircle);
+
             if (hitBoxHitCounter == 0)
             {
 
-
                 currentControllerHitBoxIndex = other.gameObject.GetComponent<shieldIndex>().index;
                 firstHitBoxIndex = currentControllerHitBoxIndex;
-                Debug.Log("first Hitbox " + currentControllerHitBoxIndex.ToString());
                 hitBoxHitCounter += 1;
+                progressShieldCircle.transform.Rotate(0, 0, -(360 / numberOfHitBoxes) * (firstHitBoxIndex));
             }
 
             else if (hitBoxHitCounter == 1)
@@ -54,32 +51,26 @@ public class shieldInstantiator : MonoBehaviour {
                 {
                     if (other.gameObject.GetComponent<shieldIndex>().index == Mod(currentControllerHitBoxIndex + 1, numberOfHitBoxes))
                     {
-                        clockWise = true;
                         directionMultiplier = 1;
                         img.fillClockwise = true;
-                        Debug.Log("Clockwise: " + currentControllerHitBoxIndex.ToString());
                     }
                     else if (other.gameObject.GetComponent<shieldIndex>().index == Mod(currentControllerHitBoxIndex - 1, numberOfHitBoxes))
                     {
-                        clockWise = false;
                         directionMultiplier = -1;
                         img.fillClockwise = false;
-                        Debug.Log("Counter clockwise: " + currentControllerHitBoxIndex.ToString());
                     }
                     hitBoxHitCounter += 1;
                     fill = ((1 / (float)numberOfHitBoxes) * (float)hitBoxHitCounter);
-
-                    Debug.Log(fill);
+                    
                     img.fillAmount = fill;
                     currentControllerHitBoxIndex = Mod(currentControllerHitBoxIndex + directionMultiplier, numberOfHitBoxes);
-                    Debug.Log("Second Hitbox: " + currentControllerHitBoxIndex.ToString());
+                    
                 }
 
             }
 
             else if (hitBoxHitCounter == numberOfHitBoxes)
             {
-                Debug.Log("instantiate shield!!!");
                 GameObject shieldHolder = GameObject.FindGameObjectWithTag("shieldHolder");
                 foreach (Transform child in shieldHolder.transform)
                 {
@@ -88,6 +79,8 @@ public class shieldInstantiator : MonoBehaviour {
                 //Vector3 pos = new Vector3(shieldHolder.transform.position.x, shieldHolder.transform.position.y, shieldHolder.transform.position.z + 1.5f);
                 Vector3 pos = new Vector3(0, 0, 0.5f);
                 GameObject shield = Instantiate(shieldPrefab, shieldHolder.transform.position + 1.5f * shieldHolder.transform.forward, shieldHolder.transform.rotation, shieldHolder.transform);
+                shieldRotation sr = shield.GetComponent<shieldRotation>();
+                sr.speed = -500 * directionMultiplier;
 
                 GameObject gco = GameObject.FindGameObjectWithTag("GameController");
                 GameController gc = gco.GetComponent<GameController>();
@@ -102,9 +95,9 @@ public class shieldInstantiator : MonoBehaviour {
             else
             {
 
-                if (other.gameObject.GetComponent<shieldIndex>().index == (currentControllerHitBoxIndex + directionMultiplier) % numberOfHitBoxes)
+                if (other.gameObject.GetComponent<shieldIndex>().index == Mod(currentControllerHitBoxIndex + directionMultiplier, numberOfHitBoxes))
                 {
-                    currentControllerHitBoxIndex = (currentControllerHitBoxIndex + directionMultiplier) % numberOfHitBoxes;
+                    currentControllerHitBoxIndex = Mod(currentControllerHitBoxIndex + directionMultiplier, numberOfHitBoxes);
                     Debug.Log("current hitbox " + currentControllerHitBoxIndex.ToString());
                     hitBoxHitCounter++;
                     fill = (1 / (float)numberOfHitBoxes) * (float)hitBoxHitCounter;

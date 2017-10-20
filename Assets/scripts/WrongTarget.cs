@@ -29,11 +29,6 @@ public class WrongTarget : MonoBehaviour {
 			
 				//Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
 
-				// Hide bullet mesh
-				if (removeObject) {
-					MeshRenderer mesh = GetComponent<MeshRenderer> ();
-					mesh.enabled = false;
-				}
 
 				// Fade out audio and then destroy bullet
 				StartCoroutine (fadeAudio ());

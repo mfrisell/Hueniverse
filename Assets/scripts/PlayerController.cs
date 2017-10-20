@@ -303,9 +303,11 @@ public class PlayerController : MonoBehaviour
                 currentShieldController = leftController;
             }
             center = currentShieldController.transform.position;// + currentShieldController.transform.forward;
+            
 
             Vector3 shieldDirection;
             shieldDirection = currentShieldController.transform.position - GameObject.FindWithTag("MainCamera").transform.position;
+            //center = GameObject.FindWithTag("MainCamera").transform.position + shieldDirection;
             GameObject shieldParent = (GameObject)Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection), spaceShip.transform);
             GameObject shieldGuide = (GameObject)Instantiate(shieldGuidePrefab, shieldParent.transform.position, shieldParent.transform.rotation, shieldParent.transform);
 
@@ -329,7 +331,7 @@ public class PlayerController : MonoBehaviour
                 //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
 
                 shieldCheckpoint.transform.localPosition = pos;
-                Debug.Log((360 / numObjects) * i);
+                //Debug.Log((360 / numObjects) * i);
                 shieldCheckpoint.transform.Rotate(new Vector3(0, 0, -(360 / numObjects) * i));
             }
 
@@ -599,7 +601,7 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector3 pos;
-        Debug.Log("center:" + center.ToString());
+        //Debug.Log("center:" + center.ToString());
         pos.x = center.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
         pos.y = center.y + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
         pos.z = center.z;
