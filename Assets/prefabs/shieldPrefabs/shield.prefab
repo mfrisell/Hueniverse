@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33984979803194796}
   - component: {fileID: 23070696602535212}
   - component: {fileID: 65398906972417408}
-  - component: {fileID: 114852702655418322}
+  - component: {fileID: 114023465839817968}
   m_Layer: 0
   m_Name: shield
   m_TagString: shield
@@ -187,7 +187,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114852702655418322
+--- !u!114 &114023465839817968
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -195,11 +195,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1046764927993584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3733ab1df9f3846aca92fb94adfc72cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 283ec35a6dce5444f876056271d54c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFromLifeCircleHolder: 0
-  speed: 500
+  speed: 0
 --- !u!198 &198540193738247598
 ParticleSystem:
   m_ObjectHideFlags: 1
