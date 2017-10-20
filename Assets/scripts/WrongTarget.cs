@@ -11,7 +11,6 @@ public class WrongTarget : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		Debug.Log (removeObject);
 		
 	}
 	

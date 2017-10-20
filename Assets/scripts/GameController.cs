@@ -182,7 +182,6 @@ public class GameController : MonoBehaviour {
 	}
 
 	void animateGameOver() {
-		Debug.Log ("GAME OVER");
 
 		GameObject goModel = Instantiate (GameOverModel, new Vector3 (0, 10, 20), Quaternion.Euler(20, 180, 0)) as GameObject;
 		GameObject goExplosion = Instantiate (superExplosion, new Vector3 (0, 5.5f, 18), Quaternion.Euler(0, 0, 0)) as GameObject;

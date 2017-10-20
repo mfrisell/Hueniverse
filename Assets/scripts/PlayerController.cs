@@ -125,7 +125,6 @@ public class PlayerController : MonoBehaviour
 
         leftCurrentColor = Color.red;
         rightCurrentColor = Color.red;
-        Debug.Log(leftCurrentColor);
 
         combinedBulletSpawn = new GameObject();
 
@@ -134,7 +133,6 @@ public class PlayerController : MonoBehaviour
 
     private void delayedStart()
     {
-        Debug.Log("delayed start");
         //Instantiate colorcircle particle systems
         leftParticleSystemGO = Instantiate(circlePSPrefab, leftController.transform.position, leftController.transform.rotation) as GameObject;
         leftParticleSystemGO.transform.SetParent(leftController.transform);

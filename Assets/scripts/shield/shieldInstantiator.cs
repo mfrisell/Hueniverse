@@ -98,18 +98,14 @@ public class shieldInstantiator : MonoBehaviour {
                 if (other.gameObject.GetComponent<shieldIndex>().index == Mod(currentControllerHitBoxIndex + directionMultiplier, numberOfHitBoxes))
                 {
                     currentControllerHitBoxIndex = Mod(currentControllerHitBoxIndex + directionMultiplier, numberOfHitBoxes);
-                    Debug.Log("current hitbox " + currentControllerHitBoxIndex.ToString());
                     hitBoxHitCounter++;
                     fill = (1 / (float)numberOfHitBoxes) * (float)hitBoxHitCounter;
                     img.fillAmount = fill;
-                    Debug.Log("fill amount: " + fill.ToString());
+
 
                 }
                 else
                 {                                 
-                    Debug.Log("wrong index");
-                    Debug.Log(other.gameObject.GetComponent<shieldIndex>().index);
-
                     GameObject shieldHolder = GameObject.FindGameObjectWithTag("shieldHolder");
                     GameObject.Destroy(shieldHolder);
 

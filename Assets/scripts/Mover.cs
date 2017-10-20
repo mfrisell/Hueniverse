@@ -23,7 +23,6 @@ public class Mover : MonoBehaviour {
         {
             float scaleValue = i / 50f;
             rb.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
-            Debug.Log(rb.transform.localScale);
             yield return null;
 
         }
