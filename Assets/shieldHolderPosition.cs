@@ -22,7 +22,6 @@ public class shieldHolderPosition : MonoBehaviour {
             Vector3 shipMovement = newShipPos - oldShipPos;
             //this.gameObject.transform.position.Set(this.gameObject.transform.position.x + shipMovement.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
             this.gameObject.transform.position += shipMovement;
-            Debug.Log("x: " + this.gameObject.transform.position.x.ToString());
         }
         oldShipPos = newShipPos;
     }
