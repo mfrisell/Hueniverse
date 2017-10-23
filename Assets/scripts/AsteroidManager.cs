@@ -95,60 +95,11 @@ public class AsteroidManager : MonoBehaviour {
         }
 
 
-		
-		
-
-		switch (asteroidPrefabIndex)
-		{
-		case 0:
-			asteroidObject = Instantiate(asteroidRed, asteroidSpawnPosition, lookRotation) as GameObject;
-			foreach (Transform child in asteroidObject.transform) if (child.CompareTag("red")) {
-				childAsteroid = child;
-			} 
-			//asteroidObject.gameObject.tag = "red";
-			break;
-		case 1:
-			asteroidObject = Instantiate(asteroidGreen, asteroidSpawnPosition, lookRotation) as GameObject;
-			foreach (Transform child in asteroidObject.transform) if (child.CompareTag("green")) {
-					childAsteroid = child;
-			} 
-			//asteroidObject.gameObject.tag = "green";
-			break;
-		case 2:
-			asteroidObject = Instantiate(asteroidBlue, asteroidSpawnPosition, lookRotation) as GameObject;
-			foreach (Transform child in asteroidObject.transform) if (child.CompareTag("blue")) {
-					childAsteroid = child;
-			} 
-			//asteroidObject.gameObject.tag = "blue";
-			break;
-		case 3:
-			asteroidObject = Instantiate(asteroidCyan, asteroidSpawnPosition, lookRotation) as GameObject;
-			foreach (Transform child in asteroidObject.transform) if (child.CompareTag("cyan")) {
-					childAsteroid = child;
-			} 
-			//asteroidObject.gameObject.tag = "cyan";
-			break;
-		case 4:
-			asteroidObject = Instantiate(asteroidMagenta, asteroidSpawnPosition, lookRotation) as GameObject;
-			foreach (Transform child in asteroidObject.transform) if (child.CompareTag("magenta")) {
-					childAsteroid = child;
-			} 
-			//asteroidObject.gameObject.tag = "magenta";
-			break;
-		case 5:
-			asteroidObject = Instantiate(asteroidYellow, asteroidSpawnPosition, lookRotation) as GameObject;
-			foreach (Transform child in asteroidObject.transform) if (child.CompareTag("yellow")) {
-					childAsteroid = child;
-			} 
-			//asteroidObject.gameObject.tag = "yellow";
-			break;
-		default:
-			Debug.Log("Error");
-			//asteroidColor = new Color(1, 1, 1, 1); //It needs some color incase it bugs out, should not happen though
-			break;
-		}
-
-        //GameObject asteroidObject = Instantiate(asteroid, asteroidSpawnPosition, lookRotation) as GameObject;
+		asteroidObject = Instantiate(colorToPrefab(indexToColor(asteroidPrefabIndex)), asteroidSpawnPosition, lookRotation) as GameObject;
+        foreach (Transform child in asteroidObject.transform) if (child.CompareTag(colorToString(indexToColor(asteroidPrefabIndex))))
+        {
+            childAsteroid = child;
+        }
 
         asteroidObject.transform.SetParent(GetComponent<Transform>());
         float asteroidSize = Random.Range(asteroidMinSize, asteroidMaxSize);
@@ -158,61 +109,49 @@ public class AsteroidManager : MonoBehaviour {
 
 		Rigidbody rb = childAsteroid.GetComponent<Rigidbody>();
 		rb.velocity = rb.transform.forward * asteroidSpeed;
+    }
 
-//		foreach (Transform child in asteroidObject) if (child.CompareTag("Zone")) {
-//				
-//		} 
+    void launchAsteroid(Color color, int widthAngle, int heightAngle)
+    {
+        Vector3 asteroidSpawnPosition = new Vector3(
+            targetPosition.x + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * widthAngle) * Mathf.Cos(Mathf.Deg2Rad * heightAngle),
+            targetPosition.y + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * heightAngle),
+            targetPosition.z + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * heightAngle) * Mathf.Cos(Mathf.Deg2Rad * widthAngle)
+        );
 
-//        Rigidbody rb = asteroidObject.GetComponent<Rigidbody>();
-//
-//
-//		Debug.Log (rb.velocity);
-//        rb.velocity = rb.transform.forward * asteroidSpeed;
+        //find the vector pointing from our position to the target
+        Vector3 direction = (targetPosition - asteroidSpawnPosition).normalized;
 
-//		int asteroidColorIndex = Random.Range(0, 4);
-//		if (asteroidColorIndex == 3) {
-//			asteroidColorIndex += Random.Range(0, 3);
-//		}
-//        Color asteroidColor;
-//
-//        switch (asteroidColorIndex)
-//        {
-//            case 0:
-//                asteroidObject.gameObject.tag = "blue";
-//                asteroidColor = new Color(0, 0, 1, 1);
-//                break;
-//            case 1:
-//                asteroidObject.gameObject.tag = "red";
-//                asteroidColor = new Color(1, 0, 0, 1);
-//                break;
-//            case 2:
-//                asteroidObject.gameObject.tag = "green";
-//                asteroidColor = new Color(0, 1, 0, 1);
-//                break;
-//			case 3:
-//				asteroidObject.gameObject.tag = "cyan";
-//				asteroidColor = new Color(0, 1, 1, 1);
-//				break;
-//			case 4:
-//				asteroidObject.gameObject.tag = "magenta";
-//				asteroidColor = new Color(1, 0, 1, 1);
-//				break;
-//			case 5:
-//				asteroidObject.gameObject.tag = "yellow";
-//				asteroidColor = new Color(1, 1, 0, 1);
-//				break;
-//	            default:
-//                Debug.Log("Error");
-//                asteroidColor = new Color(1, 1, 1, 1); //It needs some color incase it bugs out, should not happen though
-//                break;
-//        }
-//
-//        MeshRenderer gameObjectRenderer = asteroidObject.GetComponent<MeshRenderer>();
-//
-//        Material newMaterial = new Material(Shader.Find("Standard"));
-//
-//        newMaterial.color = asteroidColor;
-//        gameObjectRenderer.material = newMaterial;
+        //create the rotation we need to be in to look at the target
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        int randomNumber = Random.Range(0, 10);
+        int asteroidPrefabIndex = 0;
+
+        if (randomNumber < (mixedPercentage * 10))
+        {
+            asteroidPrefabIndex += Random.Range(3, 6);
+        }
+        else
+        {
+            asteroidPrefabIndex = Random.Range(0, 3);
+        }
+
+
+        asteroidObject = Instantiate(colorToPrefab(color), asteroidSpawnPosition, lookRotation) as GameObject;
+        foreach (Transform child in asteroidObject.transform) if (child.CompareTag(colorToString(color)))
+        {
+            childAsteroid = child;
+        }
+
+        asteroidObject.transform.SetParent(GetComponent<Transform>());
+        float asteroidSize = Random.Range(asteroidMinSize, asteroidMaxSize);
+        asteroidObject.transform.localScale = new Vector3(asteroidSize, asteroidSize, asteroidSize);
+        //asteroidObject.AddComponent<Rigidbody>();
+
+
+        Rigidbody rb = childAsteroid.GetComponent<Rigidbody>();
+        rb.velocity = rb.transform.forward * asteroidSpeed;
     }
 
     public GameObject createAsteroid(string color, Vector3 position)
@@ -260,5 +199,76 @@ public class AsteroidManager : MonoBehaviour {
             
         }
         
+    }
+
+    private int Mod(int a, int b)
+    {
+        return (a % b + b) % b;
+    }
+
+    //Returns black on error
+    private Color indexToColor(int colorIndex)
+    {
+        //colorIndex = Mod(colorIndex, 6);
+        switch (colorIndex)
+        {
+            case 0:
+                return Color.red;
+            case 1:
+                return Color.blue;
+            case 2:
+                return Color.green;
+            case 3:
+                return Color.cyan;
+            case 4:
+                return Color.magenta;
+            case 5:
+                return new Color(1, 1, 0); //Yellow
+            default:
+                Debug.Log("Index to Color error, index = " + colorIndex);
+                return Color.black;
+        }
+    }
+
+    private string colorToString(Color color)
+    {
+        if (color == Color.red)
+            return "red";
+        else if (color == Color.green)
+            return "green";
+        else if (color == Color.blue)
+            return "blue";
+        else if (color == Color.cyan)
+            return "cyan";
+        else if (color == Color.magenta)
+            return "magenta";
+        else if (color == new Color(1, 1, 0)) //Yellow
+            return "yellow";
+        else
+        {
+            Debug.Log("Color string error: " + color);
+            return null;
+        }
+    }
+
+    private GameObject colorToPrefab(Color color)
+    {
+        if (color == Color.red)
+            return asteroidRed;
+        else if (color == Color.green)
+            return asteroidGreen;
+        else if (color == Color.blue)
+            return asteroidBlue;
+        else if (color == Color.cyan)
+            return asteroidCyan;
+        else if (color == Color.magenta)
+            return asteroidMagenta;
+        else if (color == new Color(1, 1, 0)) //Yellow
+            return asteroidYellow;
+        else
+        {
+            Debug.Log("Tag error: " + color);
+            return null;
+        }
     }
 }
