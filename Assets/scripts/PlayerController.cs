@@ -108,6 +108,8 @@ public class PlayerController : MonoBehaviour
     public GameObject shieldHolder;
     public GameObject spaceShip;
     public GameObject shieldGuidePrefab;
+    public string currentShieldControllerTag;
+    
 
 
     void Start()
@@ -300,17 +302,24 @@ public class PlayerController : MonoBehaviour
             {
                 currentShieldController = leftController;
             }
+            currentShieldControllerTag = currentShieldController.tag;
             center = currentShieldController.transform.position;// + currentShieldController.transform.forward;
             
 
             Vector3 shieldDirection;
             shieldDirection = currentShieldController.transform.position - GameObject.FindWithTag("MainCamera").transform.position;
             //center = GameObject.FindWithTag("MainCamera").transform.position + shieldDirection;
-            GameObject shieldParent = (GameObject)Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection), spaceShip.transform);
+
+            if (GameObject.FindGameObjectWithTag("shieldHolder") != null) {
+                Destroy(GameObject.FindGameObjectWithTag("shieldHolder"));
+            };
+
+            //GameObject shieldParent = (GameObject)Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection),spaceShip.transform);
+            GameObject shieldParent = (GameObject)Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection));
             GameObject shieldGuide = (GameObject)Instantiate(shieldGuidePrefab, shieldParent.transform.position, shieldParent.transform.rotation, shieldParent.transform);
 
 
-            //Debug.Log(shieldParent.transform.position.x);
+            Debug.Log(shieldParent.transform.position.x);
 
             for (int i = 0; i < numObjects; i++)
             {
@@ -325,7 +334,7 @@ public class PlayerController : MonoBehaviour
                 sI.index = i;
 
 
-                Vector3 pos = CreateGestureCircle(new Vector3(0, 0, 0), 0.02f, (360.0f / numObjects) * i);
+                Vector3 pos = CreateGestureCircle(new Vector3(0, 0, 0), 0.4f, (360.0f / numObjects) * i);
                 //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
 
                 shieldCheckpoint.transform.localPosition = pos;
@@ -334,6 +343,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
 
 
 
