@@ -6,7 +6,7 @@ public class DestroyByContact : MonoBehaviour {
 
 	public GameObject explosion;
 	public GameObject failExplosion;
-	private bool exploded = false;
+	public bool exploded = false;
 	private bool gameOver;
 	private GameObject go;
 	private GameController gc;
@@ -40,8 +40,21 @@ public class DestroyByContact : MonoBehaviour {
 				// Fade out audio
 				StartCoroutine (fadeAudio ());
 			}
-		} else {
-		}
+		} else if(other.tag == "shield")
+        {
+            exploded = true;
+            Instantiate(explosion, transform.position, transform.rotation);
+
+            // Hide mesh
+            MeshRenderer mesh = GetComponent<MeshRenderer>();
+            mesh.enabled = false;
+
+            // Fade out audio
+            StartCoroutine(fadeAudio());
+        } else
+        {
+
+        }
 	}
 
 	IEnumerator fadeAudio() {

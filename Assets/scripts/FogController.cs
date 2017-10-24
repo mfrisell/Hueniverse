@@ -32,7 +32,7 @@ public class FogController : MonoBehaviour {
 			ambientSpawnNumber = Random.Range (1, 2);
 			zRange = 1000;
 			zCone = 200;
-			ambientSize = Random.Range (10, 50);
+			ambientSize = Random.Range (50, 200);
 
 			for (int i = 0; i < ambientSpawnNumber; i++) {
 
@@ -50,7 +50,7 @@ public class FogController : MonoBehaviour {
 
 			}
 
-			waitBetweenSpawns = Random.Range (3,10);
+			waitBetweenSpawns = Random.Range (6,20);
 			yield return new WaitForSeconds (waitBetweenSpawns);
 
 

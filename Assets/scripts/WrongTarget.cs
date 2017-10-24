@@ -11,7 +11,6 @@ public class WrongTarget : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		Debug.Log (removeObject);
 		
 	}
 	
@@ -22,23 +21,25 @@ public class WrongTarget : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 
-		if (!exploded || !removeObject) {
-			exploded = true;
+        if (other.tag != "leftController" && other.tag != "rightController")
+        {
+            if (!exploded || !removeObject)
+            {
+                exploded = true;
 
-			if (gameObject.tag != other.tag) {
-			
-				Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
 
-				// Hide bullet mesh
-				if (removeObject) {
-					MeshRenderer mesh = GetComponent<MeshRenderer> ();
-					mesh.enabled = false;
-				}
 
-				// Fade out audio and then destroy bullet
-				StartCoroutine (fadeAudio ());
-			} 
-		}
+                if (gameObject.tag != other.tag)
+                {
+
+                    Instantiate (failExplosion, gameObject.transform.position, gameObject.transform.rotation);
+                    //Debug.Log("Nu sprängs jag mot: " + other.tag);
+
+                    // Fade out audio and then destroy bullet
+                    StartCoroutine(fadeAudio());
+                }
+            }
+        }
 	}
 
 	IEnumerator fadeAudio() {
@@ -54,6 +55,7 @@ public class WrongTarget : MonoBehaviour {
 		// Remove gameobject from scene
 
 		if (removeObject) {
+            //Debug.Log("NU TAR JAG BOR SKOTTET");
 			Destroy (gameObject);
 		}
 	}

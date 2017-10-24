@@ -9,7 +9,11 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
-    public bool resetGame, gameOver;
+    private int framesCounter = 0;
+    private float fpsTimer = 0f;
+
+    public bool resetGame;
+    public bool gameOver;
 	public int score = 0;
 	public string name = "Spansk";
 	public string gameMode = "demo";
@@ -18,11 +22,10 @@ public class GameController : MonoBehaviour {
 	public int lifes = 3;
 	public float powerUp = 0; // A value between 0 and 1. 
 	public bool powerUpAvailable = false;
-
-	private GameObject sun;
-	private float distanceZ;
-	private float deltaDistance;
-	public float sunStopFromPlayer = 30;
+    public float timeToPowerUp = 30;
+    public float timeToPowerDown = 5;
+    public bool shieldActivated = false;
+    public bool showFps = false;
 
 	private bool GOrunning = false;
 	public GameObject GameOverModel;
@@ -33,15 +36,24 @@ public class GameController : MonoBehaviour {
 		
         resetGame = false;
 		gameOver = false;
+        
 
-		sun = GameObject.FindGameObjectWithTag ("sun");
-		distanceZ = sun.transform.position.z;
-		deltaDistance = distanceZ / maxGameTime;
-
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+        framesCounter += 1;
+        fpsTimer += Time.deltaTime;
+        if (fpsTimer > 1f)
+        {
+            if(showFps) {
+                Debug.Log("FPS: " + framesCounter.ToString());
+            }
+            framesCounter = 0;
+            fpsTimer = 0f;
+        }
+
 		if (gameTime > maxGameTime)
 			gameOver = true;
 		else
@@ -70,9 +82,6 @@ public class GameController : MonoBehaviour {
 			ReadHighscore ();
 		}
 
-		// Commented row below because - Removed Sun
-        //moveSunCloser();
-
 		if (gameOver && !GOrunning) {
 			GOrunning = true;
 			animateGameOver ();
@@ -81,6 +90,41 @@ public class GameController : MonoBehaviour {
 		if (lifes <= 0) {
 			gameOver = true;
 		}
+
+        updatePower();
+    }
+
+    public void updatePower()
+    {
+        if(!shieldActivated)
+        {
+            if (powerUp < 1)
+            {
+                powerUp += Time.deltaTime / timeToPowerUp;
+            }
+            else
+            {
+                powerUp = 1;
+            }
+        } else
+        {
+            if(powerUp>0)
+            {
+                powerUp -= Time.deltaTime / timeToPowerDown;
+            } else
+            {
+                powerUp = 0;
+                shieldActivated = false;
+                DestroyAllObjects();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            shieldActivated = true;
+        }
+
+
     }
 
 	public void SaveHighscore() {
@@ -136,25 +180,20 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	void moveSunCloser() {
-
-		float distanceChange = deltaDistance * Time.deltaTime;
-		Vector3 pos = sun.transform.position;
-		float distanceChangeNew = distanceChange;
-	
-
-		if (pos.z < 100 + sunStopFromPlayer) {
-			distanceChangeNew = (distanceChange * (pos.z - sunStopFromPlayer)) / 100;
-		}
-
-		Vector3 tmp = new Vector3 (pos.x, pos.y, pos.z - distanceChangeNew);
-		sun.transform.position = tmp;
-	}
-
 	void animateGameOver() {
-		Debug.Log ("GAME OVER");
 
 		GameObject goModel = Instantiate (GameOverModel, new Vector3 (0, 10, 20), Quaternion.Euler(20, 180, 0)) as GameObject;
 		GameObject goExplosion = Instantiate (superExplosion, new Vector3 (0, 5.5f, 18), Quaternion.Euler(0, 0, 0)) as GameObject;
 	}
+
+    void DestroyAllObjects()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("shieldHolder");
+
+        for (var i = 0; i < gameObjects.Length; i++)
+        {
+            Destroy(gameObjects[i]);
+        }
+    }
+
 }

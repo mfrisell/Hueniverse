@@ -41,6 +41,13 @@ TagManager:
   - leftOuterColor
   - rightOuterColor
   - developer
+  - HUD
+  - shield
+  - shieldCheckPoint
+  - shieldHitBox
+  - shieldHolder
+  - progressShieldCircle
+  - spaceShip
   layers:
   - Default
   - TransparentFX

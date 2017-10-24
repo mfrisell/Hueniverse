@@ -75,8 +75,14 @@ public class BackgroundCircle : MonoBehaviour {
 			sq.transform.SetParent(GetComponent<Transform>());
 
 			Image sqImg = sq.GetComponent<Image> ();
-
-			sqImg.color = colorsInOrder[i];
+			if (i % 1 == 0) {
+				sqImg.color = colorsInOrder [i];
+			} else {
+				Color col = sqImg.color;
+				col.a = 0;
+				sqImg.color = col;
+				//sqImg.color.a = 0;
+			}
 
 			movedAcrossCircle += 30;
 			sq.transform.Rotate(Vector3.forward * movedAcrossCircle );

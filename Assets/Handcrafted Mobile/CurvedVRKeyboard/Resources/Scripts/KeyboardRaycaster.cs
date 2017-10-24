@@ -42,7 +42,7 @@ namespace CurvedVRKeyboard {
                  (Mathf.Abs(target.transform.lossyScale.x) + Mathf.Abs(target.transform.lossyScale.y) + Mathf.Abs(target.transform.lossyScale.z)));
             RayCastKeyboard();
 
-            Debug.Log(rayLength);
+            //Debug.Log(rayLength);
 
 			// Highlight chosen key
 			if (keyItemCurrent != null) {

@@ -95,6 +95,22 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource audio;
 
+    ////Shield gesture variables
+    //private int numObjects = 10;
+    //public GameObject gestureCheckpointPrefab;
+    //public Vector3 center;
+    //public GameObject shieldHolder;
+
+    //Shield gesture variables
+    private int numObjects = 12;
+    public GameObject gestureCheckpointPrefab;
+    public Vector3 center;
+    public GameObject shieldHolder;
+    public GameObject spaceShip;
+    public GameObject shieldGuidePrefab;
+    public string currentShieldControllerTag;
+    
+
 
     void Start()
     {
@@ -111,7 +127,6 @@ public class PlayerController : MonoBehaviour
 
         leftCurrentColor = Color.red;
         rightCurrentColor = Color.red;
-        Debug.Log(leftCurrentColor);
 
         combinedBulletSpawn = new GameObject();
 
@@ -120,7 +135,6 @@ public class PlayerController : MonoBehaviour
 
     private void delayedStart()
     {
-        Debug.Log("delayed start");
         //Instantiate colorcircle particle systems
         leftParticleSystemGO = Instantiate(circlePSPrefab, leftController.transform.position, leftController.transform.rotation) as GameObject;
         leftParticleSystemGO.transform.SetParent(leftController.transform);
@@ -233,6 +247,107 @@ public class PlayerController : MonoBehaviour
 
             SetRenderers(rightColorIndex, rightWeaponPSR, rightButtonLeftRenderer, rightButtonRightRenderer, lightEmitterRightRenderer);
         }
+
+
+        //// Gesture for shield
+
+        //if ((rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Grip)) || (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Grip)))
+        //{
+        //    GameObject currentShieldController;
+        //    if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Grip)) {
+        //        currentShieldController = rightController;
+        //    }
+
+        //    else {
+        //        currentShieldController = leftController;
+        //    }
+        //    Debug.Log(currentShieldController);
+        //    center = currentShieldController.transform.position;// + currentShieldController.transform.forward;
+
+        //    Vector3 shieldDirection;
+        //    shieldDirection = currentShieldController.transform.position - GameObject.FindWithTag("MainCamera").transform.position;
+        //    var shieldParent = Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection));
+        //    //Debug.Log(shieldParent.transform.position.x);
+
+        //    for (int i = 0; i < numObjects; i++) {
+        //        //Vector3 pos = CreateGestureCircle(center, 0.5f, (360.0f / numObjects) * i);
+        //        //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
+        //        //Instantiate(gestureCheckpointPrefab, pos, rot, shieldParent.transform);
+
+
+        //        //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
+        //        var shieldCheckpoint = Instantiate(gestureCheckpointPrefab, new Vector3(0,0,0), new Quaternion(0,0,0,0), shieldParent.transform);
+        //        Vector3 pos = CreateGestureCircle(new Vector3(0,0,0), 0.3f, (360.0f / numObjects) * i);
+        //        //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
+
+        //        shieldCheckpoint.transform.localPosition = pos;
+        //        Debug.Log((360 / numObjects) * i);
+        //        shieldCheckpoint.transform.Rotate(new Vector3(0,0,-(360/numObjects)*i));
+        //    }
+
+        //}
+
+        GameObject gco = GameObject.FindGameObjectWithTag("GameController");
+        GameController gc = gco.GetComponent<GameController>();
+
+        if (((rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Grip)) || (leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Grip))) && !gc.shieldActivated)
+        {
+            GameObject currentShieldController;
+            if (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            {
+                currentShieldController = rightController;
+            }
+
+            else
+            {
+                currentShieldController = leftController;
+            }
+            currentShieldControllerTag = currentShieldController.tag;
+            center = currentShieldController.transform.position;// + currentShieldController.transform.forward;
+            
+
+            Vector3 shieldDirection;
+            shieldDirection = currentShieldController.transform.position - GameObject.FindWithTag("MainCamera").transform.position;
+            //center = GameObject.FindWithTag("MainCamera").transform.position + shieldDirection;
+
+            if (GameObject.FindGameObjectWithTag("shieldHolder") != null) {
+                Destroy(GameObject.FindGameObjectWithTag("shieldHolder"));
+            };
+
+            //GameObject shieldParent = (GameObject)Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection),spaceShip.transform);
+            GameObject shieldParent = (GameObject)Instantiate(shieldHolder, center, Quaternion.LookRotation(shieldDirection));
+            GameObject shieldGuide = (GameObject)Instantiate(shieldGuidePrefab, shieldParent.transform.position, shieldParent.transform.rotation, shieldParent.transform);
+
+
+            Debug.Log(shieldParent.transform.position.x);
+
+            for (int i = 0; i < numObjects; i++)
+            {
+                //Vector3 pos = CreateGestureCircle(center, 0.5f, (360.0f / numObjects) * i);
+                //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
+                //Instantiate(gestureCheckpointPrefab, pos, rot, shieldParent.transform);
+
+
+                //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
+                GameObject shieldCheckpoint = (GameObject)Instantiate(gestureCheckpointPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), shieldParent.transform);
+                shieldIndex sI = shieldCheckpoint.GetComponent<shieldIndex>();
+                sI.index = i;
+
+
+                Vector3 pos = CreateGestureCircle(new Vector3(0, 0, 0), 0.4f, (360.0f / numObjects) * i);
+                //Quaternion rot = Quaternion.FromToRotation(Vector3.down, center - pos);
+
+                shieldCheckpoint.transform.localPosition = pos;
+                //Debug.Log((360 / numObjects) * i);
+                shieldCheckpoint.transform.Rotate(new Vector3(0, 0, -(360 / numObjects) * i));
+            }
+
+        }
+
+
+
+
+
 
 
         float distanceBetweenWeapons = (leftWeaponEmitter.transform.position - rightWeaponEmitter.transform.position).magnitude;
@@ -486,6 +601,19 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Color string error: " + color);
             return null;
         }
+    }
+
+    //Assigning positions for gesture checkpoints
+
+    Vector3 CreateGestureCircle(Vector3 center, float radius, float angle)
+    {
+
+        Vector3 pos;
+        //Debug.Log("center:" + center.ToString());
+        pos.x = center.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+        pos.y = center.y + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+        pos.z = center.z;
+        return pos;
     }
 
 }
