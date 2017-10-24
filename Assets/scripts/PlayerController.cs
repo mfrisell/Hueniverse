@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
         leftController = GameObject.FindWithTag("leftController");
         rightController = GameObject.FindWithTag("rightController");
 
-        if (leftController == null || rightController == null)
+        if (Time.timeScale == 0 || leftController == null || rightController == null)
             return;
         else if (!delayedStartCompleted)
             delayedStart();
