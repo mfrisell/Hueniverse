@@ -58,7 +58,10 @@ public class AsteroidManager : MonoBehaviour {
 
         //Physics.gravity = gravity;
         if (Input.GetKeyDown("space"))
+        {
             launchAsteroid();
+        }
+            
 
     }
 
