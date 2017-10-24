@@ -14,23 +14,42 @@ public class shieldInstantiator : MonoBehaviour {
     private int hitBoxHitCounter = 0;
     private int numberOfHitBoxes = 12;
     private float fill;
+    private float guideTimer = 0f;
+    public float maxGuideTimer = 5f;
+    private string currentShieldController;
+    //private GameObject cameraRig;
 
     public GameObject shieldPrefab;
 
 	void Start () {
-
+       //cameraRig = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}         
+        if (GameObject.FindGameObjectWithTag("shieldHolder") != null)
+        {
+            if (guideTimer < maxGuideTimer)
+            {
+                guideTimer += Time.deltaTime;
+            }
+            else
+            {
+                if (GameObject.FindGameObjectWithTag("shield") == null)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("shieldHolder"));
+                }
+                guideTimer = 0f;
+            }
+        }
+
+    }         
 
     void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("banan");
+        //Debug.Log(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentShieldControllerTag + " should be " + this.tag);
 
-        if (other.tag == "shieldHitBox") {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentShieldControllerTag == this.tag && other.tag == "shieldHitBox") {
             GameObject progressShieldCircle = GameObject.FindGameObjectWithTag("progressShieldCircle");
             Image img = progressShieldCircle.GetComponent<Image>();
 

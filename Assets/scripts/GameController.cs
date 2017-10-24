@@ -65,8 +65,7 @@ public class GameController : MonoBehaviour {
         }
 
         float percentComplete = (gameTime / maxGameTime);
-        AsteroidManager.asteroidFrequency = (percentComplete / 3f) + 0.1f;
-        AsteroidManager.mixedPercentage = (percentComplete / 3) + 0.1f; //Go linearly from 10 to 43 percent
+        AsteroidManager.percentComplete = percentComplete;
 
 
         if (Input.GetKeyDown ("k")) {

@@ -47,6 +47,7 @@ TagManager:
   - shieldHitBox
   - shieldHolder
   - progressShieldCircle
+  - spaceShip
   layers:
   - Default
   - TransparentFX
