@@ -57,14 +57,15 @@ public class AsteroidManager : MonoBehaviour {
         {
             targetPosition = target.transform.position;
         }
-
-        asteroidFrequency = (percentComplete / 3) + 0.1f;
-        mixedPercentage = (percentComplete / 3) + 0.1f; //Go linearly from 10 to 43 percent
-
-        //Physics.gravity = gravity;
+        percentComplete = (gameControllerScript.gameTime / gameControllerScript.maxGameTime);
+        Mathf.Clamp01(percentComplete);
+        asteroidFrequency = (percentComplete / 3) - 0.02f; //Will be negative for about 10 seconds
+        mixedPercentage = (percentComplete / 3) - 0.1f; //Go linearly from -10 to 23 percent, should pass 0 at ~60 seconds in
+        
         if (Input.GetKeyDown("space"))
         {
-            launchAsteroid();
+            Time.timeScale = 1 - Time.timeScale;
+            //launchAsteroid();
         }
             
 
@@ -73,7 +74,6 @@ public class AsteroidManager : MonoBehaviour {
 
     void launchAsteroid ()
     {
-        //Random.Range( 0.0f, 1.0f )
         
         //Randomize positions and center them
         int asteroidWidthAngle = Random.Range(0, asteroidSpawnAngleWidth) - (asteroidSpawnAngleWidth / 2);
@@ -197,7 +197,7 @@ public class AsteroidManager : MonoBehaviour {
 		while (gameOver == false)
         {
             //Debug.Log(asteroidFrequency);
-            if (asteroidFrequency == 0)
+            if (asteroidFrequency <= 0)
                 yield return null;
             else {
                 yield return new WaitForSeconds(0.5f / asteroidFrequency);
