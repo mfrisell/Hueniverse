@@ -11,6 +11,17 @@ public class Scenario : MonoBehaviour {
     //Public
     public GameController gameControllerScript;
 
+    public bool baseShown = false;
+    public bool controlsShown = false;
+    public bool combinedShown = false;
+    public bool shieldShown = false;
+
+    public Image image;
+    public Sprite controlSprite;
+    public Sprite baseSprite;
+    public Sprite combinedSprite;
+    public Sprite shieldSprite;
+
     //Private
     private int leftDeviceIndex;
     private int rightDeviceIndex;
@@ -22,45 +33,58 @@ public class Scenario : MonoBehaviour {
         //Might be better to make these public somewhere and get the index from there
         leftDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
         rightDeviceIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
-
+        image.enabled = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (Time.timeScale == 0)
+        //Change to check if paused instead of "space"
+        if (Input.GetKeyDown("space")) // || ((leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) || (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)))
         {
-            Pause();
-        }
-
-        if ((leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) || (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)))
-        {
-            
+            Debug.Log(controlsShown);
+            Unpause();
         }
     }
 
     void Pause ()
     {
-
+        Time.timeScale = 0;
+        image.enabled = true;
+        //TODO Hide controllers
     }
 
-    void ShowControls ()
+    void Unpause ()
     {
-
+        Time.timeScale = 1;
+        image.enabled = false;
+        //TODO Unhide controllers
     }
 
-    void ShowBaseColor ()
+    public void ShowControls ()
     {
-
+        controlsShown = true;
+        image.sprite = controlSprite;
+        Pause();
     }
 
-    void ShowCombinedColor ()
+    public void ShowBaseColor ()
     {
-
+        baseShown = true;
+        image.sprite = baseSprite;
+        Pause();
     }
 
-    void ShowShield ()
+    public void ShowCombinedColor ()
     {
+        combinedShown = true;
+        image.sprite = combinedSprite;
+        Pause();
+    }
 
+    public void ShowShield ()
+    {
+        shieldShown = true;
+        image.sprite = shieldSprite;
+        Pause();
     }
 }

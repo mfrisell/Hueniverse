@@ -5,7 +5,6 @@ using UnityEngine;
 public class AsteroidManager : MonoBehaviour {
 
     public int asteroidSpeed;
-    public static float percentComplete = 0;
     public int asteroidSpawnAngleWidth;
     public int asteroidSpawnAngleHeight;
     public int asteroidSpawnRadius;
@@ -29,7 +28,8 @@ public class AsteroidManager : MonoBehaviour {
 	public GameObject asteroidMagenta;
 	public GameObject asteroidYellow;
 
-	private Transform childAsteroid;
+    private float percentComplete = 0;
+    private Transform childAsteroid;
 
 	private GameObject asteroidObject;
 
@@ -59,12 +59,13 @@ public class AsteroidManager : MonoBehaviour {
         }
         percentComplete = (gameControllerScript.gameTime / gameControllerScript.maxGameTime);
         Mathf.Clamp01(percentComplete);
-        asteroidFrequency = (percentComplete / 3) - 0.02f; //Will be negative for about 10 seconds
+        asteroidFrequency = (percentComplete / 3) + 0.1f; //Will be negative for about 10 seconds
+        //Debug.Log(asteroidFrequency);
         mixedPercentage = (percentComplete / 3) - 0.1f; //Go linearly from -10 to 23 percent, should pass 0 at ~60 seconds in
         
         if (Input.GetKeyDown("space"))
         {
-            Time.timeScale = 1 - Time.timeScale;
+            //Time.timeScale = 1 - Time.timeScale;
             //launchAsteroid();
         }
             
@@ -197,11 +198,15 @@ public class AsteroidManager : MonoBehaviour {
 		while (gameOver == false)
         {
             //Debug.Log(asteroidFrequency);
-            if (asteroidFrequency <= 0)
+            if (asteroidFrequency <= 0.12f)
+            {
+                //Debug.Log("a" + asteroidFrequency);
                 yield return null;
+            }
             else {
+                Debug.Log(asteroidFrequency + " " + 0.5f / asteroidFrequency);
                 yield return new WaitForSeconds(0.5f / asteroidFrequency);
-                //Debug.Log(asteroidFrequency);
+                Debug.Log("Launch");
                 launchAsteroid();
             }
             

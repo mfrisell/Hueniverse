@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
+    public Scenario scenarioScript;
     private int framesCounter = 0;
     private float fpsTimer = 0f;
 
@@ -59,13 +60,28 @@ public class GameController : MonoBehaviour {
 		else
 			gameTime += Time.deltaTime;
 
-		if(resetGame)
+        if (gameTime > 0 && !scenarioScript.controlsShown)
+        {
+            Debug.Log("Controls");
+            scenarioScript.ShowControls();
+        }
+
+        if (gameTime > 8 && !scenarioScript.baseShown) //TODO Tweak numbers
+        {
+            Debug.Log("Base");
+            scenarioScript.ShowBaseColor();
+        }
+
+        if (gameTime > 60 && !scenarioScript.combinedShown) //TODO Tweak numbers
+        {
+            Debug.Log("Combined");
+            scenarioScript.ShowCombinedColor();
+        }
+
+        if (resetGame)
         {
             Application.LoadLevel(Application.loadedLevel);
         }
-
-        float percentComplete = (gameTime / maxGameTime);
-        AsteroidManager.percentComplete = percentComplete;
 
 
         if (Input.GetKeyDown ("k")) {
@@ -101,10 +117,16 @@ public class GameController : MonoBehaviour {
             if (powerUp < 1)
             {
                 powerUp += Time.deltaTime / timeToPowerUp;
+                Debug.Log(powerUp);
             }
             else
             {
                 powerUp = 1;
+
+                if (!scenarioScript.shieldShown)
+                {
+                    scenarioScript.ShowShield();
+                }
             }
         } else
         {
