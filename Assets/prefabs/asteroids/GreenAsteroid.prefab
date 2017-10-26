@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 114463094231783542}
   - component: {fileID: 114719711714187492}
   - component: {fileID: 114329882567188334}
+  - component: {fileID: 114051120421453960}
   m_Layer: 0
   m_Name: GreenAsteroid
   m_TagString: Untagged
@@ -428,6 +429,17 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114051120421453960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275824970266556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b197668da8e905040aa06262af18f67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114329882567188334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -467,6 +479,7 @@ MonoBehaviour:
   explosion: {fileID: 1603356232265264, guid: 3397dbc85523d4703ac231b18679d49c, type: 2}
   failExplosion: {fileID: 1544323113944220, guid: 1db218b6c31a047078107f75a597d5bd,
     type: 2}
+  exploded: 0
 --- !u!114 &114554690596107592
 MonoBehaviour:
   m_ObjectHideFlags: 1
