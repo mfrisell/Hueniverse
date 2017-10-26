@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
+    public Scenario scenarioScript;
     private int framesCounter = 0;
     private float fpsTimer = 0f;
 
@@ -54,21 +55,38 @@ public class GameController : MonoBehaviour {
             fpsTimer = 0f;
         }
 
-		if (gameTime > maxGameTime)
-			gameOver = true;
-		else
-			gameTime += Time.deltaTime;
+        if (gameTime > maxGameTime)
+        {
+            gameOver = true;    //Game Over on time out
+        }
+        else
+            gameTime += Time.deltaTime;
 
-		if(resetGame)
+        if (gameTime > 0 && !scenarioScript.controlsShown)
+        {
+            scenarioScript.ShowControls();
+        }
+
+        if (gameTime > 8 && !scenarioScript.baseShown) //TODO Tweak numbers
+        {
+            scenarioScript.ShowBaseColor();
+        }
+
+        if (gameTime > 60 && !scenarioScript.combinedShown) //TODO Tweak numbers
+        {
+            scenarioScript.ShowCombinedColor();
+        }
+
+        if (resetGame)
         {
             Application.LoadLevel(Application.loadedLevel);
         }
 
-        float percentComplete = (gameTime / maxGameTime);
-        AsteroidManager.asteroidFrequency = (percentComplete / 3f) + 0.1f;
-        AsteroidManager.mixedPercentage = (percentComplete / 3) + 0.1f; //Go linearly from 10 to 43 percent
-
-
+        if (resetGame)
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
+        
         if (Input.GetKeyDown ("k")) {
 			Debug.Log ("Saving Highscore");
 			/*Destroy (GameObject.FindWithTag ("blue"));
@@ -106,6 +124,11 @@ public class GameController : MonoBehaviour {
             else
             {
                 powerUp = 1;
+
+                if (!scenarioScript.shieldShown)
+                {
+                    scenarioScript.ShowShield();
+                }
             }
         } else
         {
