@@ -55,10 +55,12 @@ public class GameController : MonoBehaviour {
             fpsTimer = 0f;
         }
 
-		if (gameTime > maxGameTime)
-			gameOver = true;
-		else
-			gameTime += Time.deltaTime;
+        if (gameTime > maxGameTime)
+        {
+            gameOver = true;    //Game Over on time out
+        }
+        else
+            gameTime += Time.deltaTime;
 
         if (gameTime > 0 && !scenarioScript.controlsShown)
         {

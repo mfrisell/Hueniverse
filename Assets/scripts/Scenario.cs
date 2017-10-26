@@ -25,6 +25,7 @@ public class Scenario : MonoBehaviour {
     //Private
     private int leftDeviceIndex;
     private int rightDeviceIndex;
+    private float pauseTime = 0;
 
     private bool isPaused = false;
 
@@ -39,7 +40,7 @@ public class Scenario : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Change to check if paused instead of "space"
-        if (Time.timeScale == 0 && ((leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) || (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))))
+        if (Time.realtimeSinceStartup - pauseTime > 2 && Time.timeScale == 0 && ((leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) || (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))))
         {
             Debug.Log(controlsShown);
             Unpause();
@@ -50,6 +51,7 @@ public class Scenario : MonoBehaviour {
     {
         Time.timeScale = 0;
         image.enabled = true;
+        pauseTime = Time.realtimeSinceStartup;
         //TODO Hide controllers
     }
 
@@ -57,11 +59,13 @@ public class Scenario : MonoBehaviour {
     {
         Time.timeScale = 1;
         image.enabled = false;
+        pauseTime = 0;
         //TODO Unhide controllers
     }
 
     public void ShowControls ()
     {
+        Debug.Log("controls");
         controlsShown = true;
         image.sprite = controlSprite;
         Pause();

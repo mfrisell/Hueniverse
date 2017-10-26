@@ -21,7 +21,7 @@ public class WrongTarget : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 
-        if (other.tag != "leftController" && other.tag != "rightController")
+        if (other.tag != "leftController" && other.tag != "rightController" && other.tag != "shield")
         {
             if (!exploded || !removeObject)
             {
