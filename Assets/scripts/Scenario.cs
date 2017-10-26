@@ -39,7 +39,7 @@ public class Scenario : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Change to check if paused instead of "space"
-        if (Input.GetKeyDown("space")) // || ((leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) || (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)))
+        if (Time.timeScale == 0 && ((leftDeviceIndex != -1 && SteamVR_Controller.Input(leftDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) || (rightDeviceIndex != -1 && SteamVR_Controller.Input(rightDeviceIndex).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))))
         {
             Debug.Log(controlsShown);
             Unpause();
