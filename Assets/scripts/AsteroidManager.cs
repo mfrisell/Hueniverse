@@ -14,6 +14,8 @@ public class AsteroidManager : MonoBehaviour
     public float asteroidMaxSize;
     public float asteroidHitRatio;
     public Vector3 gravity;
+    public float asteroidFrequencyOffset = 0.1f;
+    public float mixedPercentageOffset = -0.1f;
     //public float asteroidHealth;
 
     public GameController gameControllerScript;
@@ -62,9 +64,9 @@ public class AsteroidManager : MonoBehaviour
         }
         percentComplete = (gameControllerScript.gameTime / gameControllerScript.maxGameTime);
         Mathf.Clamp01(percentComplete);
-        asteroidFrequency = (percentComplete / 3) + 0.1f; //Will be negative for about 10 seconds
+        asteroidFrequency = (percentComplete / 3) + asteroidFrequencyOffset; //Will be negative for about 10 seconds
         //Debug.Log(asteroidFrequency);
-        mixedPercentage = (percentComplete / 3) - 0.1f; //Go linearly from -10 to 23 percent, should pass 0 at ~60 seconds in
+        mixedPercentage = (percentComplete / 3) + mixedPercentageOffset; //Go linearly from -10 to 23 percent, should pass 0 at ~60 seconds in
 
         if (Input.GetKeyDown("space"))
         {

@@ -57,22 +57,22 @@ public class GameController : MonoBehaviour {
 
         if (gameTime > maxGameTime)
         {
-            gameOver = true;    //Game Over on time out
+            //gameOver = true;    //Game Over on time out
         }
         else
             gameTime += Time.deltaTime;
 
-        if (gameTime > 0 && !scenarioScript.controlsShown)
+        if (gameTime > 0.2f && !scenarioScript.getControlBool())
         {
             scenarioScript.ShowControls();
         }
 
-        if (gameTime > 8 && !scenarioScript.baseShown) //TODO Tweak numbers
+        if (gameTime > 8 && !scenarioScript.getBaseBool()) //TODO Tweak numbers
         {
             scenarioScript.ShowBaseColor();
         }
 
-        if (gameTime > 60 && !scenarioScript.combinedShown) //TODO Tweak numbers
+        if (gameTime > 60 && !scenarioScript.getCombinedBool()) //TODO Tweak numbers
         {
             scenarioScript.ShowCombinedColor();
         }
@@ -125,7 +125,7 @@ public class GameController : MonoBehaviour {
             {
                 powerUp = 1;
 
-                if (!scenarioScript.shieldShown)
+                if (!scenarioScript.getShieldBool())
                 {
                     scenarioScript.ShowShield();
                 }

@@ -10,11 +10,9 @@ public class Scenario : MonoBehaviour {
 
     //Public
     public GameController gameControllerScript;
+    public bool tutorialOff = false;
 
-    public bool baseShown = false;
-    public bool controlsShown = false;
-    public bool combinedShown = false;
-    public bool shieldShown = false;
+    
 
     public Image image;
     public Sprite controlSprite;
@@ -23,6 +21,11 @@ public class Scenario : MonoBehaviour {
     public Sprite shieldSprite;
 
     //Private
+    private bool baseShown = false;
+    private bool controlsShown = false;
+    private bool combinedShown = false;
+    private bool shieldShown = false;
+
     private int leftDeviceIndex;
     private int rightDeviceIndex;
     private float pauseTime = 0;
@@ -49,6 +52,8 @@ public class Scenario : MonoBehaviour {
 
     void Pause ()
     {
+        if (tutorialOff)
+            return;
         Time.timeScale = 0;
         image.enabled = true;
         pauseTime = Time.realtimeSinceStartup;
@@ -65,7 +70,6 @@ public class Scenario : MonoBehaviour {
 
     public void ShowControls ()
     {
-        Debug.Log("controls");
         controlsShown = true;
         image.sprite = controlSprite;
         Pause();
@@ -90,5 +94,25 @@ public class Scenario : MonoBehaviour {
         shieldShown = true;
         image.sprite = shieldSprite;
         Pause();
+    }
+
+    public bool getControlBool ()
+    {
+        return controlsShown;
+    }
+
+    public bool getBaseBool()
+    {
+        return baseShown;
+    }
+
+    public bool getCombinedBool()
+    {
+        return combinedShown;
+    }
+
+    public bool getShieldBool()
+    {
+        return shieldShown;
     }
 }
