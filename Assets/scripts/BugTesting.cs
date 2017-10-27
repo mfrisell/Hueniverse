@@ -87,6 +87,7 @@ public class BugTesting : MonoBehaviour {
 			playerControllerScript.rightCurrentColor = Color.blue;
 			break;
 		case 10:
+            gameControllerScript.gameTime = 0;
 			SteamVR_LoadLevel.Begin("Start");
 			break;
 		default:
