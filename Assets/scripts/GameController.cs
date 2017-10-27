@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour {
             scenarioScript.ShowControls();
         }
 
-        if (gameTime > 8 && !scenarioScript.getBaseBool()) //TODO Tweak numbers
+        if (gameTime > 5 && !scenarioScript.getBaseBool()) //TODO Tweak numbers
         {
             scenarioScript.ShowBaseColor();
         }

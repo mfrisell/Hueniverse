@@ -10,6 +10,7 @@ public class Scenario : MonoBehaviour {
 
     //Public
     public GameController gameControllerScript;
+    public AsteroidManager asMan;
     public bool tutorialOff = false;
 
     
@@ -70,6 +71,7 @@ public class Scenario : MonoBehaviour {
 
     public void ShowControls ()
     {
+        asMan.launchAsteroid(Color.red, 0, 0);
         controlsShown = true;
         image.sprite = controlSprite;
         Pause();

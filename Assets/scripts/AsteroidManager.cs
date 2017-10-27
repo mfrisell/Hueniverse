@@ -62,10 +62,9 @@ public class AsteroidManager : MonoBehaviour
         {
             targetPosition = target.transform.position;
         }
-        percentComplete = (gameControllerScript.gameTime / gameControllerScript.maxGameTime);
-        Mathf.Clamp01(percentComplete);
+        percentComplete = (Time.time / gameControllerScript.maxGameTime);
+        //Mathf.Clamp01(percentComplete);
         asteroidFrequency = (percentComplete / 3) + asteroidFrequencyOffset; //Will be negative for about 10 seconds
-        //Debug.Log(asteroidFrequency);
         mixedPercentage = (percentComplete / 3) + mixedPercentageOffset; //Go linearly from -10 to 23 percent, should pass 0 at ~60 seconds in
 
         if (Input.GetKeyDown("space"))
@@ -78,7 +77,7 @@ public class AsteroidManager : MonoBehaviour
     }
 
 
-    void launchAsteroid()
+    public void launchAsteroid()
     {
 
         //Randomize positions and center them
@@ -126,7 +125,7 @@ public class AsteroidManager : MonoBehaviour
         rb.velocity = rb.transform.forward * asteroidSpeed;
     }
 
-    void launchAsteroid(Color color, int widthAngle, int heightAngle)
+    public void launchAsteroid(Color color, int widthAngle, int heightAngle)
     {
         Vector3 asteroidSpawnPosition = new Vector3(
             targetPosition.x + asteroidSpawnRadius * Mathf.Sin(Mathf.Deg2Rad * widthAngle) * Mathf.Cos(Mathf.Deg2Rad * heightAngle),
