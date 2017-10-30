@@ -194,11 +194,9 @@ public class PlayerController : MonoBehaviour
             }
             leftColorIndex = Mod(leftColorIndex, 3);
 
-            Debug.Log("Left color index: " + leftColorIndex);
             Color endColor = indexToColor(leftColorIndex);
             StartCoroutine(lerpColor(leftPS, leftCurrentColor, endColor));
             leftCurrentColor = endColor;
-            Debug.Log(leftCurrentColor);
 
             MeshRenderer leftButtonLeftRenderer = leftButtonLeft.GetComponent<MeshRenderer>();
             MeshRenderer leftButtonRightRenderer = leftButtonRight.GetComponent<MeshRenderer>();
@@ -235,7 +233,6 @@ public class PlayerController : MonoBehaviour
             }
 
             rightColorIndex = Mod(rightColorIndex, 3);
-            Debug.Log("RIndex: " + rightColorIndex);
 
             Color endColor = indexToColor(rightColorIndex);
             StartCoroutine(lerpColor(rightPS, rightCurrentColor, endColor));
@@ -443,6 +440,9 @@ public class PlayerController : MonoBehaviour
         bulletSpawnPosition = combinedBulletSpawn.transform.position;
         bulletSpawnRotation = combinedBulletSpawn.transform.rotation;
 
+        SteamVR_Controller.Input(leftDeviceIndex).TriggerHapticPulse(1000);
+        SteamVR_Controller.Input(rightDeviceIndex).TriggerHapticPulse(1000);
+
         spawnBullet(bulletSpawnPosition, bulletSpawnRotation, bulletColor);
 
     }
@@ -481,9 +481,6 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bulletObject = Instantiate(weaponParticle, bulletSpawnPosition, bulletSpawnRotation) as GameObject;
         bulletObject.GetComponent<ParticleSystemRenderer>().material = colorToMaterial(bulletColor);
-
-
-        Debug.Log(bulletColor);
 
         bulletObject.gameObject.tag = colorToString(bulletColor);
     }

@@ -7,11 +7,6 @@ public class rotateAroundAxis : MonoBehaviour {
 	public bool speedFromLifeCircleHolder = false;
 
 	public float speed;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	void Update()
 	{
