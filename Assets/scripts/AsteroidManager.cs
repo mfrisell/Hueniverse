@@ -62,7 +62,7 @@ public class AsteroidManager : MonoBehaviour
         {
             targetPosition = target.transform.position;
         }
-        percentComplete = (Time.time / gameControllerScript.maxGameTime);
+        percentComplete = (gameControllerScript.gameTime / gameControllerScript.maxGameTime);
         //Mathf.Clamp01(percentComplete);
         asteroidFrequency = (percentComplete / 3) + asteroidFrequencyOffset; //Will be negative for about 10 seconds
         mixedPercentage = (percentComplete / 3) + mixedPercentageOffset; //Go linearly from -10 to 23 percent, should pass 0 at ~60 seconds in
@@ -90,12 +90,6 @@ public class AsteroidManager : MonoBehaviour
             targetPosition.z + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * asteroidHeightAngle) * Mathf.Cos(Mathf.Deg2Rad * asteroidWidthAngle)
         );
 
-        //find the vector pointing from our position to the target
-        Vector3 direction = (targetPosition - asteroidSpawnPosition).normalized;
-
-        //create the rotation we need to be in to look at the target
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-
         int randomNumber = Random.Range(0, 10);
         int asteroidPrefabIndex = 0;
 
@@ -108,21 +102,7 @@ public class AsteroidManager : MonoBehaviour
             asteroidPrefabIndex = Random.Range(0, 3);
         }
 
-
-        asteroidObject = Instantiate(colorToPrefab(indexToColor(asteroidPrefabIndex)), asteroidSpawnPosition, lookRotation) as GameObject;
-        foreach (Transform child in asteroidObject.transform) if (child.CompareTag(colorToString(indexToColor(asteroidPrefabIndex))))
-            {
-                childAsteroid = child;
-            }
-
-        asteroidObject.transform.SetParent(GetComponent<Transform>());
-        float asteroidSize = Random.Range(asteroidMinSize, asteroidMaxSize);
-        asteroidObject.transform.localScale = new Vector3(asteroidSize, asteroidSize, asteroidSize);
-        //asteroidObject.AddComponent<Rigidbody>();
-
-
-        Rigidbody rb = childAsteroid.GetComponent<Rigidbody>();
-        rb.velocity = rb.transform.forward * asteroidSpeed;
+        launchAsteroidHelper(indexToColor(asteroidPrefabIndex), asteroidSpawnPosition);
     }
 
     public void launchAsteroid(Color color, int widthAngle, int heightAngle)
@@ -133,23 +113,16 @@ public class AsteroidManager : MonoBehaviour
             targetPosition.z + asteroidSpawnRadius * Mathf.Cos(Mathf.Deg2Rad * heightAngle) * Mathf.Cos(Mathf.Deg2Rad * widthAngle)
         );
 
+        launchAsteroidHelper(color, asteroidSpawnPosition);
+    }
+
+    private void launchAsteroidHelper (Color color, Vector3 asteroidSpawnPosition)
+    {
         //find the vector pointing from our position to the target
         Vector3 direction = (targetPosition - asteroidSpawnPosition).normalized;
 
         //create the rotation we need to be in to look at the target
         Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-        int randomNumber = Random.Range(0, 10);
-        int asteroidPrefabIndex = 0;
-
-        if (randomNumber < (mixedPercentage * 10))
-        {
-            asteroidPrefabIndex += Random.Range(3, 6);
-        }
-        else
-        {
-            asteroidPrefabIndex = Random.Range(0, 3);
-        }
 
 
         asteroidObject = Instantiate(colorToPrefab(color), asteroidSpawnPosition, lookRotation) as GameObject;
@@ -165,7 +138,7 @@ public class AsteroidManager : MonoBehaviour
 
 
         Rigidbody rb = childAsteroid.GetComponent<Rigidbody>();
-        rb.velocity = rb.transform.forward * asteroidSpeed;
+        //rb.velocity = rb.transform.forward * asteroidSpeed;
     }
 
     public GameObject createAsteroid(string color, Vector3 position)
@@ -210,9 +183,7 @@ public class AsteroidManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(asteroidFrequency + " " + 0.5f / asteroidFrequency);
                 yield return new WaitForSeconds(0.5f / asteroidFrequency);
-                Debug.Log("Launch");
                 launchAsteroid();
             }
 

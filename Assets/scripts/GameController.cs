@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour {
     public bool shieldActivated = false;
     public bool showFps = false;
     public float customDeltaTime;
+    public int timeScale = 1;
 
 	private bool GOrunning = false;
 	public GameObject GameOverModel;
@@ -57,7 +58,7 @@ public class GameController : MonoBehaviour {
         }
 
         customDeltaTime = Time.deltaTime;
-        if (scenarioScript.isPaused)
+        if (scenarioScript.isPaused) //If it is paused
             customDeltaTime = 0;
         gameTime += customDeltaTime;
         

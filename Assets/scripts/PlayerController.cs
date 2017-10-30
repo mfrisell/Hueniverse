@@ -21,8 +21,11 @@ public class PlayerController : MonoBehaviour
     public float TimeScale = 2f;
     public float maxDistance = 0.5f;
 
+    public Vector3 test;
+
     public GameObject weaponParticle;
     //public GameObject bulletPrefab;
+    public GameController gameControllerScript;
     public GameObject circlePSPrefab;
     public GameObject weaponEmitter;
 
@@ -165,7 +168,7 @@ public class PlayerController : MonoBehaviour
         leftController = GameObject.FindWithTag("leftController");
         rightController = GameObject.FindWithTag("rightController");
 
-        if (Time.timeScale == 0 || leftController == null || rightController == null)
+        if (leftController == null || rightController == null)
             return;
         else if (!delayedStartCompleted)
             delayedStart();
@@ -438,7 +441,7 @@ public class PlayerController : MonoBehaviour
         animRight.SetTrigger("Shoot");
         bulletColor = combinedCurrentColor;
         bulletSpawnPosition = combinedBulletSpawn.transform.position;
-        bulletSpawnRotation = combinedBulletSpawn.transform.rotation * Quaternion.Euler(90f, 0, 0);
+        bulletSpawnRotation = combinedBulletSpawn.transform.rotation;
 
         spawnBullet(bulletSpawnPosition, bulletSpawnRotation, bulletColor);
 
@@ -458,7 +461,7 @@ public class PlayerController : MonoBehaviour
             bulletColor = leftCurrentColor;
             //Vector3 offsetVector = leftController.transform.forward/6;
             bulletSpawnPosition = leftController.transform.position + weaponParticle.transform.position;
-            bulletSpawnRotation = leftController.transform.rotation * Quaternion.Euler(90f, 0, 0);
+            bulletSpawnRotation = leftController.transform.rotation;
         }
         else
         {
@@ -467,7 +470,7 @@ public class PlayerController : MonoBehaviour
             bulletColor = rightCurrentColor;
             //Vector3 offsetVector = rightController.transform.forward/6;
             bulletSpawnPosition = rightController.transform.position + weaponParticle.transform.position;
-            bulletSpawnRotation = rightController.transform.rotation * Quaternion.Euler(90f, 0, 0);
+            bulletSpawnRotation = rightController.transform.rotation;
         }
 
 

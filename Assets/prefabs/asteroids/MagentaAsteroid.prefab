@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 114903244991584774}
   - component: {fileID: 114378960140752844}
   - component: {fileID: 114217508722896954}
+  - component: {fileID: 114656105734715142}
   m_Layer: 0
   m_Name: MagentaAsteroid
   m_TagString: Untagged
@@ -454,6 +455,7 @@ MonoBehaviour:
   explosion: {fileID: 1173697183181138, guid: 8d9d4a60336d243b1903ce9d1271a9e1, type: 2}
   failExplosion: {fileID: 1526210595141420, guid: c3d537a47530e411daea1778a26ff04c,
     type: 2}
+  exploded: 0
 --- !u!114 &114378960140752844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,7 +467,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77acbddbb9abe644597f43ba5da0cd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDeath: 30
+  waitTime: 30
+--- !u!114 &114656105734715142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1432812886889808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614f3601eb49c476f81dc3c526bd60e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!114 &114881287474658528
 MonoBehaviour:
   m_ObjectHideFlags: 1

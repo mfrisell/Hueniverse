@@ -48,6 +48,7 @@ TagManager:
   - shieldHolder
   - progressShieldCircle
   - spaceShip
+  - scenario
   layers:
   - Default
   - TransparentFX

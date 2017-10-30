@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 114664265320977488}
   - component: {fileID: 114161317017219502}
   - component: {fileID: 114433510455868748}
+  - component: {fileID: 114889463836035150}
   m_Layer: 0
   m_Name: YellowAsteroid
   m_TagString: Untagged
@@ -442,6 +443,7 @@ MonoBehaviour:
   explosion: {fileID: 1067957053778526, guid: d7cad155fc1d24f5b9742d74521ac1b6, type: 2}
   failExplosion: {fileID: 1476964932268364, guid: 2e825a1adcb764865a3bf427518ef7b8,
     type: 2}
+  exploded: 0
 --- !u!114 &114161317017219502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77acbddbb9abe644597f43ba5da0cd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDeath: 30
+  waitTime: 30
 --- !u!114 &114433510455868748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -479,6 +481,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleTime: 0.05
   scaleFactor: 1
+--- !u!114 &114889463836035150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1247727681346186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614f3601eb49c476f81dc3c526bd60e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!114 &114896540938071340
 MonoBehaviour:
   m_ObjectHideFlags: 1

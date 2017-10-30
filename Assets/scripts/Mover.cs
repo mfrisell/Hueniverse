@@ -6,15 +6,21 @@ public class Mover : MonoBehaviour {
 
     private Rigidbody rb;
     private float customDeltaTime;
+    private GameController gameController;
     public float speed;
 
 	void Start() {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         GameObject go = GameObject.FindGameObjectWithTag("GameController");
-        GameController gameController = GetComponent<GameController>();
+        gameController = go.GetComponent<GameController>();
         StartCoroutine( SpeedUpBullet() );
 		
 	}
+
+    private void Update()
+    {
+        transform.Translate(Vector3.forward * speed * gameController.customDeltaTime);
+    }
 
     IEnumerator SpeedUpBullet()
     {
@@ -23,11 +29,11 @@ public class Mover : MonoBehaviour {
         for (int i =0; i<10; i++)
         {
             float scaleValue = i / 50f;
-            rb.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
+            //rb.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
             yield return null;
 
         }
-        transform.Translate(Vector3.up * speed * customDeltaTime);
+        
 
     }
 

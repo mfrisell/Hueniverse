@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class Die : MonoBehaviour {
 
-	public float timeToDeath = 30f;
+	public float waitTime = 30f;
+    Scenario scenario;
 
 	// Use this for initialization
 	void Start () {
-		
-		Destroy(this.gameObject, timeToDeath);
+        GameObject go = GameObject.FindGameObjectWithTag("scenario");
+        scenario = go.GetComponent<Scenario>();
+        StartCoroutine(Kill());
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    IEnumerator Kill()
+    {
+
+
+        while(waitTime > 0)
+        {
+            yield return new WaitForSeconds(1);
+            if (!scenario.isPaused)
+                waitTime--;
+
+        }
+
+        Destroy(this.gameObject);
+
+
+    }
 }
