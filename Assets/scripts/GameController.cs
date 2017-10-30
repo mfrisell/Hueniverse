@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour {
     public float timeToPowerDown = 5;
     public bool shieldActivated = false;
     public bool showFps = false;
+    public float customDeltaTime;
 
 	private bool GOrunning = false;
 	public GameObject GameOverModel;
@@ -55,8 +56,11 @@ public class GameController : MonoBehaviour {
             fpsTimer = 0f;
         }
 
+        customDeltaTime = Time.deltaTime;
+        if (scenarioScript.isPaused)
+            customDeltaTime = 0;
+        gameTime += customDeltaTime;
         
-        gameTime += Time.deltaTime;
 
         if (gameTime > 0.2f && !scenarioScript.getControlBool())
         {

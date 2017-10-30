@@ -5,12 +5,13 @@ using UnityEngine;
 public class Mover : MonoBehaviour {
 
     private Rigidbody rb;
-
+    private float customDeltaTime;
     public float speed;
 
 	void Start() {
         rb = GetComponent<Rigidbody>();
-
+        GameObject go = GameObject.FindGameObjectWithTag("GameController");
+        GameController gameController = GetComponent<GameController>();
         StartCoroutine( SpeedUpBullet() );
 		
 	}
@@ -26,8 +27,7 @@ public class Mover : MonoBehaviour {
             yield return null;
 
         }
-  
-        rb.velocity = transform.up * speed;
+        transform.Translate(Vector3.up * speed * customDeltaTime);
 
     }
 

@@ -12,7 +12,6 @@ public class Scenario : MonoBehaviour {
     public GameController gameControllerScript;
     public AsteroidManager asMan;
     public bool tutorialOff = false;
-
     
 
     public Image image;
@@ -20,6 +19,7 @@ public class Scenario : MonoBehaviour {
     public Sprite baseSprite;
     public Sprite combinedSprite;
     public Sprite shieldSprite;
+    public bool isPaused = false;
 
     //Private
     private bool baseShown = false;
@@ -31,7 +31,7 @@ public class Scenario : MonoBehaviour {
     private int rightDeviceIndex;
     private float pauseTime = 0;
 
-    private bool isPaused = false;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -55,6 +55,7 @@ public class Scenario : MonoBehaviour {
     {
         if (tutorialOff)
             return;
+        isPaused = true;
         Time.timeScale = 0;
         image.enabled = true;
         pauseTime = Time.realtimeSinceStartup;
@@ -63,6 +64,7 @@ public class Scenario : MonoBehaviour {
 
     void Unpause ()
     {
+        isPaused = false;
         Time.timeScale = 1;
         image.enabled = false;
         pauseTime = 0;
