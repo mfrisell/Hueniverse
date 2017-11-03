@@ -62,7 +62,7 @@ public class AsteroidManager : MonoBehaviour
         {
             targetPosition = target.transform.position;
         }
-        percentComplete = (gameControllerScript.gameTime / gameControllerScript.maxGameTime);
+        percentComplete = (gameControllerScript.gameTime / gameControllerScript.maxGameTime); //This was changed to Time.time for some reason at one point but can't remember why so if someone changes back, explain why
         //Mathf.Clamp01(percentComplete);
         asteroidFrequency = (percentComplete / 3) + asteroidFrequencyOffset; //Will be negative for about 10 seconds
         mixedPercentage = (percentComplete / 3) + mixedPercentageOffset; //Go linearly from -10 to 23 percent, should pass 0 at ~60 seconds in
@@ -176,7 +176,7 @@ public class AsteroidManager : MonoBehaviour
         while (gameOver == false)
         {
             //Debug.Log(asteroidFrequency);
-            if (asteroidFrequency <= 0.12f)
+            if (asteroidFrequency <= 0.12f || gameControllerScript.customDeltaTime == 0)
             {
                 //Debug.Log("a" + asteroidFrequency);
                 yield return null;

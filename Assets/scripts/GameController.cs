@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour {
         {
             if (powerUp < 1)
             {
-                powerUp += Time.deltaTime / timeToPowerUp;
+                powerUp += customDeltaTime / timeToPowerUp;
             }
             else
             {
